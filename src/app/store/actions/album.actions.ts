@@ -6,7 +6,10 @@ export enum AlbumActionTypes {
     FetchSuccess = '[Library] Fetch Albums Success',
     FetchError = '[Library] Fetch Albums Error',
     Open = '[Library] Open Album',
-    Close = '[Library] Close Album'
+    Close = '[Library] Close Album',
+    FetchSingle = '[Library] Fetch Album',
+    FetchSingleSuccess = '[Library] Fetch Album Success',
+    FetchSingleError = '[Library] Fetch Album Error',
 }
 
 export class FetchAlbums implements Action {
@@ -23,7 +26,8 @@ export class FetchAlbumsSuccess implements Action {
 export class FetchAlbumsError implements Action {
     readonly type = AlbumActionTypes.FetchError;
 
-    constructor(public error: any) {}
+    constructor(public error: any) {
+    }
 }
 
 export class OpenAlbum implements Action {
@@ -37,8 +41,46 @@ export class CloseAlbum implements Action {
     readonly type = AlbumActionTypes.Close;
 }
 
+export class FetchAlbum implements Action {
+    readonly type = AlbumActionTypes.FetchSingle;
+
+    public payload: {
+        id: number
+    };
+
+    constructor(id: number) {
+        this.payload = {
+            id
+        };
+    }
+}
+
+export class FetchAlbumSuccess implements Action {
+    readonly type = AlbumActionTypes.FetchSingleSuccess;
+
+    public payload: {
+        album: Album
+    };
+
+    constructor(album: Album) {
+        this.payload = {
+            album
+        };
+    }
+}
+
+export class FetchAlbumError implements Action {
+    readonly type = AlbumActionTypes.FetchSingleError;
+
+    constructor(public error: any) {
+    }
+}
+
 export type AlbumActionsUnion = FetchAlbums |
     FetchAlbumsSuccess |
     FetchAlbumsError |
     OpenAlbum |
-    CloseAlbum;
+    CloseAlbum |
+    FetchAlbum |
+    FetchAlbumSuccess |
+    FetchAlbumError;

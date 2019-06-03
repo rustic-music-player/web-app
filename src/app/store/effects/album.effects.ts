@@ -3,9 +3,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import {
     AlbumActionTypes,
-    CloseAlbum,
+    CloseAlbum, FetchAlbum, FetchAlbumError,
     FetchAlbumsError,
-    FetchAlbumsSuccess,
+    FetchAlbumsSuccess, FetchAlbumSuccess,
     OpenAlbum
 } from '../actions/album.actions';
 import { LibraryService } from '../../library/library.service';
@@ -35,6 +35,21 @@ export class AlbumEffects {
         ofType(ROUTER_NAVIGATION),
         filter(({ payload }: RouterNavigationAction<RouterState>) => !('albumId' in payload.routerState.params)),
         map(() => new CloseAlbum())
+    );
+
+    @Effect() openSingle$ = this.actions$.pipe(
+        ofType(AlbumActionTypes.Open),
+        map(({ payload }: OpenAlbum) => payload),
+        map(id => new FetchAlbum(id))
+    );
+
+    @Effect() fetchSingle$ = this.actions$.pipe(
+        ofType(AlbumActionTypes.FetchSingle),
+        map(({ payload }: FetchAlbum) => payload.id),
+        switchMap(id => this.libraryApi.getAlbum(id).pipe(
+            map(album => new FetchAlbumSuccess(album)),
+            catchError(err => of(new FetchAlbumError(err)))
+        ))
     );
 
     constructor(private actions$: Actions,

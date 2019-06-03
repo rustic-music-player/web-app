@@ -15,6 +15,10 @@ export class LibraryService {
         return this.http.get<Album[]>('/api/library/albums');
     }
 
+    getAlbum(id: number): Observable<Album> {
+        return this.http.get<Album>(`/api/library/albums/${id}`);
+    }
+
     getArtists(): Observable<Artist[]> {
         return this.http.get<Artist[]>('/api/library/artists');
     }
@@ -22,9 +26,4 @@ export class LibraryService {
     getTracks(): Observable<Track[]> {
         return this.http.get<Track[]>('/api/library/tracks');
     }
-
-    getAlbum(id: number): Observable<Album> {
-        return this.http.get<Album>(`/api/library/albums/${id}`);
-    }
-
 }

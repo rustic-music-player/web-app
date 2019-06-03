@@ -26,6 +26,8 @@ export function reducer(state: State = initialState, action: AlbumActionsUnion):
                 ...state,
                 selectedAlbumId: null
             };
+        case AlbumActionTypes.FetchSingleSuccess:
+            return adapter.upsertOne(action.payload.album, state);
         default:
             return state;
     }
