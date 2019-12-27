@@ -10,7 +10,7 @@ export class QueueService {
     }
 
     queue(track: Track): Observable<void> {
-        return this.http.post<void>(`/api/queue/${track.id}`, null);
+        return this.http.post<void>(`/api/queue/track/${track.id}`, null);
     }
 
     get(): Observable<Track[]> {
