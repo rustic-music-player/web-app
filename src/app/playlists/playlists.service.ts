@@ -5,11 +5,14 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PlaylistsService {
-
     constructor(private http: HttpClient) {
     }
 
     getPlaylists(): Observable<Playlist[]> {
         return this.http.get<Playlist[]>('/api/library/playlists');
+    }
+
+    getPlaylist(cursor: string): Observable<Playlist> {
+        return this.http.get<Playlist>(`/api/library/playlists/${cursor}`);
     }
 }

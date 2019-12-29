@@ -29,14 +29,14 @@ export class AlbumEffects {
 
     @Effect() open$ = this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
-        filter(({ payload }: RouterNavigationAction<RouterState>) => 'cursor' in payload.routerState.params),
-        map(({ payload }: RouterNavigationAction<RouterState>) => payload.routerState.params.cursor),
+        filter(({ payload }: RouterNavigationAction<RouterState>) => 'album_cursor' in payload.routerState.params),
+        map(({ payload }: RouterNavigationAction<RouterState>) => payload.routerState.params.album_cursor),
         map(id => new OpenAlbum(id))
     );
 
     @Effect() close$ = this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
-        filter(({ payload }: RouterNavigationAction<RouterState>) => !('cursor' in payload.routerState.params)),
+        filter(({ payload }: RouterNavigationAction<RouterState>) => !('album_cursor' in payload.routerState.params)),
         map(() => new CloseAlbum())
     );
 

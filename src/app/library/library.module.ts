@@ -35,7 +35,7 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'library/albums/:cursor',
+        path: 'library/albums/:album_cursor',
         component: AlbumComponent
     }
 ];

@@ -1,6 +1,7 @@
-<mat-list>
-    <mat-list-item *ngFor="let playlist of (playlists$ | async)">
+<mat-nav-list>
+    <a [routerLink]="playlist.cursor" mat-list-item *ngFor="let playlist of (playlists$ | async)">
+        <mat-icon matListIcon svgIcon="playlist-play" style="opacity: 0.7;"></mat-icon>
         <h3 matLine>{{playlist.title}}</h3>
         <p matLine>{{playlist.tracks.length}} Tracks</p>
-    </mat-list-item>
-</mat-list>
+    </a>
+</mat-nav-list>

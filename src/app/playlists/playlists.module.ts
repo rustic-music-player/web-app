@@ -4,11 +4,16 @@ import { PlaylistsComponent } from './playlists/playlists.component';
 import { PlaylistsService } from './playlists.service';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 const routes: Routes = [
     {
         path: 'playlists',
         component: PlaylistsComponent
+    },
+    {
+        path: 'playlists/:playlist_cursor',
+        component: PlaylistComponent
     }
 ];
 
@@ -19,7 +24,8 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        PlaylistsComponent
+        PlaylistsComponent,
+        PlaylistComponent
     ],
     providers: [
         PlaylistsService
