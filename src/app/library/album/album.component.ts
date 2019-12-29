@@ -21,7 +21,7 @@ export class AlbumComponent {
 
     queueTrack(track: Track) {
         this.queue
-            .queue(track)
+            .queueTrack(track)
             .subscribe(() => {
             });
     }

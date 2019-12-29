@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QueueService } from '../../queue.service';
-import { Observable, timer } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { merge, Observable } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
 import { Track } from '../../contracts/track.model';
+import { Messages, SocketService } from '../../socket.service';
 
 @Component({
     selector: 'rms-queue',
@@ -13,12 +14,14 @@ export class QueueComponent implements OnInit {
 
     queue$: Observable<Track[]>;
 
-    constructor(private api: QueueService) {
+    constructor(private api: QueueService,
+                private socket: SocketService) {
     }
 
     ngOnInit() {
-        this.queue$ = timer(0, 1000)
-            .pipe(switchMap(() => this.api.get()));
+        const initalFetch = this.api.get();
+        const updates = this.socket.ws$.pipe(filter(({type}) => type === Messages.QueueUpdated), switchMap(() => this.api.get()));
+        this.queue$ = merge(initalFetch, updates);
     }
 
 }

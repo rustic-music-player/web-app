@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Track } from './contracts/track.model';
+import { Playlist } from './contracts/playlist.model';
 
 @Injectable()
 export class QueueService {
@@ -9,8 +10,12 @@ export class QueueService {
     constructor(private http: HttpClient) {
     }
 
-    queue(track: Track): Observable<void> {
+    queueTrack(track: Track): Observable<void> {
         return this.http.post<void>(`/api/queue/track/${track.id}`, null);
+    }
+
+    queuePlaylist(playlist: Playlist): Observable<void> {
+        return this.http.post<void>(`/api/queue/playlist/${playlist.id}`, null);
     }
 
     get(): Observable<Track[]> {

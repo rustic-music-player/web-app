@@ -25,7 +25,7 @@ export class TracksComponent implements OnInit {
 
     queue(track: Track) {
         this.queueService
-            .queue(track)
+            .queueTrack(track)
             .subscribe(() => console.log('queued'));
     }
 }
