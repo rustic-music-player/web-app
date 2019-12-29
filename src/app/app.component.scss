@@ -14,5 +14,7 @@ mat-sidenav-container {
 }
 
 @media screen and (max-width: 599px) {
-    height: calc(100vh - 56px - 56px);
+    body {
+        height: calc(100vh - 56px - 56px);
+    }
 }

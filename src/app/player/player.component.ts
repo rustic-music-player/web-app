@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ObservableMedia } from '@angular/flex-layout';
+import { MediaObserver } from '@angular/flex-layout';
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { Track } from '../contracts/track.model';
 import { RmsState, selectCurrentTrack, selectPlayingState } from '../store/reducers';
@@ -17,10 +17,10 @@ export class PlayerComponent implements OnInit {
     private overlayRef: OverlayRef;
     private positionStrategy: FlexibleConnectedPositionStrategy;
 
-    @ViewChild('queueOverlay')
+    @ViewChild('queueOverlay', { static: false })
     queueOverlay;
 
-    @ViewChild('queueToggle', { read: ElementRef })
+    @ViewChild('queueToggle', { read: ElementRef, static: false })
     queueToggle: ElementRef;
 
     showQueue = false;
@@ -28,7 +28,7 @@ export class PlayerComponent implements OnInit {
     playing = false;
     current$: Observable<Track | null>;
 
-    constructor(private media: ObservableMedia,
+    constructor(private media: MediaObserver,
                 private overlay: Overlay,
                 private positionBuilder: OverlayPositionBuilder,
                 private store: Store<RmsState>) {
@@ -42,6 +42,7 @@ export class PlayerComponent implements OnInit {
 
     ngOnInit() {
         this.media
+            .media$
             .subscribe(change => {
                 if (change.mqAlias === 'xs') {
                     this.closeQueue();
