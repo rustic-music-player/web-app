@@ -6,7 +6,9 @@ export interface State extends EntityState<Album> {
     selectedAlbumCursor: string | null;
 }
 
-const adapter = createEntityAdapter<Album>();
+const adapter = createEntityAdapter<Album>({
+    selectId: album => album.cursor
+});
 
 export const initialState: State = adapter.getInitialState({
     selectedAlbumCursor: null
