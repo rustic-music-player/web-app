@@ -33,7 +33,7 @@ export class FetchAlbumsError implements Action {
 export class OpenAlbum implements Action {
     readonly type = AlbumActionTypes.Open;
 
-    constructor(public payload: number) {
+    constructor(public payload: string) {
     }
 }
 
@@ -45,12 +45,12 @@ export class FetchAlbum implements Action {
     readonly type = AlbumActionTypes.FetchSingle;
 
     public payload: {
-        id: number
+        cursor: string
     };
 
-    constructor(id: number) {
+    constructor(cursor: string) {
         this.payload = {
-            id
+            cursor
         };
     }
 }

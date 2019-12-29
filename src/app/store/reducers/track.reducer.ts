@@ -4,7 +4,9 @@ import { TrackActionsUnion, TrackActionTypes } from '../actions/track.actions';
 
 export interface State extends EntityState<Track> {}
 
-const adapter = createEntityAdapter<Track>();
+const adapter = createEntityAdapter<Track>({
+    selectId: track => track.cursor
+});
 
 export const initialState: State = adapter.getInitialState();
 

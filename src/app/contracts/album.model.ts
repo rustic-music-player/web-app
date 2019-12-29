@@ -2,9 +2,10 @@ import { Track } from './track.model';
 import { Artist } from './artist.model';
 
 export interface Album {
-    id: number;
+    cursor: string;
     title: string;
-    coverart?: string;
-    tracks: Track[];
     artist?: Artist;
+    tracks: Track[];
+    provider?: any;
+    coverart?: string;
 }

@@ -29,7 +29,7 @@ export class FetchArtistsError implements Action {
 export class OpenArtist implements Action {
     readonly type = ArtistActionTypes.Open;
 
-    constructor(public payload: number) {
+    constructor(public payload: string) {
     }
 }
 

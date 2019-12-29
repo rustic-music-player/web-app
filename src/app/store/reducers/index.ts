@@ -56,7 +56,7 @@ export const selectAlbumEntities = createSelector(
 
 export const selectCurrentAlbumId = createSelector(
     selectLibraryAlbumsState,
-    albums.getSelectedAlbumId
+    albums.getSelectedAlbumCursor
 );
 
 export const selectCurrentAlbum = createSelector(

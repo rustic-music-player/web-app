@@ -1,7 +1,10 @@
 import { Track } from './track.model';
+import { Album } from './album.model';
 
 export interface Artist {
-    id: number;
+    cursor: string;
     name: string;
+    albums?: Album[];
     tracks?: Track[];
+    image?: string;
 }

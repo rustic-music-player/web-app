@@ -3,13 +3,13 @@ import { Album } from '../../contracts/album.model';
 import { AlbumActionsUnion, AlbumActionTypes } from '../actions/album.actions';
 
 export interface State extends EntityState<Album> {
-    selectedAlbumId: number | null;
+    selectedAlbumCursor: string | null;
 }
 
 const adapter = createEntityAdapter<Album>();
 
 export const initialState: State = adapter.getInitialState({
-    selectedAlbumId: null
+    selectedAlbumCursor: null
 });
 
 export function reducer(state: State = initialState, action: AlbumActionsUnion): State {
@@ -19,12 +19,12 @@ export function reducer(state: State = initialState, action: AlbumActionsUnion):
         case AlbumActionTypes.Open:
             return {
                 ...state,
-                selectedAlbumId: action.payload
+                selectedAlbumCursor: action.payload
             };
         case AlbumActionTypes.Close:
             return {
                 ...state,
-                selectedAlbumId: null
+                selectedAlbumCursor: null
             };
         case AlbumActionTypes.FetchSingleSuccess:
             return adapter.upsertOne(action.payload.album, state);
@@ -33,7 +33,7 @@ export function reducer(state: State = initialState, action: AlbumActionsUnion):
     }
 }
 
-export const getSelectedAlbumId = (state: State) => state.selectedAlbumId;
+export const getSelectedAlbumCursor = (state: State) => state.selectedAlbumCursor;
 
 export const {
     selectIds: selectAlbumIds,

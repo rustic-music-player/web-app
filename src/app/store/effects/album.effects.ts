@@ -3,9 +3,12 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import {
     AlbumActionTypes,
-    CloseAlbum, FetchAlbum, FetchAlbumError,
+    CloseAlbum,
+    FetchAlbum,
+    FetchAlbumError,
     FetchAlbumsError,
-    FetchAlbumsSuccess, FetchAlbumSuccess,
+    FetchAlbumsSuccess,
+    FetchAlbumSuccess,
     OpenAlbum
 } from '../actions/album.actions';
 import { LibraryService } from '../../library/library.service';
@@ -26,14 +29,14 @@ export class AlbumEffects {
 
     @Effect() open$ = this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
-        filter(({ payload }: RouterNavigationAction<RouterState>) => 'albumId' in payload.routerState.params),
-        map(({ payload }: RouterNavigationAction<RouterState>) => payload.routerState.params.albumId),
+        filter(({ payload }: RouterNavigationAction<RouterState>) => 'cursor' in payload.routerState.params),
+        map(({ payload }: RouterNavigationAction<RouterState>) => payload.routerState.params.cursor),
         map(id => new OpenAlbum(id))
     );
 
     @Effect() close$ = this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
-        filter(({ payload }: RouterNavigationAction<RouterState>) => !('albumId' in payload.routerState.params)),
+        filter(({ payload }: RouterNavigationAction<RouterState>) => !('cursor' in payload.routerState.params)),
         map(() => new CloseAlbum())
     );
 
@@ -45,8 +48,8 @@ export class AlbumEffects {
 
     @Effect() fetchSingle$ = this.actions$.pipe(
         ofType(AlbumActionTypes.FetchSingle),
-        map(({ payload }: FetchAlbum) => payload.id),
-        switchMap(id => this.libraryApi.getAlbum(id).pipe(
+        map(({ payload }: FetchAlbum) => payload.cursor),
+        switchMap(cursor => this.libraryApi.getAlbum(cursor).pipe(
             map(album => new FetchAlbumSuccess(album)),
             catchError(err => of(new FetchAlbumError(err)))
         ))

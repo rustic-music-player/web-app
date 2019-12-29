@@ -11,11 +11,11 @@ export class QueueService {
     }
 
     queueTrack(track: Track): Observable<void> {
-        return this.http.post<void>(`/api/queue/track/${track.id}`, null);
+        return this.http.post<void>(`/api/queue/track/${track.cursor}`, null);
     }
 
     queuePlaylist(playlist: Playlist): Observable<void> {
-        return this.http.post<void>(`/api/queue/playlist/${playlist.id}`, null);
+        return this.http.post<void>(`/api/queue/playlist/${playlist.cursor}`, null);
     }
 
     get(): Observable<Track[]> {

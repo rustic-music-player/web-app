@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="center start" class="list">
-    <a *ngFor="let album of albums$ | async" [routerLink]="['/library/albums', album.id]">
+    <a *ngFor="let album of albums$ | async" [routerLink]="['/library/albums', album.cursor]">
         <rms-album-card [album]="album"></rms-album-card>
         <!--<rms-album-cover [album]="album">-->
     </a>

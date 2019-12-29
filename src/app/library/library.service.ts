@@ -15,8 +15,8 @@ export class LibraryService {
         return this.http.get<Album[]>('/api/library/albums');
     }
 
-    getAlbum(id: number): Observable<Album> {
-        return this.http.get<Album>(`/api/library/albums/${id}`);
+    getAlbum(cursor: string): Observable<Album> {
+        return this.http.get<Album>(`/api/library/albums/${cursor}`);
     }
 
     getArtists(): Observable<Artist[]> {

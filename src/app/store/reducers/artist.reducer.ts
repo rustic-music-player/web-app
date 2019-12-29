@@ -3,13 +3,15 @@ import { Artist } from '../../contracts/artist.model';
 import { ArtistActionsUnion, ArtistActionTypes } from '../actions/artist.actions';
 
 export interface State extends EntityState<Artist> {
-    selectedArtistId: number | null;
+    selectedArtistCursor: string | null;
 }
 
-const adapter = createEntityAdapter<Artist>();
+const adapter = createEntityAdapter<Artist>({
+    selectId: artist => artist.cursor
+});
 
 export const initialState: State = adapter.getInitialState({
-    selectedArtistId: null
+    selectedArtistCursor: null
 });
 
 export function reducer(state: State = initialState, action: ArtistActionsUnion): State {
@@ -19,19 +21,19 @@ export function reducer(state: State = initialState, action: ArtistActionsUnion)
         case ArtistActionTypes.Open:
             return {
                 ...state,
-                selectedArtistId: action.payload
+                selectedArtistCursor: action.payload
             };
         case ArtistActionTypes.Close:
             return {
                 ...state,
-                selectedArtistId: null
+                selectedArtistCursor: null
             };
         default:
             return state;
     }
 }
 
-export const getSelectedArtistId = (state: State) => state.selectedArtistId;
+export const getSelectedArtistCursor = (state: State) => state.selectedArtistCursor;
 
 export const {
     selectIds: selectArtistIds,
