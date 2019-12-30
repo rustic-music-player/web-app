@@ -2,8 +2,13 @@
 @import "../../theme";
 
 :host a[mat-list-item] {
+    &:not(.active) mat-icon {
+        opacity: 0.7;
+    }
+
     &.active,
     &.active:focus {
+        opacity: 1;
         color: mat-color($rms-accent);
         background: rgba(mat-color($rms-accent), 0.1);
     }
