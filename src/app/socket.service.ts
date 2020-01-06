@@ -12,7 +12,7 @@ export class SocketService {
     private _ws$: WebSocketSubject<any>;
 
     constructor() {
-        this._ws$ = webSocket('ws://localhost:4200/api/socket');
+        this._ws$ = webSocket(`ws://${location.host}/api/socket`);
     }
 
     get ws$() {
