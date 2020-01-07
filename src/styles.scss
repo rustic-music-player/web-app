@@ -1,6 +1,17 @@
 @import 'theme';
+@import './app/header/header.theme.scss';
 
 body {
     margin: 0;
     padding: 0;
+}
+
+@include mat-core();
+
+@include angular-material-theme($rms-theme);
+@include header-theme($rms-theme);
+
+.dark-theme {
+    @include angular-material-theme($rms-dark-theme);
+    @include header-theme($rms-dark-theme);
 }
