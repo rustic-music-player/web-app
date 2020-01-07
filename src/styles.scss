@@ -1,5 +1,6 @@
 @import 'theme';
-@import './app/header/header.theme.scss';
+@import './app/header/header.theme';
+@import './app/search/search-provider/search-provider.theme';
 
 body {
     margin: 0;
@@ -10,8 +11,10 @@ body {
 
 @include angular-material-theme($rms-theme);
 @include header-theme($rms-theme);
+@include search-provider-theme($rms-theme);
 
 .dark-theme {
     @include angular-material-theme($rms-dark-theme);
     @include header-theme($rms-dark-theme);
+    @include search-provider-theme($rms-dark-theme);
 }
