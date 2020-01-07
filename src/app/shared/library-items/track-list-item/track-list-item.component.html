@@ -1,10 +1,13 @@
-<mat-list-item class="track-list-item">
+<button mat-list-item class="track-list-item" [rmsQueueTrack]="track">
     <img class="track-list-item__cover" [src]="track.coverart" matListAvatar *ngIf="track.coverart">
     <mat-icon class="track-list-item__cover-placeholder" svgIcon="music-circle" matListIcon *ngIf="!track.coverart"></mat-icon>
     <span class="badge {{track.provider}}">
         <i class="mdi mdi-{{(track.provider | provider).icon}}">
         </i>
     </span>
-    <h3 mat-line>{{track.title}}</h3>
+    <h3 mat-line fxLayout="row">
+        <span fxFlex>{{track.title}}</span>
+        <span class="track-list-item__duration">{{ track.duration | duration }}</span>
+    </h3>
     <p mat-line>{{track.artist?.name}}</p>
-</mat-list-item>
+</button>

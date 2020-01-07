@@ -26,6 +26,10 @@ $radius: 20px;
     color: #ffffff;
 }
 
+.track-list-item__duration {
+    opacity: 0.54;
+}
+
 @each $name, $value in $providers {
     .#{$name} {
         color: $value;

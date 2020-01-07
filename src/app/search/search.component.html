@@ -27,11 +27,11 @@
     </ng-container>
     <ng-container *ngIf="results.tracks.length">
         <h2>Tracks</h2>
-        <mat-list>
+        <mat-action-list>
             <rms-track-list-item *ngFor="let track of results.tracks"
                                  [track]="track">
             </rms-track-list-item>
-        </mat-list>
+        </mat-action-list>
     </ng-container>
 </ng-container>
 

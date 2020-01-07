@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DurationPipe } from './duration.pipe';
 import { ProviderPipe } from './provider.pipe';
 import { RouterModule } from '@angular/router';
+import { QueueTrackDirective } from './queue-track.directive';
 
 @NgModule({
     imports: [
@@ -38,10 +39,12 @@ import { RouterModule } from '@angular/router';
         DurationPipe,
         ProviderPipe,
         RouterModule,
+        QueueTrackDirective
     ],
     declarations: [
         DurationPipe,
-        ProviderPipe
+        ProviderPipe,
+        QueueTrackDirective
     ]
 })
 export class SharedModule {

@@ -5,6 +5,7 @@ import { PlaylistsService } from './playlists.service';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { PlaylistComponent } from './playlist/playlist.component';
+import { LibraryItemsModule } from '../shared/library-items/library-items.module';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
     imports: [
         CommonModule,
         SharedModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        LibraryItemsModule
     ],
     declarations: [
         PlaylistsComponent,

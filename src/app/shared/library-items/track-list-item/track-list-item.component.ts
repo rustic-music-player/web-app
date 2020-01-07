@@ -7,8 +7,6 @@ import { Track } from '../../../contracts/track.model';
     styleUrls: ['./track-list-item.component.scss']
 })
 export class TrackListItemComponent {
-
     @Input()
     track: Track;
-
 }
