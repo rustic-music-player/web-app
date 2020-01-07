@@ -23,6 +23,7 @@ import { ArtistEffects } from './store/effects/artist.effects';
 import { TrackEffects } from './store/effects/track.effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomRouterStateSerializer } from './store/reducers/router.reducer';
+import { ExtensionsModule } from './extensions/extensions.module';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import { CustomRouterStateSerializer } from './store/reducers/router.reducer';
         PlayerModule,
         LibraryModule,
         PlaylistsModule,
-        SearchModule
+        SearchModule,
+        ExtensionsModule
     ],
     providers: [
         QueueService,

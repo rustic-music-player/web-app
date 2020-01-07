@@ -1,0 +1,10 @@
+<div class="extensions">
+    <h2>Extensions</h2>
+    <mat-list>
+        <mat-list-item *ngFor="let extension of extensions$ | async">
+            <h3 matLine>{{ extension.name }}</h3>
+            <p matLine>v{{ extension.version }}</p>
+            <mat-slide-toggle [checked]="extension.enabled" disabled></mat-slide-toggle>
+        </mat-list-item>
+    </mat-list>
+</div>
