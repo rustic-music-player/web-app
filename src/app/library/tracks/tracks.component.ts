@@ -4,7 +4,6 @@ import { Track } from '../../contracts/track.model';
 import { select, Store } from '@ngrx/store';
 import { RmsState, selectAllTracks } from '../../store/reducers';
 import { FetchTracks } from '../../store/actions/track.actions';
-import { QueueService } from '../../queue.service';
 
 @Component({
     selector: 'rms-tracks',
@@ -14,8 +13,7 @@ import { QueueService } from '../../queue.service';
 export class TracksComponent implements OnInit {
     tracks$: Observable<Track[]>;
 
-    constructor(private store: Store<RmsState>,
-                private queueService: QueueService) {
+    constructor(private store: Store<RmsState>) {
         this.tracks$ = this.store.pipe(select(selectAllTracks));
     }
 
@@ -23,9 +21,7 @@ export class TracksComponent implements OnInit {
         this.store.dispatch(new FetchTracks());
     }
 
-    queue(track: Track) {
-        this.queueService
-            .queueTrack(track)
-            .subscribe(() => console.log('queued'));
+    trackTrack(index: number, track: Track): string {
+        return track.cursor;
     }
 }

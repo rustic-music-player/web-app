@@ -9,6 +9,7 @@ import { LibraryItemsModule } from '../shared/library-items/library-items.module
 import { AlbumsComponent } from './albums/albums.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { TracksComponent } from './tracks/tracks.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const routes: Routes = [
     {
@@ -45,7 +46,8 @@ const routes: Routes = [
         CommonModule,
         SharedModule,
         RouterModule.forChild(routes),
-        LibraryItemsModule
+        LibraryItemsModule,
+        ScrollingModule
     ],
     declarations: [
         LibraryComponent,

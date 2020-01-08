@@ -1,6 +1,7 @@
-<mat-action-list>
-    <rms-track-list-item *ngFor="let track of tracks$ | async"
-                         [track]="track"
-                         (click)="queue(track)">
-    </rms-track-list-item>
+<mat-action-list style="height: 100%">
+    <cdk-virtual-scroll-viewport itemSize="70" style="height: 100%">
+        <rms-track-list-item *cdkVirtualFor="let track of tracks$ | async; trackBy: trackTrack"
+                             [track]="track">
+        </rms-track-list-item>
+    </cdk-virtual-scroll-viewport>
 </mat-action-list>
