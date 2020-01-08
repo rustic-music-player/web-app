@@ -1,6 +1,6 @@
 {
-    "name": "Rust Media Server",
-    "short_name": "RMS",
+    "name": "Rustic",
+    "short_name": "Rustic",
     "start_url": ".",
     "display": "standalone"
 }
