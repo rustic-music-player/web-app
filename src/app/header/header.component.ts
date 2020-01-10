@@ -13,6 +13,8 @@ import { debounceTime, tap } from 'rxjs/operators';
 })
 export class HeaderComponent {
 
+    darkTheme = localStorage.darkTheme ? JSON.parse(localStorage.darkTheme) : false;
+
     searchControl = new FormControl();
 
     @Output('toggle-sidenav')
@@ -34,5 +36,15 @@ export class HeaderComponent {
 
     onToggleSidenav() {
         this.toggleSidenav.emit();
+    }
+
+    onToggleDarkTheme() {
+        this.darkTheme = !this.darkTheme;
+        localStorage.darkTheme = this.darkTheme;
+        if (this.darkTheme) {
+            document.body.classList.add('dark-theme');
+        }else {
+            document.body.classList.remove('dark-theme');
+        }
     }
 }

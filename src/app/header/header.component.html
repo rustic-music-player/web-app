@@ -3,13 +3,28 @@
         <button mat-icon-button (click)="onToggleSidenav()" class="menu-btn">
             <i class="mdi mdi-menu"></i>
         </button>
-        <span fxFlex="25%">Rustic</span>
+        <span fxFlex>Rustic</span>
         <div class="search-bar" fxHide.xs>
             <i class="mdi mdi-search"></i>
             <input type="search"
                    placeholder="Search"
                    [formControl]="searchControl"/>
         </div>
-        <span fxFlex="20%" fxHide.lt-md></span>
+        <span fxFlex fxHide.lt-md></span>
+        <button mat-icon-button [matMenuTriggerFor]="optionsMenu">
+            <mat-icon svgIcon="dots-vertical"></mat-icon>
+        </button>
+        <mat-menu #optionsMenu>
+            <button *ngIf="!darkTheme"
+                    mat-menu-item
+                    (click)="onToggleDarkTheme()">
+                Dark Theme
+            </button>
+            <button *ngIf="darkTheme"
+                    mat-menu-item
+                    (click)="onToggleDarkTheme()">
+                Light Theme
+            </button>
+        </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>

@@ -10,6 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,6 +34,7 @@ import { QueueTrackDirective } from './queue-track.directive';
         MatIconModule,
         MatProgressSpinnerModule,
         MatTabsModule,
+        MatMenuModule,
         FlexLayoutModule,
         HttpClientModule,
         ReactiveFormsModule,
