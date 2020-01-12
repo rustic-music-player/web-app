@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QueueService } from '../../queue.service';
-import { merge, Observable } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 import { Track } from '../../contracts/track.model';
-import { Messages, SocketService } from '../../socket.service';
+import { SocketService } from '../../socket.service';
 
 @Component({
     selector: 'rms-queue',
@@ -19,9 +19,10 @@ export class QueueComponent implements OnInit {
     }
 
     ngOnInit() {
-        const initalFetch = this.api.get();
-        const updates = this.socket.ws$.pipe(filter(({type}) => type === Messages.QueueUpdated), switchMap(() => this.api.get()));
-        this.queue$ = merge(initalFetch, updates);
+        this.queue$ = this.api.observe().pipe(shareReplay(1));
     }
 
+    clear() {
+        this.api.clear().subscribe();
+    }
 }

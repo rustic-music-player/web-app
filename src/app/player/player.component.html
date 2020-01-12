@@ -9,15 +9,15 @@
             </div>
         </div>
         <div fxFlex.gt-sm fxLayout="row" fxLayoutAlign="center center">
-            <button mat-icon-button (click)="prev($event)" fxHide.xs>
+            <button mat-icon-button (click)="prev($event)" fxHide.xs [disabled]="queueIsEmpty$ | async">
                 <i class="mdi mdi-skip-previous"></i>
             </button>
-            <button mat-icon-button (click)="toggle($event)">
+            <button mat-icon-button (click)="toggle($event)" [disabled]="queueIsEmpty$ | async">
                 <i class="mdi"
                    [class.mdi-play]="!playing"
                    [class.mdi-pause]="playing"></i>
             </button>
-            <button mat-icon-button (click)="next($event)" fxHide.xs>
+            <button mat-icon-button (click)="next($event)" fxHide.xs [disabled]="queueIsEmpty$ | async">
                 <i class="mdi mdi-skip-next"></i>
             </button>
         </div>

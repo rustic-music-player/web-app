@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { merge, Observable } from 'rxjs';
 import { Track } from './contracts/track.model';
 import { Playlist } from './contracts/playlist.model';
+import { filter, switchMap } from 'rxjs/operators';
+import { Messages, SocketService } from './socket.service';
 
 @Injectable()
 export class QueueService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private socket: SocketService) {
     }
 
     queueTrack(track: Track): Observable<void> {
@@ -20,5 +23,15 @@ export class QueueService {
 
     get(): Observable<Track[]> {
         return this.http.get<Track[]>('/api/queue');
+    }
+
+    clear(): Observable<void> {
+        return this.http.post<void>('/api/queue/clear', null);
+    }
+
+    observe(): Observable<Track[]> {
+        const initalFetch = this.get();
+        const updates = this.socket.ws$.pipe(filter(({type}) => type === Messages.QueueUpdated), switchMap(() => this.get()));
+        return merge(initalFetch, updates);
     }
 }

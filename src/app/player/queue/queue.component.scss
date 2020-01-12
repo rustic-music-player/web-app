@@ -1,0 +1,15 @@
+.queue__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.queue__title {
+    flex: 1;
+    margin: 0;
+}
+
+.queue__clear-btn {
+}
+

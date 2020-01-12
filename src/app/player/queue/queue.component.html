@@ -1,3 +1,12 @@
+<div class="queue__header">
+    <h2 class="queue__title">Queue</h2>
+    <button class="queue__clear-btn"
+            mat-button
+            (click)="clear()"
+            [disabled]="(queue$ | async)?.length === 0">
+        Clear
+    </button>
+</div>
 <mat-list>
     <mat-list-item *ngFor="let track of queue$ | async">
         <img matListAvatar [src]="track.coverart">
