@@ -1,4 +1,5 @@
-<mat-action-list style="height: 100%">
+<!-- HACK: fix list height -->
+<mat-action-list style="height: calc(100vh - 49px - 64px - 64px - 8px)">
     <cdk-virtual-scroll-viewport itemSize="70" style="height: 100%">
         <rms-track-list-item *cdkVirtualFor="let track of tracks$ | async; trackBy: trackTrack"
                              [track]="track">
