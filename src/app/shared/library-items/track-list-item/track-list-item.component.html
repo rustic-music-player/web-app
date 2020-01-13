@@ -1,7 +1,7 @@
 <button mat-list-item class="track-list-item" [rmsQueueTrack]="track">
     <img class="track-list-item__cover" [src]="track.coverart" matListAvatar *ngIf="track.coverart" loading="lazy">
-    <mat-icon class="track-list-item__cover-placeholder" svgIcon="music-circle" matListIcon *ngIf="!track.coverart"></mat-icon>
-    <span class="badge {{track.provider}}">
+    <mat-icon class="placeholder-icon" svgIcon="music-circle" matListIcon *ngIf="!track.coverart"></mat-icon>
+    <span class="provider-badge provider-badge--{{track.provider}}">
         <i class="mdi mdi-{{(track.provider | provider).icon}}">
         </i>
     </span>

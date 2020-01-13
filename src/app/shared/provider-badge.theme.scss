@@ -1,0 +1,30 @@
+@import "../providers";
+
+// TODO: Move into own component
+@mixin provider-badge-theme($theme) {
+    $radius: 20px;
+    
+    .provider-badge {
+        width: $radius;
+        height: $radius;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #e0e0e0;
+        margin: 3px;
+        position: absolute;
+        top: 40px;
+        left: 40px;
+    
+        .i {
+            font-size: 14px;
+        }
+    }
+    
+    @each $name, $value in $providers {
+        .provider-badge--#{$name} {
+            color: $value;
+        }
+    }
+}
