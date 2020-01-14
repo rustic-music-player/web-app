@@ -3,6 +3,7 @@
 @import './app/search/search-provider/search-provider.theme';
 @import './app/shared/provider-badge.theme';
 @import './app/shared/placeholder-icon.theme';
+@import './app/shared/library-items/album-card/album-card.theme.scss';
 
 body {
     margin: 0;
@@ -16,6 +17,7 @@ body {
 @include search-provider-theme($rms-theme);
 @include provider-badge-theme($rms-theme);
 @include placeholder-icon-theme($rms-theme);
+@include album-card-theme($rms-theme);
 
 .dark-theme {
     @include angular-material-theme($rms-dark-theme);
@@ -23,4 +25,5 @@ body {
     @include search-provider-theme($rms-dark-theme);
     @include provider-badge-theme($rms-dark-theme);
     @include placeholder-icon-theme($rms-dark-theme);
+    @include album-card-theme($rms-dark-theme);
 }

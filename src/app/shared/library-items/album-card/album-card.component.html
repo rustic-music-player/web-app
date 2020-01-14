@@ -1,5 +1,7 @@
-<img [src]="album.coverart">
-<span class="title">{{album.title}}</span>
-<span class="artist">{{album.artist?.name}}</span>
-<mat-icon [svgIcon]="(album.provider | provider).icon"
-          [class]="album.provider"></mat-icon>
+<a [routerLink]="['/library/albums', album.cursor]" class="album-card">
+    <img [src]="album.coverart">
+    <span class="album-card__title">{{album.title}}</span>
+    <span class="album-card__artist">{{album.artist?.name}}</span>
+    <mat-icon [svgIcon]="(album.provider | provider).icon"
+              [class]="album.provider"></mat-icon>
+</a>
