@@ -9,4 +9,9 @@
             color: map-get($foreground, text);
         }
     }
+
+    .header__search-suggestions {
+        background: map-get($background, card);
+        color: map-get($foreground, text);
+    }
 }

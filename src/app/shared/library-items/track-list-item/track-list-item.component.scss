@@ -1,42 +1,7 @@
-@import "../../../providers";
-
-$radius: 20px;
-
-.badge {
-    width: $radius;
-    height: $radius;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e0e0e0;
-    margin: 3px;
-    position: absolute;
-    top: 40px;
-    left: 40px;
-
-    .i {
-        font-size: 14px;
-    }
-}
-
-.track-list-item__cover-placeholder,
-.track-list-item__cover {
-    mask: url(/assets/cover-mask.svg);
-}
-
-.track-list-item .track-list-item__cover-placeholder {
-    padding: 8px;
-    background: #dddddd;
-    color: #ffffff;
-}
-
 .track-list-item__duration {
     opacity: 0.54;
 }
 
-@each $name, $value in $providers {
-    .#{$name} {
-        color: $value;
-    }
+.track-list-item__cover {
+    mask: url(/assets/cover-mask.svg);
 }

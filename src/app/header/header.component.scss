@@ -1,3 +1,5 @@
+@import "~@angular/material/theming";
+
 .search-bar {
     height: 48px;
     border-radius: 2px;
@@ -21,4 +23,41 @@
 
 .mdi {
     font-size: 24px;
+}
+
+.header__search-suggestion-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    top: 56px;
+}
+
+.header__search-suggestions {
+    max-width: 700px;
+    width: 100%;
+    border-radius: 2px;
+    @include mat-elevation(2);
+    margin-left: 16px; // HACK: the search bar is not properly centered
+}
+
+.header__search-suggestion-track {
+    padding: 8px;
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: 48px 1fr;
+    grid-template-areas: 'coverart title' 'coverart subtitle';
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(black, 0.2);
+    }
+}
+
+.header__search-suggestion-coverart {
+    grid-area: coverart;
+    height: 48px;
+    width: 48px;
 }

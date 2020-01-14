@@ -5,6 +5,7 @@ import { Track } from '../contracts/track.model';
 import { Album } from '../contracts/album.model';
 import { Artist } from '../contracts/artist.model';
 import { Playlist } from '../contracts/playlist.model';
+import { OpenResult } from '../contracts/open-result.model';
 
 export interface SearchResults {
     tracks: Track[],
@@ -59,5 +60,9 @@ export class SearchService {
                 this._results$.next(results);
                 this._pending$.next(false);
             });
+    }
+
+    resolveExternalUrl(url: string): Observable<OpenResult> {
+        return this.http.get<OpenResult>(`api/open/${encodeURIComponent(btoa(url))}`);
     }
 }

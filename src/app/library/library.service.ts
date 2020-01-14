@@ -26,4 +26,8 @@ export class LibraryService {
     getTracks(): Observable<Track[]> {
         return this.http.get<Track[]>('/api/library/tracks');
     }
+
+    getTrack(cursor: string): Observable<Track> {
+        return this.http.get<Track>(`/api/tracks/${cursor}`);
+    }
 }
