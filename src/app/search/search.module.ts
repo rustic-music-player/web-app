@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchComponent } from './search.component';
 import { SharedModule } from '../shared/shared.module';
-import { SearchProviderComponent } from './search-provider/search-provider.component';
 import { LibraryItemsModule } from '../shared/library-items/library-items.module';
 
 const routes: Routes = [
@@ -21,8 +20,7 @@ const routes: Routes = [
         LibraryItemsModule
     ],
     declarations: [
-        SearchComponent,
-        SearchProviderComponent
+        SearchComponent
     ]
 })
 export class SearchModule {

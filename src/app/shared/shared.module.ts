@@ -18,10 +18,13 @@ import { DurationPipe } from './duration.pipe';
 import { ProviderPipe } from './provider.pipe';
 import { RouterModule } from '@angular/router';
 import { QueueTrackDirective } from './queue-track.directive';
+import { FilterProviderComponent } from './filter-provider/filter-provider.component';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        MatIconModule,
+        FlexLayoutModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -41,12 +44,14 @@ import { QueueTrackDirective } from './queue-track.directive';
         DurationPipe,
         ProviderPipe,
         RouterModule,
-        QueueTrackDirective
+        QueueTrackDirective,
+        FilterProviderComponent
     ],
     declarations: [
         DurationPipe,
         ProviderPipe,
-        QueueTrackDirective
+        QueueTrackDirective,
+        FilterProviderComponent
     ]
 })
 export class SharedModule {

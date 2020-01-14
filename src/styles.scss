@@ -1,6 +1,6 @@
 @import 'theme';
 @import './app/header/header.theme';
-@import './app/search/search-provider/search-provider.theme';
+@import './app/shared/filter-provider/filter-provider.theme';
 @import './app/shared/provider-badge.theme';
 @import './app/shared/placeholder-icon.theme';
 @import './app/shared/library-items/album-card/album-card.theme.scss';
@@ -14,7 +14,7 @@ body {
 
 @include angular-material-theme($rms-theme);
 @include header-theme($rms-theme);
-@include search-provider-theme($rms-theme);
+@include filter-provider-theme($rms-theme);
 @include provider-badge-theme($rms-theme);
 @include placeholder-icon-theme($rms-theme);
 @include album-card-theme($rms-theme);
@@ -22,7 +22,7 @@ body {
 .dark-theme {
     @include angular-material-theme($rms-dark-theme);
     @include header-theme($rms-dark-theme);
-    @include search-provider-theme($rms-dark-theme);
+    @include filter-provider-theme($rms-dark-theme);
     @include provider-badge-theme($rms-dark-theme);
     @include placeholder-icon-theme($rms-dark-theme);
     @include album-card-theme($rms-dark-theme);

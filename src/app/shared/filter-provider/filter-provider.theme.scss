@@ -2,14 +2,14 @@
 
 $height: 24px;
 
-@mixin search-provider-theme($theme) {
+@mixin filter-provider-theme($theme) {
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
     $highlight: map-get($background, selected-button);
     $default: map-get($background, disabled-button);
 
-    .search-provider {
+    .filter-provider {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -23,13 +23,13 @@ $height: 24px;
         white-space: nowrap;
         border: 2px solid transparent;
 
-        &.search-provider--selected {
+        &.filter-provider--selected {
             background: $highlight;
         }
     }
 
     @each $name, $value in $providers {
-        .search-provider--#{$name}.search-provider--selected {
+        .filter-provider--#{$name}.filter-provider--selected {
             border-color: $value;
 
             mat-icon {
