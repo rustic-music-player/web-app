@@ -1,21 +1,24 @@
-<ng-container *ngIf="album$ | async as album">
+<div class="album" [style.background-image]="'url(' + album.coverart + ')'" *ngIf="album$ | async as album">
     <img class="background" [src]="album.coverart">
     <mat-card>
-        <mat-card-title>{{album.title}}</mat-card-title>
-        <mat-card-content fxLayout="column">
-            <span class="mat-body-1">{{album.artist?.name}}</span>
-            <span class="mat-caption">{{album.tracks.length}} Tracks</span>
+        <mat-card-content class="album__card-header" fxLayout="row">
+            <img width="64" height="64" class="album__card-image" [src]="album.coverart" fxHide.lt-md>
+            <div fxLayout="column">
+                <h2 class="album__title">{{album.title}}</h2>
+                <span class="mat-body-1">{{album.artist?.name}}</span>
+                <span class="mat-caption">{{album.tracks.length}} Tracks</span>
+            </div>
         </mat-card-content>
         <mat-card-content>
-            <mat-nav-list>
-                <a mat-list-item *ngFor="let track of album.tracks" (click)="queueTrack(track)">
+            <mat-action-list>
+                <button mat-list-item *ngFor="let track of album.tracks" [rmsQueueTrack]="track">
                     <h3 matLine>{{track.title}}</h3>
                     <p matLine *ngIf="track.duration">{{track.duration | duration}}</p>
-                </a>
-            </mat-nav-list>
+                </button>
+            </mat-action-list>
         </mat-card-content>
-        <button mat-fab class="play">
-            <i class="mdi mdi-play"></i>
+        <button mat-fab class="play" (click)="queueAlbum(album)">
+            <i class="mdi mdi-playlist-plus"></i>
         </button>
     </mat-card>
-</ng-container>
+</div>

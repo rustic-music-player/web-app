@@ -1,15 +1,14 @@
-:host {
+.album {
     position: relative;
     display: block;
     overflow: auto;
-    max-height: calc(100vh - 64px);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 img.background {
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    object-fit: cover;
+    display: none;
 }
 
 mat-card {
@@ -32,12 +31,29 @@ mat-card-title {
 }
 
 @media screen and (max-width: 599px) {
+    .album {
+        background: none !important;
+    }
+
     mat-card {
         margin: 100vw 0 48px;
         border-radius: 0;
     }
 
     img.background {
+        display: block;
         height: 100vw;
+        width: 100vw;
+        position: fixed;
+        object-fit: cover;
     }
+}
+
+.album__card-image {
+    padding-right: 16px;
+}
+
+.album__title {
+    margin-bottom: 4px;
+    line-height: 20px;
 }

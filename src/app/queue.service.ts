@@ -5,6 +5,7 @@ import { Track } from './contracts/track.model';
 import { Playlist } from './contracts/playlist.model';
 import { filter, switchMap } from 'rxjs/operators';
 import { Messages, SocketService } from './socket.service';
+import { Album } from './contracts/album.model';
 
 @Injectable()
 export class QueueService {
@@ -19,6 +20,10 @@ export class QueueService {
 
     queuePlaylist(playlist: Playlist): Observable<void> {
         return this.http.post<void>(`/api/queue/playlist/${playlist.cursor}`, null);
+    }
+
+    queueAlbum(album: Album): Observable<void> {
+        return this.http.post<void>(`/api/queue/album/${album.cursor}`, null);
     }
 
     get(): Observable<Track[]> {
