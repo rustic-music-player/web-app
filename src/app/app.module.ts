@@ -24,6 +24,7 @@ import { TrackEffects } from './store/effects/track.effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomRouterStateSerializer } from './store/reducers/router.reducer';
 import { ExtensionsModule } from './extensions/extensions.module';
+import { ProviderEffects } from './store/effects/provider.effects';
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import { ExtensionsModule } from './extensions/extensions.module';
             PlayerEffects,
             AlbumEffects,
             ArtistEffects,
-            TrackEffects
+            TrackEffects,
+            ProviderEffects
         ]),
         PlayerModule,
         LibraryModule,

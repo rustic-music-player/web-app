@@ -5,17 +5,20 @@ import * as albums from './album.reducer';
 import * as artists from './artist.reducer';
 import * as tracks from './track.reducer';
 import * as router from './router.reducer';
+import * as provider from './provider.reducer';
 
 export interface RmsState {
     player: player.State,
     library: library.State,
-    router: router.State
+    router: router.State,
+    providers: provider.State
 }
 
 export const reducers: ActionReducerMap<RmsState> = {
     player: player.reducer,
     library: library.reducer,
-    router: router.reducer
+    router: router.reducer,
+    providers: provider.reducer
 };
 
 export function selectPlayerState(state: RmsState): player.State {
@@ -32,6 +35,10 @@ export function selectLibraryArtistsState(state: RmsState): artists.State {
 
 export function selectLibraryTracksState(state: RmsState): tracks.State {
     return state.library.tracks;
+}
+
+export function selectProvidersState(state: RmsState): provider.State {
+    return state.providers;
 }
 
 export const selectCurrentTrack = createSelector(
@@ -73,4 +80,9 @@ export const selectAllArtists = createSelector(
 export const selectAllTracks = createSelector(
     selectLibraryTracksState,
     tracks.selectAllTracks
+);
+
+export const selectProviders = createSelector(
+    selectProvidersState,
+    provider.selectProviders
 );

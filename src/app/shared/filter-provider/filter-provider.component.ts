@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { ProviderModel } from '../../contracts/provider.model';
+import { RmsState, selectProviders } from '../../store/reducers';
+import { Store } from '@ngrx/store';
+import { ToggleProvider } from '../../store/actions/provider.actions';
 
 @Component({
     selector: 'rms-filter-provider',
@@ -10,28 +10,14 @@ import { ProviderModel } from '../../contracts/provider.model';
     styleUrls: ['./filter-provider.component.scss']
 })
 export class FilterProviderComponent {
-    providers$: Observable<string[]> = this.httpClient.get<ProviderModel[]>('/api/providers')
-        .pipe(
-            map(providers => providers.map(provider => provider.provider)),
-            tap(providers => (this.selected = providers))
-        );
+    providers$: Observable<any[]> = this.store.select(selectProviders);
 
     selected: string[] = [];
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private store: Store<RmsState>) {
     }
 
     toggle(name: string) {
-        const index = this.selected
-            .findIndex(provider => provider === name);
-        if (index !== -1) {
-            this.selected = this.selected.filter(provider => provider !== name);
-        }else {
-            this.selected = [...this.selected, name];
-        }
-    }
-
-    isSelected(name: string) {
-        return this.selected.includes(name);
+        this.store.dispatch(new ToggleProvider(name));
     }
 }
