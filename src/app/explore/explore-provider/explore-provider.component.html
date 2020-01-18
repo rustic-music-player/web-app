@@ -1,0 +1,37 @@
+<div class="explore">
+    <div class="explore__path">
+        <ng-container *ngIf="provider$ | async as provider">
+            <a [routerLink]="['/explore', provider.provider]" [queryParams]="{ path: '' }" class="explore__path-provider-item">
+               <mat-icon [svgIcon]="(provider.provider | provider).icon"></mat-icon>
+               {{ provider.title }}
+            </a>
+            <i class="mdi mdi-chevron-right explore__path-separator" *ngIf="path.length > 0"></i>
+        </ng-container>
+        <ng-container *ngFor="let folder of path$ | async; let last = last">
+            <span class="explore__path-item">
+                {{ folder }}
+            </span>
+            <i class="mdi mdi-chevron-right explore__path-separator" *ngIf="!last"></i>
+        </ng-container>
+    </div>
+    <div class="explore__folder-list">
+        <a class="explore__folder"
+           *ngFor="let folder of folders$ | async"
+           [routerLink]=""
+           [queryParams]="{ path: next(folder) }"
+           (click)="selectFolder(folder)">
+            <span>{{ folder }}</span>
+        </a>
+    </div>
+    <ng-container *ngIf="tracks$ | async as tracks">
+        <ng-container *ngIf="tracks.length > 0">
+            <h2>Tracks</h2>
+            <mat-action-list>
+                <rms-track-list-item *ngFor="let track of tracks"
+                                     [track]="track">
+                </rms-track-list-item>
+            </mat-action-list>
+        </ng-container>
+    </ng-container>
+</div>
+

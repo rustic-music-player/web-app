@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FetchProviders, FetchProvidersSuccess, ProviderActionTypes } from '../actions/provider.actions';
-import { ProviderService } from '../../providers.service';
+import { ProviderService } from '../../provider.service';
 
 @Injectable()
 export class ProviderEffects {

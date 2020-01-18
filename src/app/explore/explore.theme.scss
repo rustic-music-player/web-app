@@ -1,0 +1,44 @@
+@import "../providers";
+
+@mixin explore-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
+    .explore {
+        margin: 16px 0 16px 16px;
+    }
+
+    .explore__provider,
+    .explore__folder,
+    .explore__path-item,
+    .explore__path-provider-item {
+        text-decoration: none;
+        padding: 16px;
+        border-radius: 4px;
+        background: rgba(black, 0.1);
+        color: map-get($foreground, text);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 256px;
+        cursor: pointer;
+        margin: 8px;
+        border: none;
+        transition: 0.1s ease-in-out all;
+
+        &:hover {
+            background: rgba(black, 0.2);
+        }
+    }
+
+    @each $provider, $color in $providers {
+        .explore__provider--#{$provider}:hover {
+            color: $color;
+        }
+    }
+
+    .explore__folder-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,20 @@
+@import "~@mdi/font/scss/variables";
+@import "~@mdi/font/scss/functions";
+
+.explore__path {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.explore__path-item,
+.explore__path-provider-item {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: rgba(black, 0.1);
+    width: auto;
+}
+
+.explore__path-separator {
+    font-size: 24px;
+}

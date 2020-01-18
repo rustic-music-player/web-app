@@ -1,0 +1,13 @@
+<div class="explore">
+    <div class="explore__folder-list">
+        <a class="explore__provider"
+           [routerLink]="provider.provider"
+           [ngClass]="'explore__provider--' + provider.provider"
+           *ngFor="let provider of providers$ | async">
+            <mat-icon [svgIcon]="(provider.provider | provider).icon"></mat-icon>
+            <span>{{ provider.title }}</span>
+        </a>
+    </div>
+</div>
+
+

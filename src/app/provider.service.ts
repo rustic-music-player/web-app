@@ -14,4 +14,12 @@ export class ProviderService {
     getProviders(): Observable<ProviderModel[]> {
         return this.http.get<ProviderModel[]>('api/providers');
     }
+
+    navigate(provider: string, path: string): Observable<any> {
+        return this.http.get<any>(`api/providers/${provider}/navigate`, {
+            params: {
+                path
+            }
+        });
+    }
 }
