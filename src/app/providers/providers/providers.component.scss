@@ -1,0 +1,30 @@
+@import "../../providers";
+
+.providers {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.providers__provider-card {
+    margin-bottom: 16px;
+}
+
+mat-card-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+mat-icon {
+    margin-right: 8px;
+}
+
+@each $provider, $color in $providers {
+    .providers__icon--#{$provider} {
+        color: $color;
+    }
+    .providers__login-button--#{$provider} {
+        background: $color;
+    }
+}

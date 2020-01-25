@@ -11,7 +11,7 @@ export const PROVIDERS = {
         label: 'Pocketcasts',
         icon: 'podcast',
     },
-    googleplaymusic: {
+    gmusic: {
         label: 'Google Play Music',
         icon: 'google-play',
     },

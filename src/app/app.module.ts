@@ -26,6 +26,7 @@ import { CustomRouterStateSerializer } from './store/reducers/router.reducer';
 import { ExtensionsModule } from './extensions/extensions.module';
 import { ProviderEffects } from './store/effects/provider.effects';
 import { ExploreModule } from './explore/explore.module';
+import { ProvidersModule } from './providers/providers.module';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { ExploreModule } from './explore/explore.module';
         PlaylistsModule,
         SearchModule,
         ExtensionsModule,
-        ExploreModule
+        ExploreModule,
+        ProvidersModule
     ],
     providers: [
         QueueService,

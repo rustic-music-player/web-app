@@ -1,0 +1,19 @@
+<div class="providers">
+<mat-card *ngFor="let provider of providers$ | async"
+          class="providers__provider-card">
+    <mat-card-title>
+        <mat-icon [ngClass]="'providers__icon--' + provider.provider"
+                  [svgIcon]="(provider.provider | provider).icon"></mat-icon>
+        {{ provider.title }}
+    </mat-card-title>
+    <mat-card-content>
+        <a mat-raised-button
+           [ngClass]="'providers__login-button--' + provider.provider"
+           *ngIf="provider.authState.state === 'o-auth-authentication'"
+           [href]="provider.authState.url"
+           target="_blank">
+            Login with {{ provider.title }}
+        </a>
+    </mat-card-content>
+</mat-card>
+</div>
