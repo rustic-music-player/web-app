@@ -39,4 +39,8 @@ export class QueueService {
         const updates = this.socket.ws$.pipe(filter(({type}) => type === Messages.QueueUpdated), switchMap(() => this.get()));
         return merge(initalFetch, updates);
     }
+
+    removeItem(index: number): Observable<void> {
+        return this.http.delete<void>(`api/queue/${index}`);
+    }
 }

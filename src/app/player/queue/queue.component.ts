@@ -25,4 +25,8 @@ export class QueueComponent implements OnInit {
     clear() {
         this.api.clear().subscribe();
     }
+
+    removeItem(index: number) {
+        this.api.removeItem(index).subscribe();
+    }
 }

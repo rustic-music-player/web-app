@@ -13,6 +13,7 @@ export class SocketService {
 
     constructor() {
         this._ws$ = webSocket(`ws://${location.host}/api/socket`);
+        this.ws$.subscribe(msg => console.debug(msg));
     }
 
     get ws$() {
