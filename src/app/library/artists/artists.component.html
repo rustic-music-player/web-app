@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="8px" class="list">
-    <a *ngFor="let artist of artists$ | async" [routerLink]="['/library/artists', artist.id]">
+    <a *ngFor="let artist of artists$ | async" [routerLink]="['/library/artists', artist.cursor]">
         <rms-artist-card [artist]="artist"></rms-artist-card>
     </a>
 </div>
