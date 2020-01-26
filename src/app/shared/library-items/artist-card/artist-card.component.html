@@ -1,5 +1,7 @@
-<img [src]="artist.image" *ngIf="artist.image">
-<div class="placeholder" *ngIf="!artist.image">
-    <i class="mdi mdi-account"></i>
+<div class="artist-card">
+    <img class="artist-card__image" [src]="artist.image" *ngIf="artist.image">
+    <div class="artist-card__placeholder" *ngIf="!artist.image">
+        <i class="mdi mdi-account"></i>
+    </div>
+    <span class="artist-card__name">{{artist.name}}</span>
 </div>
-<span>{{artist.name}}</span>

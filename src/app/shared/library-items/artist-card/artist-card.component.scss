@@ -1,52 +1,38 @@
 @import '~@angular/material/theming';
 
-$width: 172px;
-$border-width: 6px;
+$width: 192px;
+$height: 64px;
 
-:host {
+.artist-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    border-radius: 4px;
+    height: $height;
+    width: $width;
+    cursor: pointer;
+    transition: all 0.1s linear;
 
     &:hover {
-        img,
-        .placeholder {
-            @include mat-elevation(4);
-        }
+        @include mat-elevation(1);
     }
 }
 
-img,
-.placeholder {
-    @include mat-elevation(2);
-
-    transition: all 0.15s ease-in-out;
-    border-radius: 100%;
-    height: $width - 2 * $border-width;
-    width: $width - 2 * $border-width;
-    border: 6px solid white;
-    margin-bottom: 4px;
-    object-fit: cover;
-    cursor: pointer;
+.artist-card__image,
+.artist-card__placeholder {
+    width: $height;
+    height: $height;
+    border-radius: 2px;
+    flex-shrink: 0;
 }
 
-.placeholder {
+.artist-card__placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #dddddd;
-    color: #ffffff;
-    font-size: 64px;
+    font-size: 32px;
 }
 
-span {
-    font-size: 14px;
-    font-weight: 500;
-    padding: 4px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: $width;
-    text-align: center;
-    color: black;
+.artist-card__name {
+    padding: 16px;
 }
