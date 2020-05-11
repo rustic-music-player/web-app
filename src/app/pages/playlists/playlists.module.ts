@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { PlaylistsService } from './playlists.service';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { PlaylistComponent } from './playlist/playlist.component';
-import { LibraryItemsModule } from '../shared/library-items/library-items.module';
+import { LibraryItemsModule } from '../../shared/library-items/library-items.module';
 
 const routes: Routes = [
     {

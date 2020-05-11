@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Album } from '../contracts/album.model';
-import { Artist } from '../contracts/artist.model';
-import { Track } from '../contracts/track.model';
+import { Album } from '../../contracts/album.model';
+import { Artist } from '../../contracts/artist.model';
+import { Track } from '../../contracts/track.model';
 
 @Injectable()
 export class LibraryService {

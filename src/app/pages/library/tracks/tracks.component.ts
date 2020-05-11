@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Track } from '../../contracts/track.model';
+import { Track } from '../../../contracts/track.model';
 import { select, Store } from '@ngrx/store';
-import { RmsState, selectAllTracks } from '../../store/reducers';
-import { FetchTracks } from '../../store/actions/track.actions';
+import { RmsState, selectAllTracks } from '../../../store/reducers';
+import { FetchTracks } from '../../../store/actions/track.actions';
 
 @Component({
     selector: 'rms-tracks',

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LibraryComponent } from './library.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AlbumComponent } from './album/album.component';
 import { LibraryService } from './library.service';
-import { LibraryItemsModule } from '../shared/library-items/library-items.module';
+import { LibraryItemsModule } from '../../shared/library-items/library-items.module';
 import { AlbumsComponent } from './albums/albums.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { TracksComponent } from './tracks/tracks.component';

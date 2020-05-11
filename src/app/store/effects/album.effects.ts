@@ -11,7 +11,7 @@ import {
     FetchAlbumSuccess,
     OpenAlbum
 } from '../actions/album.actions';
-import { LibraryService } from '../../library/library.service';
+import { LibraryService } from '../../pages/library/library.service';
 import { of } from 'rxjs';
 import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
 import { RouterState } from '../reducers/router.reducer';

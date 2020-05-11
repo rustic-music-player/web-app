@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ArtistActionTypes, FetchArtistsError, FetchArtistsSuccess } from '../actions/artist.actions';
-import { LibraryService } from '../../library/library.service';
+import { LibraryService } from '../../pages/library/library.service';
 import { of } from 'rxjs';
 
 @Injectable()

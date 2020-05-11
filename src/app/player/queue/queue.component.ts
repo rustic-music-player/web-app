@@ -14,8 +14,7 @@ export class QueueComponent implements OnInit {
 
     queue$: Observable<Track[]>;
 
-    constructor(private api: QueueService,
-                private socket: SocketService) {
+    constructor(private api: QueueService) {
     }
 
     ngOnInit() {

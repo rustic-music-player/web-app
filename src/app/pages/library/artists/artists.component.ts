@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Artist } from '../../contracts/artist.model';
-import { RmsState, selectAllArtists } from '../../store/reducers';
+import { Artist } from '../../../contracts/artist.model';
+import { RmsState, selectAllArtists } from '../../../store/reducers';
 import { select, Store } from '@ngrx/store';
-import { FetchArtists } from '../../store/actions/artist.actions';
+import { FetchArtists } from '../../../store/actions/artist.actions';
 
 @Component({
     selector: 'rms-artists',

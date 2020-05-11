@@ -5,7 +5,7 @@ import { SearchService } from '../search/search.service';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { QueueService } from '../queue.service';
-import { LibraryService } from '../library/library.service';
+import { LibraryService } from '../pages/library/library.service';
 import { Track } from '../contracts/track.model';
 
 @Component({

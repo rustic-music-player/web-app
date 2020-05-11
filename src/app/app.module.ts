@@ -6,9 +6,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { PlayerModule } from './player/player.module';
-import { LibraryModule } from './library/library.module';
+import { LibraryModule } from './pages/library/library.module';
 import { QueueService } from './queue.service';
-import { PlaylistsModule } from './playlists/playlists.module';
+import { PlaylistsModule } from './pages/playlists/playlists.module';
 import { SearchModule } from './search/search.module';
 import { MatIconRegistry } from '@angular/material/icon';
 import { SocketService } from './socket.service';
@@ -23,10 +23,11 @@ import { ArtistEffects } from './store/effects/artist.effects';
 import { TrackEffects } from './store/effects/track.effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomRouterStateSerializer } from './store/reducers/router.reducer';
-import { ExtensionsModule } from './extensions/extensions.module';
+import { ExtensionsModule } from './pages/extensions/extensions.module';
 import { ProviderEffects } from './store/effects/provider.effects';
 import { ExploreModule } from './explore/explore.module';
 import { ProvidersModule } from './providers/providers.module';
+import { PlayerPageModule } from './pages/player-page/player-page.module';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { ProvidersModule } from './providers/providers.module';
         SearchModule,
         ExtensionsModule,
         ExploreModule,
-        ProvidersModule
+        ProvidersModule,
+        PlayerPageModule
     ],
     providers: [
         QueueService,

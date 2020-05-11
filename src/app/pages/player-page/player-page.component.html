@@ -1,0 +1,32 @@
+<div *ngIf="current$ | async as current" class="player-page__current-track">
+    <h2 class="player-page__current-track-title">Currently playing</h2>
+    <img class="player-page__current-track-coverart" [src]="coverart" *ngIf="current?.coverart as coverart"/>
+    <div class="player-page__current-track-metadata">
+        <span>{{ current.title }}</span>
+        <span>{{ current.album?.title }}</span>
+        <span>{{ current.artist?.name }}</span>
+    </div>
+</div>
+
+<div class="player-page__queue">
+    <h2 class="player-page__queue-title">Queue</h2>
+    <mat-table [dataSource]="queue$">
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="artist">
+            <mat-header-cell *matHeaderCellDef>Artist</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.artist?.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="album">
+            <mat-header-cell *matHeaderCellDef>Album</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.album?.title }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['title', 'artist', 'album']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['title', 'artist', 'album']"></mat-row>
+    </mat-table>
+</div>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { QueueService } from '../../queue.service';
-import { Album } from '../../contracts/album.model';
-import { RmsState, selectCurrentAlbum } from '../../store/reducers';
+import { QueueService } from '../../../queue.service';
+import { Album } from '../../../contracts/album.model';
+import { RmsState, selectCurrentAlbum } from '../../../store/reducers';
 import { select, Store } from '@ngrx/store';
 
 @Component({

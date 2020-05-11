@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Album } from '../../contracts/album.model';
-import { RmsState, selectAllAlbums } from '../../store/reducers';
+import { Album } from '../../../contracts/album.model';
+import { RmsState, selectAllAlbums } from '../../../store/reducers';
 import { select, Store } from '@ngrx/store';
-import { FetchAlbums } from '../../store/actions/album.actions';
+import { FetchAlbums } from '../../../store/actions/album.actions';
 
 @Component({
     selector: 'rms-library-albums',

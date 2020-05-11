@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PlaylistsService } from '../playlists.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Playlist } from '../../contracts/playlist.model';
-import { Track } from '../../contracts/track.model';
-import { QueueService } from '../../queue.service';
+import { Playlist } from '../../../contracts/playlist.model';
+import { Track } from '../../../contracts/track.model';
+import { QueueService } from '../../../queue.service';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
