@@ -43,4 +43,8 @@ export class QueueService {
     removeItem(index: number): Observable<void> {
         return this.http.delete<void>(`api/queue/${index}`);
     }
+
+    reorder(before: number, after: number): Observable<void> {
+        return this.http.post<void>(`api/queue/reorder/${before}/${after}`, null);
+    }
 }

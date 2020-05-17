@@ -6,13 +6,15 @@ import { PlayerService } from './player.service';
 import { QueueComponent } from './queue/queue.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     imports: [
         CommonModule,
         SharedModule,
         PortalModule,
-        OverlayModule
+        OverlayModule,
+        DragDropModule
     ],
     declarations: [
         PlayerComponent,
@@ -23,9 +25,6 @@ import { PortalModule } from '@angular/cdk/portal';
     ],
     providers: [
         PlayerService
-    ],
-    entryComponents: [
-        QueueComponent
     ]
 })
 export class PlayerModule {

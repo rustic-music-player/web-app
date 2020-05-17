@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QueueService } from '../../queue.service';
-import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { merge, Observable, Subject } from 'rxjs';
+import { first, shareReplay } from 'rxjs/operators';
 import { Track } from '../../contracts/track.model';
-import { SocketService } from '../../socket.service';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'rms-queue',
@@ -11,6 +11,7 @@ import { SocketService } from '../../socket.service';
     styleUrls: ['./queue.component.scss']
 })
 export class QueueComponent implements OnInit {
+    private reorderedItems = new Subject<Track[]>();
 
     queue$: Observable<Track[]>;
 
@@ -18,7 +19,8 @@ export class QueueComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.queue$ = this.api.observe().pipe(shareReplay(1));
+        const queue$ = this.api.observe().pipe(shareReplay(1));
+        this.queue$ = merge(queue$, this.reorderedItems);
     }
 
     clear() {
@@ -27,5 +29,16 @@ export class QueueComponent implements OnInit {
 
     removeItem(index: number) {
         this.api.removeItem(index).subscribe();
+    }
+
+    onReorder(event: CdkDragDrop<Track, any>) {
+        this.queue$.pipe(first())
+            .subscribe(queue => {
+                const next = [...queue];
+                const [item] = next.splice(event.previousIndex, 1);
+                next.splice(event.currentIndex, 0, item);
+                this.reorderedItems.next(next);
+            });
+        this.api.reorder(event.previousIndex, event.currentIndex).subscribe();
     }
 }
