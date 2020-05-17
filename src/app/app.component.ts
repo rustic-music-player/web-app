@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
     ]
 })
 export class AppComponent {
-    @ViewChild('sidenav', { static: false })
+    @ViewChild('sidenav')
     sidenav: MatSidenav;
 
     sidebarMode$: Observable<string>;

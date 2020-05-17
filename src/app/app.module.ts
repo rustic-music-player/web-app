@@ -21,7 +21,7 @@ import { PlayerEffects } from './store/effects/player.effects';
 import { AlbumEffects } from './store/effects/album.effects';
 import { ArtistEffects } from './store/effects/artist.effects';
 import { TrackEffects } from './store/effects/track.effects';
-import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomRouterStateSerializer } from './store/reducers/router.reducer';
 import { ExtensionsModule } from './pages/extensions/extensions.module';
 import { ProviderEffects } from './store/effects/provider.effects';
@@ -41,7 +41,7 @@ import { PlayerPageModule } from './pages/player-page/player-page.module';
         SharedModule,
         StoreModule.forRoot(reducers),
         StoreDevtoolsModule.instrument(),
-        StoreRouterConnectingModule.forRoot({
+        StoreRouterConnectingModule.forRoot({ serializer: CustomRouterStateSerializer,
             stateKey: 'router'
         }),
         EffectsModule.forRoot([
@@ -62,11 +62,7 @@ import { PlayerPageModule } from './pages/player-page/player-page.module';
     ],
     providers: [
         QueueService,
-        SocketService,
-        {
-            provide: RouterStateSerializer,
-            useClass: CustomRouterStateSerializer
-        }
+        SocketService
     ],
     bootstrap: [AppComponent]
 })

@@ -19,10 +19,10 @@ export class PlayerComponent implements OnInit {
     private overlayRef: OverlayRef;
     private positionStrategy: FlexibleConnectedPositionStrategy;
 
-    @ViewChild('queueOverlay', { static: false })
+    @ViewChild('queueOverlay')
     queueOverlay;
 
-    @ViewChild('queueToggle', { read: ElementRef, static: false })
+    @ViewChild('queueToggle', { read: ElementRef })
     queueToggle: ElementRef;
 
     showQueue = false;
