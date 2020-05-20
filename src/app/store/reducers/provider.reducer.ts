@@ -28,6 +28,12 @@ export function reducer(state: State = initial, action: ProviderActionsUnion): S
             } else {
                 selected = [...state.selected, action.payload.provider];
             }
+            if (selected.length === 0) {
+                return {
+                    ...state,
+                    selected: state.providers.map(p => p.provider)
+                };
+            }
             return {
                 ...state,
                 selected
