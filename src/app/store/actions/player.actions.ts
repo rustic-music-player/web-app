@@ -8,7 +8,9 @@ export enum PlayerActionTypes {
     Prev = '[Player] Prev',
     Next = '[Player] Next',
     CurrentTrackUpdated = '[Player] Current Track Updated',
-    StateUpdated = '[Player] State Updated'
+    StateUpdated = '[Player] State Updated',
+    VolumeUpdated = '[Player] Volume Updated',
+    ChangeVolume = '[Player] Change Volume'
 }
 
 export class PlayerPlay implements Action {
@@ -43,10 +45,24 @@ export class PlayerStateUpdated implements Action {
     constructor(public payload: boolean) {}
 }
 
+export class PlayerVolumeUpdated implements Action {
+    readonly type = PlayerActionTypes.VolumeUpdated;
+
+    constructor(public payload: number) {}
+}
+
+export class ChangePlayerVolume implements Action {
+    readonly type = PlayerActionTypes.ChangeVolume;
+
+    constructor(public payload: number) {}
+}
+
 export type PlayerActionsUnion = PlayerPlay |
     PlayerPause |
     PlayerStop |
     PlayerPrev |
     PlayerNext |
     PlayerCurrentTrackUpdated |
-    PlayerStateUpdated;
+    PlayerStateUpdated |
+    PlayerVolumeUpdated |
+    ChangePlayerVolume;

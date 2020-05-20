@@ -3,11 +3,12 @@ import { Observable } from 'rxjs';
 import { MediaObserver } from '@angular/flex-layout';
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { Track } from '../contracts/track.model';
-import { RmsState, selectCurrentTrack, selectPlayingState } from '../store/reducers';
+import {RmsState, selectCurrentTrack, selectPlayingState, selectVolume} from '../store/reducers';
 import { select, Store } from '@ngrx/store';
-import { PlayerNext, PlayerPause, PlayerPlay, PlayerPrev } from '../store/actions/player.actions';
+import { ChangePlayerVolume, PlayerNext, PlayerPause, PlayerPlay, PlayerPrev } from '../store/actions/player.actions';
 import { QueueService } from '../queue.service';
 import { map, shareReplay } from 'rxjs/operators';
+import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
     selector: 'rms-player',
@@ -29,6 +30,7 @@ export class PlayerComponent implements OnInit {
 
     playing = false;
     current$: Observable<Track | null>;
+    volume$: Observable<number>;
     queueIsEmpty$: Observable<boolean>;
 
     constructor(private media: MediaObserver,
@@ -42,6 +44,7 @@ export class PlayerComponent implements OnInit {
             .subscribe(playing => {
                 this.playing = playing
             });
+        this.volume$ = this.store.pipe(select(selectVolume));
         this.queueIsEmpty$ = queueService.observe()
             .pipe(map(queue => queue.length === 0), shareReplay(1));
     }
@@ -76,6 +79,10 @@ export class PlayerComponent implements OnInit {
         $event.preventDefault();
         $event.stopPropagation();
         this.store.dispatch(new PlayerPrev());
+    }
+
+    onUpdateVolume(event: MatSliderChange) {
+        this.store.dispatch(new ChangePlayerVolume(event.value))
     }
 
     toggleQueue() {

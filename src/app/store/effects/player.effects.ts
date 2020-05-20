@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Messages, SocketService } from '../../socket.service';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { PlayerActionTypes, PlayerCurrentTrackUpdated, PlayerStateUpdated } from '../actions/player.actions';
+import {
+    ChangePlayerVolume,
+    PlayerActionTypes,
+    PlayerCurrentTrackUpdated,
+    PlayerStateUpdated,
+    PlayerVolumeUpdated
+} from '../actions/player.actions';
 import { PlayerService } from '../../player/player.service';
 
 @Injectable()
@@ -27,6 +33,11 @@ export class PlayerEffects {
         switchMap(() => this.playerApi.prev())
     );
 
+    @Effect({ dispatch: false }) changeVolume$ = this.actions$.pipe(
+        ofType(PlayerActionTypes.ChangeVolume),
+        switchMap((action: ChangePlayerVolume) => this.playerApi.setVolume(action.payload))
+    );
+
     @Effect() playerState$ = this.socket.ws$.pipe(
         filter(({ type }) => type === Messages.PlayerStateChanged),
         map(({ payload }) => payload),
@@ -40,9 +51,10 @@ export class PlayerEffects {
     );
 
     @Effect() initialState$ = this.playerApi.getState().pipe(
-        switchMap(({ playing, current }) => [
+        switchMap(({ playing, current, volume }) => [
             new PlayerStateUpdated(playing),
-            new PlayerCurrentTrackUpdated(current)
+            new PlayerCurrentTrackUpdated(current),
+            new PlayerVolumeUpdated(volume)
         ])
     );
 

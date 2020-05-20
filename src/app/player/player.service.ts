@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { Track } from '../contracts/track.model';
 
 export interface PlayerState {
-    playing: boolean,
-    current?: Track
+    playing: boolean;
+    volume: number;
+    current?: Track;
 }
 
 @Injectable()
@@ -32,5 +33,9 @@ export class PlayerService {
 
     getState(): Observable<PlayerState> {
         return this.http.get<PlayerState>('/api/player');
+    }
+
+    setVolume(volume: number): Observable<void> {
+        return this.http.post<void>('/api/player/volume', volume);
     }
 }

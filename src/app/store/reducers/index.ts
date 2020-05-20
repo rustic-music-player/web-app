@@ -51,6 +51,11 @@ export const selectPlayingState = createSelector(
     player.selectPlayingState
 );
 
+export const selectVolume = createSelector(
+    selectPlayerState,
+    player.selectVolume
+);
+
 export const selectAllAlbums = createSelector(
     selectLibraryAlbumsState,
     albums.selectAllAlbums
