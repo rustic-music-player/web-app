@@ -33,6 +33,8 @@
         <div class="header__search-suggestion-track" *ngFor="let track of suggestions" [rmsQueueTrack]="track">
             <img class="header__search-suggestion-coverart" [src]="track.coverart" *ngIf="track.coverart" loading="lazy">
             <mat-icon class="header__search-suggestion-coverart-placeholder placeholder-icon" svgIcon="music-circle" *ngIf="!track.coverart"></mat-icon>
+            <span class="header__search-suggestion-provider provider-badge--{{track.provider}} mdi mdi-{{(track.provider | provider).icon}}">
+            </span>
             <span class="header__search-suggestion-title">{{ track.title }}</span>
             <span class="header__search-suggestion-subtitle">{{ track.artist?.name }}</span>
         </div>

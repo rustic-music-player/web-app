@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PROVIDERS } from '../providers';
+import { PROVIDERS, ProviderStyle } from '../providers';
 
 @Pipe({
     name: 'provider'
 })
 export class ProviderPipe implements PipeTransform {
 
-    transform(name: string): any {
+    transform(name: string): ProviderStyle {
         return PROVIDERS[name];
     }
 }

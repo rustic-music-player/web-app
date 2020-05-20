@@ -21,7 +21,7 @@
             font-size: 14px;
         }
     }
-    
+
     @each $name, $value in $providers {
         .provider-badge--#{$name} {
             color: $value;

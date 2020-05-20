@@ -47,8 +47,8 @@
     padding: 8px;
     display: grid;
     grid-gap: 8px;
-    grid-template-columns: 48px 1fr;
-    grid-template-areas: 'coverart title' 'coverart subtitle';
+    grid-template-columns: 48px 1fr 48px;
+    grid-template-areas: 'coverart title provider' 'coverart subtitle provider';
     cursor: pointer;
 
     &:hover {
@@ -60,4 +60,16 @@
     grid-area: coverart;
     height: 48px;
     width: 48px;
+    object-fit: cover;
+}
+
+.header__search-suggestion-provider {
+    grid-area: provider;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background-color: #e0e0e0;
+    border-radius: 100%;
 }

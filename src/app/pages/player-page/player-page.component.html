@@ -5,12 +5,22 @@
         <span>{{ current.title }}</span>
         <span>{{ current.album?.title }}</span>
         <span>{{ current.artist?.name }}</span>
+        <span class="header__search-suggestion-provider provider-badge--{{current.provider}} mdi mdi-{{(current.provider | provider).icon}}">
+            {{ (current.provider | provider).label }}
+        </span>
     </div>
 </div>
 
 <div class="player-page__queue">
     <h2 class="player-page__queue-title">Queue</h2>
     <mat-table [dataSource]="queue$">
+        <ng-container matColumnDef="coverart">
+            <mat-header-cell *matHeaderCellDef class="player-page__coverart-column"></mat-header-cell>
+            <mat-cell *matCellDef="let row" class="player-page__coverart-column">
+                <img class="player-page__queue-coverart" width="40" height="40" [src]="coverart" *ngIf="row?.coverart as coverart"/>
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="title">
             <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
             <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
@@ -26,7 +36,14 @@
             <mat-cell *matCellDef="let row">{{ row.album?.title }}</mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="['title', 'artist', 'album']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['title', 'artist', 'album']"></mat-row>
+        <ng-container matColumnDef="provider">
+            <mat-header-cell *matHeaderCellDef class="player-page__provider-column">Provider</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="player-page__provider-column">
+                <span class="player-page__provider-badge provider-badge--{{row.provider}} mdi mdi-{{(row.provider | provider).icon}}"></span>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['coverart', 'title', 'artist', 'album', 'provider']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['coverart', 'title', 'artist', 'album', 'provider']"></mat-row>
     </mat-table>
 </div>

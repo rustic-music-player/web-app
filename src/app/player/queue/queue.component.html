@@ -8,8 +8,12 @@
     </button>
 </div>
 <mat-list cdkDropList (cdkDropListDropped)="onReorder($event)">
-    <mat-list-item *ngFor="let track of queue$ | async; let i = index" cdkDrag>
-        <img matListAvatar [src]="track.coverart">
+    <mat-list-item *ngFor="let track of queue$ | async; let i = index" cdkDrag class="queue__list-item">
+        <img matListAvatar [src]="track.coverart" class="queue__coverart">
+        <span class="provider-badge provider-badge--{{track.provider}}">
+             <i class="mdi mdi-{{(track.provider | provider).icon}}">
+             </i>
+        </span>
         <h3 matLine>{{track.title}}</h3>
         <p matLine>{{track.artist?.name}}</p>
         <button mat-icon-button (click)="removeItem(i)">

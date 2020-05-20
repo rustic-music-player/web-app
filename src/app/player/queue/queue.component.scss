@@ -13,3 +13,10 @@
 .queue__clear-btn {
 }
 
+.queue__list-item {
+    position: relative;
+}
+
+.queue__coverart {
+    mask: url("/assets/cover-mask.svg");
+}

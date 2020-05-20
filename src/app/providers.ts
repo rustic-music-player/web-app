@@ -1,4 +1,9 @@
-export const PROVIDERS = {
+export interface ProviderStyle {
+    label: string;
+    icon: string;
+}
+
+export const PROVIDERS: { [provider: string]: ProviderStyle } = {
     soundcloud: {
         label: 'Soundcloud',
         icon: 'soundcloud',
@@ -22,5 +27,9 @@ export const PROVIDERS = {
     local: {
         label: 'Local',
         icon: 'folder-multiple'
+    },
+    youtube: {
+        label: 'YouTube',
+        icon: 'youtube'
     }
 };

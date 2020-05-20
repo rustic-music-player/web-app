@@ -50,6 +50,7 @@ $current-areas: (title, coverart, metadata);
 .player-page__current-track-coverart {
     width: $current-coverart-size;
     height: $current-coverart-size;
+    object-fit: cover;
 }
 
 .player-page__current-track-metadata {
@@ -60,4 +61,22 @@ $current-areas: (title, coverart, metadata);
 
 .player-page__queue {
     padding: 16px;
+}
+
+.player-page__coverart-column {
+    flex-basis: 48px;
+    flex-grow: 0;
+}
+
+.player-page__provider-column {
+    flex-basis: 64px;
+    flex-grow: 0;
+}
+
+.player-page__queue-coverart {
+    object-fit: cover;
+}
+
+.player-page__provider-badge {
+    font-size: 32px;
 }
