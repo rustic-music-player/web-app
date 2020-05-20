@@ -5,7 +5,8 @@ export enum ProviderActionTypes {
     Fetch = 'provider/fetch',
     FetchSuccess = 'provider/fetch/success',
     FetchError = 'provider/fetch/error',
-    ToggleSelection = 'provider/select/toggle'
+    ToggleSelection = 'provider/select/toggle',
+    SingleSelection = 'provider/select/single'
 }
 
 export class FetchProviders implements Action {
@@ -41,4 +42,19 @@ export class ToggleProvider implements Action {
 
 }
 
-export type ProviderActionsUnion = FetchProviders | FetchProvidersSuccess | ToggleProvider;
+export class SingleProvider implements Action {
+    readonly type = ProviderActionTypes.SingleSelection;
+
+    public payload: {
+        provider: string;
+    };
+
+    constructor(provider: string) {
+        this.payload = {
+            provider
+        };
+    }
+
+}
+
+export type ProviderActionsUnion = FetchProviders | FetchProvidersSuccess | ToggleProvider | SingleProvider;

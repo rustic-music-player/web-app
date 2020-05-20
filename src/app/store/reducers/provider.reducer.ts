@@ -25,12 +25,17 @@ export function reducer(state: State = initial, action: ProviderActionsUnion): S
             let selected;
             if (index !== -1) {
                 selected = state.selected.filter(provider => provider !== action.payload.provider);
-            }else {
+            } else {
                 selected = [...state.selected, action.payload.provider];
             }
             return {
                 ...state,
                 selected
+            };
+        case ProviderActionTypes.SingleSelection:
+            return {
+                ...state,
+                selected: [action.payload.provider]
             };
         default:
             return state;

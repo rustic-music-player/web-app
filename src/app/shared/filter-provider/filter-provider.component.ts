@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RmsState, selectProviders } from '../../store/reducers';
 import { Store } from '@ngrx/store';
-import { ToggleProvider } from '../../store/actions/provider.actions';
+import { SingleProvider, ToggleProvider } from '../../store/actions/provider.actions';
 
 @Component({
     selector: 'rms-filter-provider',
@@ -19,5 +19,10 @@ export class FilterProviderComponent {
 
     toggle(name: string) {
         this.store.dispatch(new ToggleProvider(name));
+    }
+
+    single(event: MouseEvent, name: string) {
+        event.preventDefault();
+        this.store.dispatch(new SingleProvider(name));
     }
 }

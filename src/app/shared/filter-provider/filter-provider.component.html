@@ -1,8 +1,10 @@
 <div fxLayout="row">
     <div *ngFor="let provider of providers$ | async"
          class="filter-provider filter-provider--{{provider.provider}}"
+         type="button"
          [class.filter-provider--selected]="provider.selected"
-         (click)="toggle(provider.provider)">
+         (click)="toggle(provider.provider)"
+         (contextmenu)="single($event, provider.provider)">
         <mat-icon [svgIcon]="(provider.provider | provider).icon"></mat-icon>
         <span>{{provider.title}}</span>
     </div>
