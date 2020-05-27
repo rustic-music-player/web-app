@@ -1,3 +1,4 @@
+@import "~@angular/material/theming";
 @import "../../providers";
 
 .providers {
@@ -27,4 +28,26 @@ mat-icon {
     .providers__login-button--#{$provider} {
         background: $color;
     }
+}
+
+.providers__auth-state {
+    margin-left: 8px;
+    border-radius: 2px;
+    padding: 4px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.providers__auth-state--authenticated {
+    background: mat-color($mat-green, 500);
+}
+
+.providers__auth-state--requires-auth {
+    background: mat-color($mat-red, 500);
+}
+
+.providers__provider-card-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

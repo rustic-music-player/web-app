@@ -1,10 +1,22 @@
 <div class="providers">
 <mat-card *ngFor="let provider of providers$ | async"
           class="providers__provider-card">
-    <mat-card-title>
+    <mat-card-title class="providers__provider-card-title">
         <mat-icon [ngClass]="'providers__icon--' + provider.provider"
                   [svgIcon]="(provider.provider | provider).icon"></mat-icon>
-        {{ provider.title }}
+        <span>{{ provider.title }}</span>
+        <span class="providers__auth-state providers__auth-state--authenticated"
+               *ngIf="provider.authState.state === 'authenticated'">
+            Authenticated
+        </span>
+        <span class="providers__auth-state providers__auth-state--requires-auth"
+               *ngIf="provider.authState.state === 'password-authentication'">
+            Requires Username/Password
+        </span>
+        <span class="providers__auth-state providers__auth-state--requires-auth"
+               *ngIf="provider.authState.state === 'o-auth-authentication'">
+            Requires Login
+        </span>
     </mat-card-title>
     <mat-card-content>
         <a mat-raised-button
@@ -14,6 +26,10 @@
            target="_blank">
             Login with {{ provider.title }}
         </a>
+        <rms-provider-password-authentication *ngIf="provider.authState.state === 'password-authentication'"
+                                              [provider]="provider"
+                                              (login)="onLogin(provider.provider, $event)">
+        </rms-provider-password-authentication>
     </mat-card-content>
 </mat-card>
 </div>
