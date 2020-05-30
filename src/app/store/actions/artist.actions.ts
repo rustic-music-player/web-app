@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Artist } from '../../contracts/artist.model';
+import { ArtistModel } from '@rustic/http-client';
 
 export enum ArtistActionTypes {
     Fetch = '[Library] Fetch Artists',
@@ -16,7 +16,7 @@ export class FetchArtists implements Action {
 export class FetchArtistsSuccess implements Action {
     readonly type = ArtistActionTypes.FetchSuccess;
 
-    constructor(public payload: Artist[]) {
+    constructor(public payload: ArtistModel[]) {
     }
 }
 

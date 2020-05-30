@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AvailableProvider } from '../providers.component';
+import { AvailableProviderModel } from '@rustic/http-client';
 
 export interface ProviderPasswordLogin {
     username: string;
@@ -16,7 +16,7 @@ export class ProviderPasswordAuthenticationComponent {
     form: FormGroup;
 
     @Input()
-    provider: AvailableProvider;
+    provider: AvailableProviderModel;
 
     @Output()
     login = new EventEmitter<ProviderPasswordLogin>();

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Track } from '../../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 import { QueueService } from '../../queue.service';
 import { shareReplay } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
@@ -12,8 +12,8 @@ import { RmsState, selectCurrentTrack } from '../../store/reducers';
   styleUrls: ['./player-page.component.scss']
 })
 export class PlayerPageComponent implements OnInit {
-    current$: Observable<Track | null>;
-    queue$: Observable<Track[]>;
+    current$: Observable<TrackModel | null>;
+    queue$: Observable<TrackModel[]>;
 
     constructor(private api: QueueService,
                 private store: Store<RmsState>

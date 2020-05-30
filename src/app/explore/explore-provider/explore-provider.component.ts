@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest, defer, Observable, of } from 'rxjs';
-import { ProviderModel } from '../../contracts/provider.model';
-import { ExploreModel } from '../../contracts/explore.model';
+import { ProviderFolderModel, ProviderModel, TrackModel } from '@rustic/http-client';
 import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
-import { Track } from '../../contracts/track.model';
 import { ProviderService } from '../../provider.service';
 import { ActivatedRoute } from '@angular/router';
 import { RmsState, selectProviders } from '../../store/reducers';
@@ -20,7 +18,7 @@ export class ExploreProviderComponent implements OnInit {
     path$ = new BehaviorSubject<string[]>([]);
     provider$ = defer(() => this.getProvider());
     folders$: Observable<string[]> = defer(() => this.selectFolders());
-    tracks$: Observable<Track[]> = defer(() => this.selectTracks());
+    tracks$: Observable<TrackModel[]> = defer(() => this.selectTracks());
 
     get path(): string[] {
         return this.path$.value;
@@ -57,7 +55,7 @@ export class ExploreProviderComponent implements OnInit {
             );
     }
 
-    private getCurrentLayer(): Observable<ExploreModel> {
+    private getCurrentLayer(): Observable<ProviderFolderModel> {
         return combineLatest([this.path$, this.provider$])
             .pipe(
                 filter(([path, provider]) => provider != null),
@@ -73,9 +71,14 @@ export class ExploreProviderComponent implements OnInit {
         return this.layer$.pipe(map(layer => layer.folders));
     }
 
-    private selectTracks(): Observable<Track[]> {
+    private selectTracks(): Observable<TrackModel[]> {
         return this.layer$.pipe(map(layer =>
-            layer.items.map(item => item.data.track)
+            layer.items.map(item => {
+                if ('track' in item.data) {
+                    return item.data.track;
+                }
+                return null;
+            })
                 .filter(track => track)));
     }
 }

@@ -1,50 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { merge, Observable } from 'rxjs';
-import { Track } from './contracts/track.model';
-import { Playlist } from './contracts/playlist.model';
+import { from, merge, Observable } from 'rxjs';
+import { AlbumModel, PlaylistModel, TrackModel } from '@rustic/http-client';
 import { filter, switchMap } from 'rxjs/operators';
 import { Messages, SocketService } from './socket.service';
-import { Album } from './contracts/album.model';
+import { ApiClient } from './contracts/api-client';
 
 @Injectable()
 export class QueueService {
 
-    constructor(private http: HttpClient,
+    constructor(private client: ApiClient,
                 private socket: SocketService) {
     }
 
-    queueTrack(track: Track): Observable<void> {
-        return this.http.post<void>(`/api/queue/track/${track.cursor}`, null);
+    queueTrack(track: TrackModel): Observable<void> {
+        return from(this.client.queueTrack(null, track.cursor));
     }
 
-    queuePlaylist(playlist: Playlist): Observable<void> {
-        return this.http.post<void>(`/api/queue/playlist/${playlist.cursor}`, null);
+    queuePlaylist(playlist: PlaylistModel): Observable<void> {
+        return from(this.client.queuePlaylist(null, playlist.cursor));
     }
 
-    queueAlbum(album: Album): Observable<void> {
-        return this.http.post<void>(`/api/queue/album/${album.cursor}`, null);
+    queueAlbum(album: AlbumModel): Observable<void> {
+        return from(this.client.queueAlbum(null, album.cursor));
     }
 
-    get(): Observable<Track[]> {
-        return this.http.get<Track[]>('/api/queue');
+    get(): Observable<TrackModel[]> {
+        return from(this.client.getQueue(null));
     }
 
     clear(): Observable<void> {
-        return this.http.post<void>('/api/queue/clear', null);
+        return from(this.client.clearQueue(null));
     }
 
-    observe(): Observable<Track[]> {
+    observe(): Observable<TrackModel[]> {
         const initalFetch = this.get();
-        const updates = this.socket.ws$.pipe(filter(({type}) => type === Messages.QueueUpdated), switchMap(() => this.get()));
+        const updates = this.socket.ws$.pipe(filter(({ type }) => type === Messages.QueueUpdated), switchMap(() => this.get()));
         return merge(initalFetch, updates);
     }
 
     removeItem(index: number): Observable<void> {
-        return this.http.delete<void>(`api/queue/${index}`);
+        return from(this.client.removeQueueItem(null, index));
     }
 
     reorder(before: number, after: number): Observable<void> {
-        return this.http.post<void>(`api/queue/reorder/${before}/${after}`, null);
+        return from(this.client.reorderQueueItem(null, before, after));
     }
 }

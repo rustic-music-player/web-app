@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QueueService } from '../../queue.service';
 import { merge, Observable, Subject } from 'rxjs';
 import { first, shareReplay } from 'rxjs/operators';
-import { Track } from '../../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -11,9 +11,9 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
     styleUrls: ['./queue.component.scss']
 })
 export class QueueComponent implements OnInit {
-    private reorderedItems = new Subject<Track[]>();
+    private reorderedItems = new Subject<TrackModel[]>();
 
-    queue$: Observable<Track[]>;
+    queue$: Observable<TrackModel[]>;
 
     constructor(private api: QueueService) {
     }
@@ -31,7 +31,7 @@ export class QueueComponent implements OnInit {
         this.api.removeItem(index).subscribe();
     }
 
-    onReorder(event: CdkDragDrop<Track, any>) {
+    onReorder(event: CdkDragDrop<TrackModel, any>) {
         this.queue$.pipe(first())
             .subscribe(queue => {
                 const next = [...queue];

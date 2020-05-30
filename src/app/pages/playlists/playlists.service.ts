@@ -1,25 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Playlist } from '../../contracts/playlist.model';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { RusticUrlEncodingCoded } from '../../url-encoding-codec';
+import { PlaylistModel } from '@rustic/http-client';
+import { from, Observable } from 'rxjs';
+import { ApiClient } from '../../contracts/api-client';
+import { ProviderTypeModel } from '@rustic/http-client';
 
 @Injectable()
 export class PlaylistsService {
-    constructor(private http: HttpClient) {
+    constructor(private client: ApiClient) {
     }
 
-    getPlaylists(providers: string[]): Observable<Playlist[]> {
-        let params = new HttpParams({ encoder: new RusticUrlEncodingCoded() });
-        for (let provider of providers) {
-            params = params.append('providers[]', provider);
-        }
-        return this.http.get<Playlist[]>('/api/library/playlists', {
-            params
-        });
+    getPlaylists(providers: ProviderTypeModel[]): Observable<PlaylistModel[]> {
+        return from(this.client.getPlaylists(providers));
     }
 
-    getPlaylist(cursor: string): Observable<Playlist> {
-        return this.http.get<Playlist>(`/api/library/playlists/${cursor}`);
+    getPlaylist(cursor: string): Observable<PlaylistModel> {
+        return from(this.client.getPlaylist(cursor));
     }
 }

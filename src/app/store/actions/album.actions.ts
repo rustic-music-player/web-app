@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Album } from '../../contracts/album.model';
+import { AlbumModel } from '@rustic/http-client';
 
 export enum AlbumActionTypes {
     Fetch = '[Library] Fetch Albums',
@@ -19,7 +19,7 @@ export class FetchAlbums implements Action {
 export class FetchAlbumsSuccess implements Action {
     readonly type = AlbumActionTypes.FetchSuccess;
 
-    constructor(public payload: Album[]) {
+    constructor(public payload: AlbumModel[]) {
     }
 }
 
@@ -59,10 +59,10 @@ export class FetchAlbumSuccess implements Action {
     readonly type = AlbumActionTypes.FetchSingleSuccess;
 
     public payload: {
-        album: Album
+        album: AlbumModel
     };
 
-    constructor(album: Album) {
+    constructor(album: AlbumModel) {
         this.payload = {
             album
         };

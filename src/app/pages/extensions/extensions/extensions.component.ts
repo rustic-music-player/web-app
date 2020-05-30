@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExtensionModel } from '../../../contracts/extension.model';
+import { ExtensionModel } from '@rustic/http-client';
 import { Observable } from 'rxjs';
 import { ExtensionsApiService } from '../extensions-api.service';
 

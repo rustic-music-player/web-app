@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ProviderModel } from '../../contracts/provider.model';
+import { ProviderModel } from '@rustic/http-client';
 
 export enum ProviderActionTypes {
     Fetch = 'provider/fetch',

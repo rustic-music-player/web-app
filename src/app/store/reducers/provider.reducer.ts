@@ -1,4 +1,4 @@
-import { ProviderModel } from '../../contracts/provider.model';
+import { ProviderModel } from '@rustic/http-client';
 import { ProviderActionsUnion, ProviderActionTypes } from '../actions/provider.actions';
 
 export interface State {

@@ -1,33 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Album } from '../../contracts/album.model';
-import { Artist } from '../../contracts/artist.model';
-import { Track } from '../../contracts/track.model';
+import { from, Observable } from 'rxjs';
+import { AlbumModel, ArtistModel, TrackModel } from '@rustic/http-client';
+import { ApiClient } from '../../contracts/api-client';
 
 @Injectable()
 export class LibraryService {
-
-    constructor(private http: HttpClient) {
+    constructor(private client: ApiClient) {
     }
 
-    getAlbums(): Observable<Album[]> {
-        return this.http.get<Album[]>('/api/library/albums');
+    getAlbums(): Observable<AlbumModel[]> {
+        return from(this.client.getAlbums([]));
     }
 
-    getAlbum(cursor: string): Observable<Album> {
-        return this.http.get<Album>(`/api/library/albums/${cursor}`);
+    getAlbum(cursor: string): Observable<AlbumModel> {
+        return from(this.client.getAlbum(cursor));
     }
 
-    getArtists(): Observable<Artist[]> {
-        return this.http.get<Artist[]>('/api/library/artists');
+    getArtists(): Observable<ArtistModel[]> {
+        return from(this.client.getArtists());
     }
 
-    getTracks(): Observable<Track[]> {
-        return this.http.get<Track[]>('/api/library/tracks');
+    getTracks(): Observable<TrackModel[]> {
+        return from(this.client.getTracks([]));
     }
 
-    getTrack(cursor: string): Observable<Track> {
-        return this.http.get<Track>(`/api/tracks/${cursor}`);
+    getTrack(cursor: string): Observable<TrackModel> {
+        return from(this.client.getTrack(cursor));
     }
 }

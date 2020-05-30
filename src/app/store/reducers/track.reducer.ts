@@ -1,10 +1,10 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { Track } from '../../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 import { TrackActionsUnion, TrackActionTypes } from '../actions/track.actions';
 
-export interface State extends EntityState<Track> {}
+export interface State extends EntityState<TrackModel> {}
 
-const adapter = createEntityAdapter<Track>({
+const adapter = createEntityAdapter<TrackModel>({
     selectId: track => track.cursor
 });
 

@@ -6,7 +6,7 @@ import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { QueueService } from '../queue.service';
 import { LibraryService } from '../pages/library/library.service';
-import { Track } from '../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 
 @Component({
     selector: 'rms-header',
@@ -24,7 +24,7 @@ export class HeaderComponent {
     @Output('toggle-sidenav')
     toggleSidenav = new EventEmitter<void>();
 
-    suggestions$: Observable<Track[]>;
+    suggestions$: Observable<TrackModel[]>;
 
     constructor(private searchService: SearchService,
                 private queueService: QueueService,

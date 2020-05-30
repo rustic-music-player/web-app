@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Track } from '../../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 
 export enum TrackActionTypes {
     Fetch = '[Library] Fetch Tracks',
@@ -14,7 +14,7 @@ export class FetchTracks implements Action {
 export class FetchTracksSuccess implements Action {
     readonly type = TrackActionTypes.FetchSuccess;
 
-    constructor(public payload: Track[]) {
+    constructor(public payload: TrackModel[]) {
     }
 }
 

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Track } from '../../../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 
 @Component({
     selector: 'rms-track-list-item',
@@ -8,5 +8,5 @@ import { Track } from '../../../contracts/track.model';
 })
 export class TrackListItemComponent {
     @Input()
-    track: Track;
+    track: TrackModel;
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Artist } from '../../../contracts/artist.model';
+import { ArtistModel } from '@rustic/http-client';
 
 @Component({
   selector: 'rms-artist-card',
@@ -9,5 +9,5 @@ import { Artist } from '../../../contracts/artist.model';
 export class ArtistCardComponent {
 
     @Input()
-    artist: Artist;
+    artist: ArtistModel;
 }

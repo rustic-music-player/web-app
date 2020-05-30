@@ -1,41 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Track } from '../contracts/track.model';
+import { from, Observable } from 'rxjs';
+import { TrackModel } from '@rustic/http-client';
+import { ApiClient } from '../contracts/api-client';
 
 export interface PlayerState {
     playing: boolean;
     volume: number;
-    current?: Track;
+    current?: TrackModel;
 }
 
 @Injectable()
 export class PlayerService {
-
-    constructor(private http: HttpClient) {
+    constructor(private client: ApiClient) {
     }
 
     play(): Observable<void> {
-        return this.http.post<void>('/api/player/play', null);
+        return from(this.client.playerControlPlay(null));
     }
 
     pause(): Observable<void> {
-        return this.http.post<void>('/api/player/pause', null);
+        return from(this.client.playerControlPause(null));
     }
 
     next(): Observable<void> {
-        return this.http.post<void>('/api/player/next', null);
+        return from(this.client.playerControlNext(null));
     }
 
     prev(): Observable<void> {
-        return this.http.post<void>('/api/player/prev', null);
+        return from(this.client.playerControlPrev(null));
     }
 
     getState(): Observable<PlayerState> {
-        return this.http.get<PlayerState>('/api/player');
+        return from(this.client.getPlayer(null));
     }
 
     setVolume(volume: number): Observable<void> {
-        return this.http.post<void>('/api/player/volume', volume);
+        return from(this.client.playerSetVolume(null, volume));
     }
 }

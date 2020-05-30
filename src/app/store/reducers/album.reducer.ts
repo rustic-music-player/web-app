@@ -1,12 +1,12 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { Album } from '../../contracts/album.model';
+import { AlbumModel } from '@rustic/http-client';
 import { AlbumActionsUnion, AlbumActionTypes } from '../actions/album.actions';
 
-export interface State extends EntityState<Album> {
+export interface State extends EntityState<AlbumModel> {
     selectedAlbumCursor: string | null;
 }
 
-const adapter = createEntityAdapter<Album>({
+const adapter = createEntityAdapter<AlbumModel>({
     selectId: album => album.cursor
 });
 

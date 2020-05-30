@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Album } from '../../../contracts/album.model';
+import { AlbumModel } from '@rustic/http-client';
 import { RmsState, selectAllAlbums } from '../../../store/reducers';
 import { select, Store } from '@ngrx/store';
 import { FetchAlbums } from '../../../store/actions/album.actions';
@@ -11,7 +11,7 @@ import { FetchAlbums } from '../../../store/actions/album.actions';
     styleUrls: ['./albums.component.scss']
 })
 export class AlbumsComponent implements OnInit {
-    albums$: Observable<Album[]>;
+    albums$: Observable<AlbumModel[]>;
 
     constructor(private store: Store<RmsState>) {
         this.albums$ = this.store.pipe(select(selectAllAlbums));

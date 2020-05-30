@@ -1,18 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProviderPasswordLogin } from './provider-password-authentication/provider-password-authentication.component';
-import { defer, merge, Subject } from 'rxjs';
+import { defer, merge, Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
-export interface AvailableProvider {
-    title: string;
-    provider: string;
-    configured: boolean;
-    authState: {
-        state: string;
-        url?: string;
-    }
-}
+import { ApiClient } from '../../contracts/api-client';
+import { AvailableProviderModel } from '@rustic/http-client';
 
 @Component({
     selector: 'rms-providers',
@@ -22,14 +14,15 @@ export interface AvailableProvider {
 export class ProvidersComponent {
     private refresh$ = new Subject();
 
-    providers$ = defer(() => {
-        const load$ = this.httpClient.get<AvailableProvider[]>('api/providers/available');
+    providers$: Observable<AvailableProviderModel[]> = defer(() => {
+        const load$ = this.client.getAvailableProviders();
         const refresh$ = this.refresh$.pipe(switchMap(() => load$));
 
         return merge(load$, refresh$);
     });
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private client: ApiClient,
+                private httpClient: HttpClient) {
     }
 
     onLogin(provider: string, credentials: ProviderPasswordLogin) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Track } from '../../../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 import { select, Store } from '@ngrx/store';
 import { RmsState, selectAllTracks } from '../../../store/reducers';
 import { FetchTracks } from '../../../store/actions/track.actions';
@@ -11,7 +11,7 @@ import { FetchTracks } from '../../../store/actions/track.actions';
     styleUrls: ['./tracks.component.scss']
 })
 export class TracksComponent implements OnInit {
-    tracks$: Observable<Track[]>;
+    tracks$: Observable<TrackModel[]>;
 
     constructor(private store: Store<RmsState>) {
         this.tracks$ = this.store.pipe(select(selectAllTracks));
@@ -21,7 +21,7 @@ export class TracksComponent implements OnInit {
         this.store.dispatch(new FetchTracks());
     }
 
-    trackTrack(index: number, track: Track): string {
+    trackTrack(index: number, track: TrackModel): string {
         return track.cursor;
     }
 }

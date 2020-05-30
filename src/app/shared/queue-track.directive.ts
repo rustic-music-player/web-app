@@ -1,5 +1,5 @@
 import { Directive, HostListener, Input } from '@angular/core';
-import { Track } from '../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 import { QueueService } from '../queue.service';
 
 @Directive({
@@ -8,7 +8,7 @@ import { QueueService } from '../queue.service';
 export class QueueTrackDirective {
 
     @Input('rmsQueueTrack')
-    track: Track;
+    track: TrackModel;
 
     constructor(private queue: QueueService) {
     }

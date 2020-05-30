@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProviderModel } from './contracts/provider.model';
+import { ProviderModel } from '@rustic/http-client';
+import { ApiClient } from './contracts/api-client';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProviderService {
 
-    constructor(private http: HttpClient) {
+    constructor(private client: ApiClient,
+                private http: HttpClient) {
     }
 
     getProviders(): Observable<ProviderModel[]> {
-        return this.http.get<ProviderModel[]>('api/providers');
+        return this.getProviders();
     }
 
     navigate(provider: string, path: string): Observable<any> {

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlaylistsService } from '../playlists.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Playlist } from '../../../contracts/playlist.model';
-import { Track } from '../../../contracts/track.model';
+import { PlaylistModel, TrackModel } from '@rustic/http-client';
 import { QueueService } from '../../../queue.service';
 import { switchMap } from 'rxjs/operators';
 
@@ -13,7 +12,7 @@ import { switchMap } from 'rxjs/operators';
     styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit {
-    playlist$: Observable<Playlist>;
+    playlist$: Observable<PlaylistModel>;
 
     constructor(private playlistsService: PlaylistsService,
                 private activatedRoute: ActivatedRoute,
@@ -24,13 +23,13 @@ export class PlaylistComponent implements OnInit {
         this.playlist$ = this.activatedRoute.params.pipe(switchMap(({playlist_cursor}) => this.playlistsService.getPlaylist(playlist_cursor)));
     }
 
-    queuePlaylist(playlist: Playlist) {
+    queuePlaylist(playlist: PlaylistModel) {
         this.queue
             .queuePlaylist(playlist)
             .subscribe();
     }
 
-    queueTrack(track: Track) {
+    queueTrack(track: TrackModel) {
         this.queue
             .queueTrack(track)
             .subscribe();

@@ -1,9 +1,9 @@
-import { Track } from '../../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 import { PlayerActionsUnion, PlayerActionTypes } from '../actions/player.actions';
 
 export interface State {
     playing: boolean;
-    currentTrack?: Track;
+    currentTrack?: TrackModel;
     volume: number;
 }
 

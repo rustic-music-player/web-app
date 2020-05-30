@@ -1,5 +1,5 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { Album } from '../../../contracts/album.model';
+import { AlbumModel } from '@rustic/http-client';
 
 @Component({
     selector: 'rms-album-card',
@@ -9,7 +9,7 @@ import { Album } from '../../../contracts/album.model';
 export class AlbumCardComponent {
 
     @Input()
-    album: Album;
+    album: AlbumModel;
 
     @HostBinding('title')
     get title() {

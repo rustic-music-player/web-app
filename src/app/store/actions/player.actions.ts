@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Track } from '../../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 
 export enum PlayerActionTypes {
     Play = '[Player] Play',
@@ -36,7 +36,7 @@ export class PlayerNext implements Action {
 export class PlayerCurrentTrackUpdated implements Action {
     readonly type = PlayerActionTypes.CurrentTrackUpdated;
 
-    constructor(public payload: Track | null) {}
+    constructor(public payload: TrackModel | null) {}
 }
 
 export class PlayerStateUpdated implements Action {

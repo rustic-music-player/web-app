@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MediaObserver } from '@angular/flex-layout';
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
-import { Track } from '../contracts/track.model';
+import { TrackModel } from '@rustic/http-client';
 import {RmsState, selectCurrentTrack, selectPlayingState, selectVolume} from '../store/reducers';
 import { select, Store } from '@ngrx/store';
 import { ChangePlayerVolume, PlayerNext, PlayerPause, PlayerPlay, PlayerPrev } from '../store/actions/player.actions';
@@ -29,7 +29,7 @@ export class PlayerComponent implements OnInit {
     showQueue = false;
 
     playing = false;
-    current$: Observable<Track | null>;
+    current$: Observable<TrackModel | null>;
     volume$: Observable<number>;
     queueIsEmpty$: Observable<boolean>;
 

@@ -1,12 +1,12 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { Artist } from '../../contracts/artist.model';
+import { ArtistModel } from '@rustic/http-client';
 import { ArtistActionsUnion, ArtistActionTypes } from '../actions/artist.actions';
 
-export interface State extends EntityState<Artist> {
+export interface State extends EntityState<ArtistModel> {
     selectedArtistCursor: string | null;
 }
 
-const adapter = createEntityAdapter<Artist>({
+const adapter = createEntityAdapter<ArtistModel>({
     selectId: artist => artist.cursor
 });
 

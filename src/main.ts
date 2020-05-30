@@ -3,6 +3,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { ApiClient } from './app/contracts/api-client';
 
 if (localStorage.darkTheme && JSON.parse(localStorage.darkTheme)) {
     document.querySelector('body').classList.add('dark-theme');
@@ -11,6 +12,13 @@ if (localStorage.darkTheme && JSON.parse(localStorage.darkTheme)) {
 if (environment.production) {
   enableProdMode();
 }
+import('@rustic/http-client')
+    .then(client => {
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+        platformBrowserDynamic([{
+            provide: ApiClient,
+            useValue: client
+        }]).bootstrapModule(AppModule)
+    }
+    )
   .catch(err => console.log(err));

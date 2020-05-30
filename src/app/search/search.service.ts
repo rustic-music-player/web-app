@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Track } from '../contracts/track.model';
-import { Album } from '../contracts/album.model';
-import { Artist } from '../contracts/artist.model';
-import { Playlist } from '../contracts/playlist.model';
-import { OpenResult } from '../contracts/open-result.model';
+import { BehaviorSubject, combineLatest, from, Observable } from 'rxjs';
+import { AlbumModel, ArtistModel, OpenResultModel, PlaylistModel, TrackModel } from '@rustic/http-client';
 import { RmsState, selectProviders } from '../store/reducers';
 import { Store } from '@ngrx/store';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { RusticUrlEncodingCoded } from '../url-encoding-codec';
+import { ApiClient } from '../contracts/api-client';
 
 export interface SearchResults {
-    tracks: Track[],
-    albums: Album[],
-    artists: Artist[],
-    playlists: Playlist[]
+    tracks: TrackModel[],
+    albums: AlbumModel[],
+    artists: ArtistModel[],
+    playlists: PlaylistModel[]
 }
 
 const EMPTY_RESULTS: SearchResults = {
@@ -34,7 +29,7 @@ export class SearchService {
     private _pending$ = new BehaviorSubject<boolean>(false);
     private _results$ = new BehaviorSubject<SearchResults>(EMPTY_RESULTS);
 
-    constructor(private http: HttpClient,
+    constructor(private client: ApiClient,
                 private store: Store<RmsState>) {
         this.setup();
     }
@@ -51,6 +46,15 @@ export class SearchService {
         return this._query$.asObservable();
     }
 
+    resolveExternalUrl(url: string): Observable<OpenResultModel> {
+        return from(this.client.openShareUrl(url));
+    }
+
+    query(query: string) {
+        this._query$.next(query);
+        this._results$.next(EMPTY_RESULTS);
+    }
+
     private setup() {
         const query$ = this.query$.pipe(filter(query => query !== ''));
         const providers$ = this.store.select(selectProviders)
@@ -58,38 +62,13 @@ export class SearchService {
                 map(providers => providers
                     .filter(p => p.selected)
                     .map(p => p.provider)));
-        providers$.pipe(
-            switchMap(providers => query$.pipe(map(query => ({
-                providers,
-                query
-            })))),
-            tap(() => {
-                this._pending$.next(true);
-            }),
-            switchMap((({ providers, query }) => {
-                let params = new HttpParams({ encoder: new RusticUrlEncodingCoded() }).append('query', query);
-                for (let provider of providers) {
-                    params = params.append('providers[]', provider);
-                }
-                return this.http
-                    .get<any>('/api/search', {
-                        params
-                    });
-            }))
+        combineLatest([query$, providers$]).pipe(
+            tap(() => this._pending$.next(true)),
+            switchMap(([query, providers]) => this.client.search(query, providers))
         )
-            .subscribe(results => {
+            .subscribe((results: any) => {
                 this._results$.next(results);
                 this._pending$.next(false);
-            });
-    }
-
-    query(query: string) {
-        console.log('query');
-        this._query$.next(query);
-        this._results$.next(EMPTY_RESULTS);
-    }
-
-    resolveExternalUrl(url: string): Observable<OpenResult> {
-        return this.http.get<OpenResult>(`api/open/${encodeURIComponent(btoa(url))}`);
+            })
     }
 }
