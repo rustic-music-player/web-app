@@ -1,10 +1,10 @@
 @import '~@angular/material/theming';
 @import "../../../providers";
 
-$width: 192px;
+$width: 256px;
 $height: 64px;
 
-.artist-card {
+.playlist-card {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,34 +19,32 @@ $height: 64px;
     }
 }
 
-.artist-card__image,
-.artist-card__placeholder {
-    width: $height;
-    height: $height;
-    border-radius: 2px;
+.playlist-card__placeholder {
+    width: 48px;
     flex-shrink: 0;
-    object-fit: cover;
-}
-
-.artist-card__placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 32px;
+    padding-left: 8px;
 }
 
-.artist-card__name {
+.playlist-card__name {
+    padding: 8px;
+}
+
+.playlist-card__name {
     padding: 16px 8px;
     flex: 1;
 }
 
-.artist-card__provider {
+.playlist-card__provider {
     width: 16px;
     align-self: flex-start;
 }
 
 @each $name, $value in $providers {
-    .artist-card__provider--#{$name} {
+    .playlist-card__provider--#{$name} {
         fill: $value;
     }
 }

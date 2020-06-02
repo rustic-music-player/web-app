@@ -28,6 +28,8 @@ export function reducer(state: State = initialState, action: ArtistActionsUnion)
                 ...state,
                 selectedArtistCursor: null
             };
+        case ArtistActionTypes.FetchSingleSuccess:
+            return adapter.upsertOne(action.payload.artist, state);
         default:
             return state;
     }

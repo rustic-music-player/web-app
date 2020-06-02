@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { ProviderModel } from '@rustic/http-client';
 import { ApiClient } from './contracts/api-client';
 
@@ -14,7 +14,7 @@ export class ProviderService {
     }
 
     getProviders(): Observable<ProviderModel[]> {
-        return this.getProviders();
+        return from(this.client.getProviders());
     }
 
     navigate(provider: string, path: string): Observable<any> {

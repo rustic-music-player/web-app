@@ -5,6 +5,7 @@
 @import './app/shared/placeholder-icon.theme';
 @import './app/shared/library-items/album-card/album-card.theme.scss';
 @import './app/shared/library-items/artist-card/artist-card.theme.scss';
+@import './app/shared/library-items/playlist-card/playlist-card.theme.scss';
 @import './app/explore/explore.theme';
 
 body {
@@ -21,6 +22,7 @@ body {
 @include placeholder-icon-theme($rms-theme);
 @include album-card-theme($rms-theme);
 @include artist-card-theme($rms-theme);
+@include playlist-card-theme($rms-theme);
 @include explore-theme($rms-theme);
 
 .dark-theme {
@@ -31,5 +33,19 @@ body {
     @include placeholder-icon-theme($rms-dark-theme);
     @include album-card-theme($rms-dark-theme);
     @include artist-card-theme($rms-dark-theme);
+    @include playlist-card-theme($rms-dark-theme);
     @include explore-theme($rms-dark-theme);
+
+    a {
+        color: map-get(map-get($rms-dark-theme, foreground), text);
+    }
+}
+
+a {
+    color: map-get(map-get($rms-theme, foreground), text);
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

@@ -1,0 +1,9 @@
+<a [routerLink]="['/playlists', playlist.cursor]" class="playlist-card">
+    <div class="playlist-card__placeholder">
+        <i class="mdi mdi-playlist-play"></i>
+    </div>
+    <span class="playlist-card__name">{{playlist.title}}</span>
+    <mat-icon [svgIcon]="(playlist.provider | provider).icon"
+              class="playlist-card__provider playlist-card__provider--{{ playlist.provider }}">
+    </mat-icon>
+</a>

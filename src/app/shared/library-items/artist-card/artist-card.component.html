@@ -1,7 +1,10 @@
-<div class="artist-card">
+<a [routerLink]="['/library/artists', artist.cursor]" class="artist-card">
     <img class="artist-card__image" [src]="artist.image" *ngIf="artist.image">
     <div class="artist-card__placeholder" *ngIf="!artist.image">
         <i class="mdi mdi-account"></i>
     </div>
     <span class="artist-card__name">{{artist.name}}</span>
-</div>
+    <mat-icon [svgIcon]="(artist.provider | provider).icon"
+              class="artist-card__provider artist-card__provider--{{ artist.provider }}">
+    </mat-icon>
+</a>

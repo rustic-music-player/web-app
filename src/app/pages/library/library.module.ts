@@ -10,6 +10,7 @@ import { AlbumsComponent } from './albums/albums.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { TracksComponent } from './tracks/tracks.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ArtistComponent } from './artist/artist.component';
 
 const routes: Routes = [
     {
@@ -38,6 +39,10 @@ const routes: Routes = [
     {
         path: 'library/albums/:album_cursor',
         component: AlbumComponent
+    },
+    {
+        path: 'library/artists/:artist_cursor',
+        component: ArtistComponent
     }
 ];
 
@@ -54,7 +59,8 @@ const routes: Routes = [
         AlbumComponent,
         AlbumsComponent,
         ArtistsComponent,
-        TracksComponent
+        TracksComponent,
+        ArtistComponent
     ],
     exports: [
         LibraryComponent

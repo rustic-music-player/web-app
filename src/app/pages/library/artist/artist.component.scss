@@ -1,0 +1,54 @@
+div {
+    overflow: auto;
+}
+
+rms-album-card {
+    margin: 0 8px 16px;
+}
+
+rms-playlist-card {
+    margin: 0 8px 16px;
+}
+
+.pending-container {
+    height: calc(100vh - 216px);
+}
+
+$image-size: 172px;
+
+.artist {
+    display: grid;
+    grid-template-areas: 'image metadata' 'top-tracks top-tracks' 'albums albums' 'playlists playlists';
+    grid-template-columns: $image-size 1fr;
+    grid-gap: 16px;
+    padding: 16px;
+}
+
+.artist__image {
+    grid-area: image;
+    height: $image-size;
+    width: $image-size;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.artist__metadata {
+    grid-area: metadata;
+    padding: 16px 0;
+}
+
+.artist__name {
+    font-size: 2.5rem;
+}
+
+.artist__top-tracks {
+    grid-area: top-tracks;
+}
+
+.artist__albums {
+    grid-area: albums;
+}
+
+.artist__playlists {
+    grid-area: playlists;
+}

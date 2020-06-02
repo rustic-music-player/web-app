@@ -5,7 +5,7 @@
             <img class="coverart" [src]="coverart" *ngIf="(current$ | async)?.coverart as coverart"/>
             <div class="current-track" fxLayout="column" fxLayoutAlign="center start" fxFlex>
                 <span class="mat-body-2">{{(current$ | async)?.title}}</span>
-                <span class="mat-body-1">{{(current$ | async)?.artist?.name}}</span>
+                <a *ngIf="(current$ | async)?.artist as artist" [routerLink]="['/library/artists', artist.cursor]" class="mat-body-1">{{ artist.name }}</a>
             </div>
         </div>
         <div fxFlex.gt-sm fxLayout="row" fxLayoutAlign="center center">

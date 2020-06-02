@@ -1,5 +1,5 @@
-<button mat-list-item class="track-list-item" [rmsQueueTrack]="track">
-    <img class="track-list-item__cover" [src]="track.coverart" matListAvatar *ngIf="track.coverart" loading="lazy">
+<button mat-list-item class="track-list-item" [rmsQueueTrack]="track" *ngIf="showCoverart">
+    <img class="track-list-item__cover" [src]="track.coverart" matListAvatar *ngIf="track.coverart" loading="lazy"/>
     <mat-icon class="placeholder-icon" svgIcon="music-circle" matListIcon *ngIf="!track.coverart"></mat-icon>
     <span class="provider-badge provider-badge--{{track.provider}}">
         <i class="mdi mdi-{{(track.provider | provider).icon}}">
@@ -9,5 +9,12 @@
         <span fxFlex>{{track.title}}</span>
         <span class="track-list-item__duration">{{ track.duration | duration }}</span>
     </h3>
-    <p mat-line>{{track.artist?.name}}</p>
+    <a [routerLink]="['/library/artists', track.artist?.cursor]" mat-line>{{track.artist?.name}}</a>
+</button>
+<button mat-list-item class="track-list-item" [rmsQueueTrack]="track" *ngIf="!showCoverart">
+    <h3 mat-line fxLayout="row">
+        <span fxFlex>{{track.title}}</span>
+        <span class="track-list-item__duration">{{ track.duration | duration }}</span>
+    </h3>
+    <a [routerLink]="['/library/artists', track.artist?.cursor]" mat-line>{{track.artist?.name}}</a>
 </button>

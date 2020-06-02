@@ -3,9 +3,9 @@
     <img class="player-page__current-track-coverart" [src]="coverart" *ngIf="current?.coverart as coverart"/>
     <div class="player-page__current-track-metadata">
         <span>{{ current.title }}</span>
-        <span>{{ current.album?.title }}</span>
-        <span>{{ current.artist?.name }}</span>
-        <span class="header__search-suggestion-provider provider-badge--{{current.provider}} mdi mdi-{{(current.provider | provider).icon}}">
+        <a [routerLink]="['/library/albums', current.album?.cursor]">{{ current.album?.title }}</a>
+        <a [routerLink]="['/libray/artists', current.artist?.cursor]">{{ current.artist?.name }}</a>
+        <span class="provider-badge--{{current.provider}} mdi mdi-{{(current.provider | provider).icon}}">
             {{ (current.provider | provider).label }}
         </span>
     </div>
@@ -28,12 +28,16 @@
 
         <ng-container matColumnDef="artist">
             <mat-header-cell *matHeaderCellDef>Artist</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{ row.artist?.name }}</mat-cell>
+            <mat-cell *matCellDef="let row">
+                <a *ngIf="row.artist" [routerLink]="['/library/artists', row.artist.cursor]">{{ row.artist.name }}</a>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="album">
             <mat-header-cell *matHeaderCellDef>Album</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{ row.album?.title }}</mat-cell>
+            <mat-cell *matCellDef="let row">
+                <a *ngIf="row.album" [routerLink]="['/library/albums', row.album.cursor]">{{ row.album.title }}</a>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="provider">

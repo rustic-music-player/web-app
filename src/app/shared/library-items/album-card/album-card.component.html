@@ -1,7 +1,7 @@
 <a [routerLink]="['/library/albums', album.cursor]" class="album-card">
     <img [src]="album.coverart">
     <span class="album-card__title">{{album.title}}</span>
-    <span class="album-card__artist">{{album.artist?.name}}</span>
+    <a *ngIf="album.artist" [routerLink]="['/library/artists', album.artist.cursor]" class="album-card__artist">{{album.artist.name}}</a>
     <mat-icon [svgIcon]="(album.provider | provider).icon"
               [class]="album.provider"></mat-icon>
 </a>

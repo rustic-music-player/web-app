@@ -1,0 +1,12 @@
+@mixin playlist-card-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
+    .playlist-card {
+        color: map-get($foreground, text);
+        background: rgba(black, 0.1);
+
+        &:hover {
+            background: rgba(black, 0.2);
+        }
+    }
+}

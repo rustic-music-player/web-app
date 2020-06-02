@@ -9,4 +9,7 @@ import { TrackModel } from '@rustic/http-client';
 export class TrackListItemComponent {
     @Input()
     track: TrackModel;
+
+    @Input()
+    showCoverart = true;
 }

@@ -82,6 +82,22 @@ export const selectAllArtists = createSelector(
     artists.selectAllArtists
 );
 
+export const selectArtistEntities = createSelector(
+    selectLibraryArtistsState,
+    artists.selectArtistEntities
+);
+
+export const selectCurrentArtistId = createSelector(
+    selectLibraryArtistsState,
+    artists.getSelectedArtistCursor
+);
+
+export const selectCurrentArtist = createSelector(
+    selectArtistEntities,
+    selectCurrentArtistId,
+    (entities, id) => entities[id]
+);
+
 export const selectAllTracks = createSelector(
     selectLibraryTracksState,
     tracks.selectAllTracks

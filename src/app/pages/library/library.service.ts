@@ -20,6 +20,10 @@ export class LibraryService {
         return from(this.client.getArtists());
     }
 
+    getArtist(cursor: string): Observable<ArtistModel> {
+        return from(this.client.getArtist(cursor));
+    }
+
     getTracks(): Observable<TrackModel[]> {
         return from(this.client.getTracks([]));
     }

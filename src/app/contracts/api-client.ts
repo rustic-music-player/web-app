@@ -7,12 +7,12 @@ import {
     PlayerModel,
     PlaylistModel,
     ProviderModel,
-    RusticClient,
+    RusticApiClient,
     SearchResults,
     TrackModel
 } from '@rustic/http-client';
 
-export abstract class ApiClient implements RusticClient {
+export abstract class ApiClient implements RusticApiClient {
     abstract clearQueue(player_id?: string): Promise<void>;
 
     abstract getAlbum(cursor: string): Promise<AlbumModel>;
@@ -20,6 +20,8 @@ export abstract class ApiClient implements RusticClient {
     abstract getAlbums(providers: any): Promise<AlbumModel[]>;
 
     abstract getArtists(): Promise<ArtistModel[]>;
+
+    abstract getArtist(cursor: string): Promise<ArtistModel>;
 
     abstract getAvailableProviders(): Promise<AvailableProviderModel[]>;
 

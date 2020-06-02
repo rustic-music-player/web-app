@@ -23,6 +23,9 @@
     <ng-container *ngIf="results.playlists.length">
         <h2>Playlists</h2>
         <div fxLayout="row">
+            <rms-playlist-card *ngFor="let playlist of results.playlists"
+                               [playlist]="playlist">
+            </rms-playlist-card>
         </div>
     </ng-container>
     <ng-container *ngIf="results.tracks.length">

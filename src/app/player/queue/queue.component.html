@@ -15,7 +15,7 @@
              </i>
         </span>
         <h3 matLine>{{track.title}}</h3>
-        <p matLine>{{track.artist?.name}}</p>
+        <a *ngIf="track.artist" [routerLink]="['/library/artists', track.artist.cursor]" matLine>{{track.artist.name}}</a>
         <button mat-icon-button (click)="removeItem(i)">
             <mat-icon svgIcon="delete"></mat-icon>
         </button>

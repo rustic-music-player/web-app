@@ -5,6 +5,7 @@ import { SharedModule } from '../shared.module';
 import { AlbumCoverComponent } from './album-cover/album-cover.component';
 import { ArtistCardComponent } from './artist-card/artist-card.component';
 import { TrackListItemComponent } from './track-list-item/track-list-item.component';
+import { PlaylistCardComponent } from './playlist-card/playlist-card.component';
 
 @NgModule({
     imports: [
@@ -15,13 +16,15 @@ import { TrackListItemComponent } from './track-list-item/track-list-item.compon
         AlbumCardComponent,
         AlbumCoverComponent,
         ArtistCardComponent,
-        TrackListItemComponent
+        TrackListItemComponent,
+        PlaylistCardComponent
     ],
     exports: [
         AlbumCardComponent,
         AlbumCoverComponent,
         ArtistCardComponent,
-        TrackListItemComponent
+        TrackListItemComponent,
+        PlaylistCardComponent
     ]
 })
 export class LibraryItemsModule {
