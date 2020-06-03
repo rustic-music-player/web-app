@@ -4,7 +4,7 @@
     <div class="player-page__current-track-metadata">
         <span>{{ current.title }}</span>
         <a [routerLink]="['/library/albums', current.album?.cursor]">{{ current.album?.title }}</a>
-        <a [routerLink]="['/libray/artists', current.artist?.cursor]">{{ current.artist?.name }}</a>
+        <a [routerLink]="['/library/artists', current.artist?.cursor]">{{ current.artist?.name }}</a>
         <span class="provider-badge--{{current.provider}} mdi mdi-{{(current.provider | provider).icon}}">
             {{ (current.provider | provider).label }}
         </span>
