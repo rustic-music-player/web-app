@@ -7,6 +7,7 @@ import {
     PlayerModel,
     PlaylistModel,
     ProviderModel,
+    QueuedTrackModel,
     RusticApiClient,
     SearchResults,
     TrackModel
@@ -37,7 +38,7 @@ export abstract class ApiClient implements RusticApiClient {
 
     abstract getProviders(): Promise<ProviderModel[]>;
 
-    abstract getQueue(player_id?: string): Promise<TrackModel[]>;
+    abstract getQueue(player_id?: string): Promise<QueuedTrackModel[]>;
 
     abstract getTrack(cursor: string): Promise<TrackModel>;
 

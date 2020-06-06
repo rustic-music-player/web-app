@@ -17,6 +17,11 @@
     position: relative;
 }
 
+.queue__list-item--active {
+    background: rgba(black, 0.2);
+    border-radius: 2px;
+}
+
 .queue__coverart {
     mask: url("/assets/cover-mask.svg");
 }

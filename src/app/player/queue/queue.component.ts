@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QueueService } from '../../queue.service';
 import { merge, Observable, Subject } from 'rxjs';
 import { first, shareReplay } from 'rxjs/operators';
-import { TrackModel } from '@rustic/http-client';
+import { QueuedTrackModel, TrackModel } from '@rustic/http-client';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -11,9 +11,9 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
     styleUrls: ['./queue.component.scss']
 })
 export class QueueComponent implements OnInit {
-    private reorderedItems = new Subject<TrackModel[]>();
+    private reorderedItems = new Subject<QueuedTrackModel[]>();
 
-    queue$: Observable<TrackModel[]>;
+    queue$: Observable<QueuedTrackModel[]>;
 
     constructor(private api: QueueService) {
     }

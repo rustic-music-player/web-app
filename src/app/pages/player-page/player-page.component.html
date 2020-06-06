@@ -3,8 +3,8 @@
     <img class="player-page__current-track-coverart" [src]="coverart" *ngIf="current?.coverart as coverart"/>
     <div class="player-page__current-track-metadata">
         <span>{{ current.title }}</span>
-        <a [routerLink]="['/library/albums', current.album?.cursor]">{{ current.album?.title }}</a>
-        <a [routerLink]="['/library/artists', current.artist?.cursor]">{{ current.artist?.name }}</a>
+        <a [routerLink]="['/library/albums', current.album.cursor]" *ngIf="current.album">{{ current.album.title }}</a>
+        <a [routerLink]="['/library/artists', current.artist.cursor]" *ngIf="current.artist">{{ current.artist.name }}</a>
         <span class="provider-badge--{{current.provider}} mdi mdi-{{(current.provider | provider).icon}}">
             {{ (current.provider | provider).label }}
         </span>
@@ -14,6 +14,13 @@
 <div class="player-page__queue">
     <h2 class="player-page__queue-title">Queue</h2>
     <mat-table [dataSource]="queue$">
+        <ng-container matColumnDef="playing">
+            <mat-header-cell *matHeaderCellDef class="player-page__playing-column"></mat-header-cell>
+            <mat-cell *matCellDef="let row" class="player-page__playing-column">
+                <mat-icon svgIcon="volume-high" *ngIf="row.playing"></mat-icon>
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="coverart">
             <mat-header-cell *matHeaderCellDef class="player-page__coverart-column"></mat-header-cell>
             <mat-cell *matCellDef="let row" class="player-page__coverart-column">
@@ -47,7 +54,7 @@
             </mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="['coverart', 'title', 'artist', 'album', 'provider']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['coverart', 'title', 'artist', 'album', 'provider']"></mat-row>
+        <mat-header-row *matHeaderRowDef="['playing', 'coverart', 'title', 'artist', 'album', 'provider']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['playing', 'coverart', 'title', 'artist', 'album', 'provider']" [class.player-page__track-item--active]="row.playing"></mat-row>
     </mat-table>
 </div>

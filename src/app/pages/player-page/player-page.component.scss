@@ -63,6 +63,12 @@ $current-areas: (title, coverart, metadata);
     padding: 16px;
 }
 
+.player-page__playing-column {
+    flex-basis: 36px;
+    font-size: 16px;
+    flex-grow: 0;
+}
+
 .player-page__coverart-column {
     flex-basis: 48px;
     flex-grow: 0;
@@ -79,4 +85,8 @@ $current-areas: (title, coverart, metadata);
 
 .player-page__provider-badge {
     font-size: 32px;
+}
+
+.player-page__track-item--active {
+    background: rgba(black, 0.2);
 }
