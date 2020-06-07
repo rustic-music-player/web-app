@@ -48,6 +48,10 @@ export class QueueService {
         return merge(initalFetch, updates);
     }
 
+    selectItem(player: string, index: number): Observable<void> {
+        return from(this.client.selectQueueItem(player, index));
+    }
+
     removeItem(player: string, index: number): Observable<void> {
         return from(this.client.removeQueueItem(player, index));
     }

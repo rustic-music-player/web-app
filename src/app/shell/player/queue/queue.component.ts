@@ -32,6 +32,12 @@ export class QueueComponent implements OnInit {
         this.withPlayer((player) => this.api.clear(player)).subscribe();
     }
 
+    selectItem(index: number) {
+        this.withPlayer((player) =>
+            this.api.selectItem(player, index)
+        ).subscribe();
+    }
+
     removeItem(index: number) {
         this.withPlayer((player) =>
             this.api.removeItem(player, index)
@@ -58,5 +64,9 @@ export class QueueComponent implements OnInit {
             first(),
             switchMap((player) => call(player))
         );
+    }
+
+    onNestedClick(event: MouseEvent) {
+        event.stopPropagation();
     }
 }

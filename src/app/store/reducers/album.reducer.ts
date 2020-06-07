@@ -20,7 +20,7 @@ export function reducer(
 ): State {
     switch (action.type) {
         case AlbumActionTypes.FetchSuccess:
-            return adapter.addAll(action.payload, state);
+            return adapter.setAll(action.payload, state);
         case AlbumActionTypes.Open:
             return {
                 ...state,

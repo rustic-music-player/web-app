@@ -80,6 +80,11 @@ export abstract class ApiClient implements RusticApiClient {
         after: number
     ): Promise<void>;
 
+    abstract selectQueueItem(
+        player_id: string | undefined,
+        item: number
+    ): Promise<void>;
+
     abstract removeQueueItem(
         player_id: string | undefined,
         item: number

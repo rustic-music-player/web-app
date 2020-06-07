@@ -7,21 +7,21 @@
         Clear
     </button>
 </div>
-<mat-list cdkDropList (cdkDropListDropped)="onReorder($event)">
-    <mat-list-item *ngFor="let track of queue$ | async; let i = index" cdkDrag class="queue__list-item" [class.queue__list-item--active]="track.playing">
+<mat-action-list cdkDropList (cdkDropListDropped)="onReorder($event)">
+    <button mat-list-item *ngFor="let track of queue$ | async; let i = index" cdkDrag class="queue__list-item" [class.queue__list-item--active]="track.playing" (click)="selectItem(i)">
         <img matListAvatar [src]="track.coverart" class="queue__coverart">
         <span class="provider-badge provider-badge--{{track.provider}}">
              <i class="mdi mdi-{{(track.provider | provider).icon}}">
              </i>
         </span>
         <h3 matLine>{{track.title}}</h3>
-        <a *ngIf="track.artist" [routerLink]="['/library/artists', track.artist.cursor]" matLine>{{track.artist.name}}</a>
-        <button mat-icon-button (click)="removeItem(i)" *ngIf="!track.playing">
+        <a *ngIf="track.artist" [routerLink]="['/library/artists', track.artist.cursor]" (click)="onNestedClick($event)" matLine>{{track.artist.name}}</a>
+        <button mat-icon-button (click)="onNestedClick($event); removeItem(i)" *ngIf="!track.playing">
             <mat-icon svgIcon="delete"></mat-icon>
         </button>
         <mat-icon svgIcon="volume-high" *ngIf="track.playing"></mat-icon>
         <div *cdkDragPreview [matchSize]="true">
             <h3>{{track.title}}</h3>
         </div>
-    </mat-list-item>
-</mat-list>
+    </button>
+</mat-action-list>
