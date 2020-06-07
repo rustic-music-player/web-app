@@ -1,6 +1,13 @@
 pipeline {
     agent {
-        docker 'node:latest'
+        docker {
+            image 'node:latest'
+            args '-v /usr/share/jenkins/cache:/build_cache'
+        }
+    }
+
+    environment {
+        YARN_CACHE_FOLDER='/build_cache/yarn'
     }
 
     stages {
