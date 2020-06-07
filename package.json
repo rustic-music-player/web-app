@@ -1,14 +1,13 @@
 {
-    "name": "@rustic-music-player/web-client",
-    "version": "0.0.0",
-    "license": "MIT",
+    "name": "@rustic/web-app",
+    "version": "0.1.0",
+    "license": "GPL-3.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build --prod",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e",
         "postinstall": "ngcc",
         "format": "prettier --write --single-quote '{src/**/*.{ts,scss,json},*.json}'"
     },
