@@ -7,10 +7,10 @@ import {
     PlaylistModel,
     TrackModel,
 } from '@rustic/http-client';
-import { RmsState, selectProviders } from '../store/reducers';
+import { RmsState, selectProviders } from '../../store/reducers';
 import { Store } from '@ngrx/store';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { ApiClient } from '../contracts/api-client';
+import { ApiClient } from '../../contracts/api-client';
 
 export interface SearchResults {
     tracks: TrackModel[];

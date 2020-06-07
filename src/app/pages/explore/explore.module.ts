@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExploreComponent } from './explore/explore.component';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
-import { LibraryItemsModule } from '../shared/library-items/library-items.module';
+import { SharedModule } from '../../shared/shared.module';
+import { LibraryItemsModule } from '../../shared/library-items/library-items.module';
 import { ExploreProviderComponent } from './explore-provider/explore-provider.component';
 
 @NgModule({

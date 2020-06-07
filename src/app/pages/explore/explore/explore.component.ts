@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProviderModel } from '@rustic/http-client';
 import { defer, Observable } from 'rxjs';
-import { RmsState, selectProviders } from '../../store/reducers';
+import { RmsState, selectProviders } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 

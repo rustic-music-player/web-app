@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProviderPasswordLogin } from './provider-password-authentication/provider-password-authentication.component';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { ApiClient } from '../../contracts/api-client';
+import { ApiClient } from '../../../contracts/api-client';
 import { AvailableProviderModel } from '@rustic/http-client';
 
 @Component({

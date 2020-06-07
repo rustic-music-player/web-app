@@ -6,9 +6,9 @@ import {
     TrackModel,
 } from '@rustic/http-client';
 import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
-import { ProviderService } from '../../provider.service';
+import { ProviderService } from '../../../provider.service';
 import { ActivatedRoute } from '@angular/router';
-import { RmsState, selectProviders } from '../../store/reducers';
+import { RmsState, selectProviders } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 
 @Component({

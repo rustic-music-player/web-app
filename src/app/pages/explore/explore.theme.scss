@@ -1,4 +1,4 @@
-@import '../providers';
+@import 'src/app/providers';
 
 @mixin explore-theme($theme) {
     $foreground: map-get($theme, foreground);

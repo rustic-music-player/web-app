@@ -10,7 +10,7 @@ import {
     PlayerVolumeUpdated,
     FetchPlayers,
 } from '../actions/player.actions';
-import { PlayerService } from '../../player/player.service';
+import { PlayerService } from '../../shell/player/player.service';
 import { RmsState } from '../reducers';
 import { select, Store } from '@ngrx/store';
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { QueueService } from '../../queue.service';
+import { QueueService } from '../../../queue.service';
 import { merge, Observable, Subject } from 'rxjs';
 import { first, shareReplay, switchMap } from 'rxjs/operators';
 import { QueuedTrackModel, TrackModel } from '@rustic/http-client';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { RmsState } from '../../store/reducers';
+import { RmsState } from '../../../store/reducers';
 import { select, Store } from '@ngrx/store';
 
 @Component({

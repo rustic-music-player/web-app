@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SearchService } from '../search/search.service';
+import { SearchService } from '../../pages/search/search.service';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { QueueService } from '../queue.service';
-import { LibraryService } from '../pages/library/library.service';
+import { QueueService } from '../../queue.service';
+import { LibraryService } from '../../pages/library/library.service';
 import { TrackModel } from '@rustic/http-client';
 
 @Component({

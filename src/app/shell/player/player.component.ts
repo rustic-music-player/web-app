@@ -13,7 +13,7 @@ import {
     selectCurrentTrack,
     selectPlayingState,
     selectVolume,
-} from '../store/reducers';
+} from '../../store/reducers';
 import { select, Store } from '@ngrx/store';
 import {
     ChangePlayerVolume,
@@ -22,8 +22,8 @@ import {
     PlayerPlay,
     PlayerPrev,
     SelectPlayer,
-} from '../store/actions/player.actions';
-import { QueueService } from '../queue.service';
+} from '../../store/actions/player.actions';
+import { QueueService } from '../../queue.service';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { MatSliderChange } from '@angular/material/slider';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { PlayerModel, TrackModel } from '@rustic/http-client';
-import { ApiClient } from '../contracts/api-client';
+import { ApiClient } from '../../contracts/api-client';
 
 export interface PlayerState {
     playing: boolean;

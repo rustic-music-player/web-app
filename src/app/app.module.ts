@@ -2,14 +2,14 @@ import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { HeaderComponent } from './header/header.component';
+import { SidenavComponent } from './shell/sidenav/sidenav.component';
+import { HeaderComponent } from './shell/header/header.component';
 import { SharedModule } from './shared/shared.module';
-import { PlayerModule } from './player/player.module';
+import { PlayerModule } from './shell/player/player.module';
 import { LibraryModule } from './pages/library/library.module';
 import { QueueService } from './queue.service';
 import { PlaylistsModule } from './pages/playlists/playlists.module';
-import { SearchModule } from './search/search.module';
+import { SearchModule } from './pages/search/search.module';
 import { MatIconRegistry } from '@angular/material/icon';
 import { SocketService } from './socket.service';
 import { reducers } from './store/reducers';
@@ -25,8 +25,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomRouterStateSerializer } from './store/reducers/router.reducer';
 import { ExtensionsModule } from './pages/extensions/extensions.module';
 import { ProviderEffects } from './store/effects/provider.effects';
-import { ExploreModule } from './explore/explore.module';
-import { ProvidersModule } from './providers/providers.module';
+import { ExploreModule } from './pages/explore/explore.module';
+import { ProvidersModule } from './pages/providers/providers.module';
 import { PlayerPageModule } from './pages/player-page/player-page.module';
 
 @NgModule({
