@@ -7,19 +7,20 @@ import { select, Store } from '@ngrx/store';
 import { RmsState, selectCurrentTrack } from '../../store/reducers';
 
 @Component({
-  selector: 'rms-player-page',
-  templateUrl: './player-page.component.html',
-  styleUrls: ['./player-page.component.scss']
+    selector: 'rms-player-page',
+    templateUrl: './player-page.component.html',
+    styleUrls: ['./player-page.component.scss'],
 })
 export class PlayerPageComponent {
     current$: Observable<TrackModel | null>;
     queue$: Observable<QueuedTrackModel[]>;
 
-    constructor(private api: QueueService,
-                private store: Store<RmsState>
-                ) {
+    constructor(private api: QueueService, private store: Store<RmsState>) {
         this.current$ = this.store.pipe(select(selectCurrentTrack));
-        const player$ = this.store.pipe(select(s => s.player.currentPlayer));
-        this.queue$ = player$.pipe(switchMap(player => this.api.observe(player)), shareReplay(1));
+        const player$ = this.store.pipe(select((s) => s.player.currentPlayer));
+        this.queue$ = player$.pipe(
+            switchMap((player) => this.api.observe(player)),
+            shareReplay(1)
+        );
     }
 }

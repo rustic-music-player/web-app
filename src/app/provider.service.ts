@@ -5,13 +5,10 @@ import { ProviderModel } from '@rustic/http-client';
 import { ApiClient } from './contracts/api-client';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ProviderService {
-
-    constructor(private client: ApiClient,
-                private http: HttpClient) {
-    }
+    constructor(private client: ApiClient, private http: HttpClient) {}
 
     getProviders(): Observable<ProviderModel[]> {
         return from(this.client.getProviders());
@@ -20,8 +17,8 @@ export class ProviderService {
     navigate(provider: string, path: string): Observable<any> {
         return this.http.get<any>(`api/providers/${provider}/navigate`, {
             params: {
-                path
-            }
+                path,
+            },
         });
     }
 }

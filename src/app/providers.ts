@@ -22,14 +22,14 @@ export const PROVIDERS: { [provider: string]: ProviderStyle } = {
     },
     plex: {
         label: 'Plex',
-        icon: 'plex'
+        icon: 'plex',
     },
     local: {
         label: 'Local',
-        icon: 'folder-multiple'
+        icon: 'folder-multiple',
     },
     youtube: {
         label: 'YouTube',
-        icon: 'youtube'
-    }
+        icon: 'youtube',
+    },
 };

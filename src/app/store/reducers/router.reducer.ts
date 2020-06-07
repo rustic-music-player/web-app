@@ -1,6 +1,10 @@
-import { routerReducer, RouterReducerState, RouterStateSerializer } from '@ngrx/router-store';
+import {
+    routerReducer,
+    RouterReducerState,
+    RouterStateSerializer,
+} from '@ngrx/router-store';
 import { Params, RouterStateSnapshot } from '@angular/router';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 export interface RouterState {
     url: string;
@@ -13,7 +17,8 @@ export type State = RouterReducerState<RouterState>;
 export const reducer = routerReducer;
 
 @Injectable()
-export class CustomRouterStateSerializer implements RouterStateSerializer<RouterState> {
+export class CustomRouterStateSerializer
+    implements RouterStateSerializer<RouterState> {
     serialize(routerState: RouterStateSnapshot): RouterState {
         let route = routerState.root;
 
@@ -30,7 +35,7 @@ export class CustomRouterStateSerializer implements RouterStateSerializer<Router
         return {
             url,
             params,
-            queryParams
+            queryParams,
         };
     }
 }

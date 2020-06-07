@@ -8,16 +8,22 @@ import { map } from 'rxjs/operators';
 @Component({
     selector: 'rms-explore',
     templateUrl: './explore.component.html',
-    styleUrls: ['./explore.component.scss']
+    styleUrls: ['./explore.component.scss'],
 })
 export class ExploreComponent {
-    constructor(private store: Store<RmsState>) {
-    }
+    constructor(private store: Store<RmsState>) {}
 
-    private selectProviders = () => this.store.select(selectProviders).pipe(map(providers => providers.filter(provider => {
-        return provider.explore.folders.length > 0 ||
-        provider.explore.items.length > 0;
-    })));
+    private selectProviders = () =>
+        this.store.select(selectProviders).pipe(
+            map((providers) =>
+                providers.filter((provider) => {
+                    return (
+                        provider.explore.folders.length > 0 ||
+                        provider.explore.items.length > 0
+                    );
+                })
+            )
+        );
 
     providers$: Observable<ProviderModel[]> = defer(this.selectProviders);
 }

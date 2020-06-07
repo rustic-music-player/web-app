@@ -8,17 +8,17 @@ import * as router from './router.reducer';
 import * as provider from './provider.reducer';
 
 export interface RmsState {
-    player: player.State,
-    library: library.State,
-    router: router.State,
-    providers: provider.State
+    player: player.State;
+    library: library.State;
+    router: router.State;
+    providers: provider.State;
 }
 
 export const reducers: ActionReducerMap<RmsState> = {
     player: player.reducer,
     library: library.reducer,
     router: router.reducer,
-    providers: provider.reducer
+    providers: provider.reducer,
 };
 
 export function selectPlayerState(state: RmsState): player.State {

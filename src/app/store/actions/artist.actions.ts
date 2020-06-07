@@ -19,8 +19,7 @@ export class FetchArtists implements Action {
 export class FetchArtistsSuccess implements Action {
     readonly type = ArtistActionTypes.FetchSuccess;
 
-    constructor(public payload: ArtistModel[]) {
-    }
+    constructor(public payload: ArtistModel[]) {}
 }
 
 export class FetchArtistsError implements Action {
@@ -32,8 +31,7 @@ export class FetchArtistsError implements Action {
 export class OpenArtist implements Action {
     readonly type = ArtistActionTypes.Open;
 
-    constructor(public payload: string) {
-    }
+    constructor(public payload: string) {}
 }
 
 export class CloseArtist implements Action {
@@ -44,12 +42,12 @@ export class FetchArtist implements Action {
     readonly type = ArtistActionTypes.FetchSingle;
 
     public payload: {
-        cursor: string
+        cursor: string;
     };
 
     constructor(cursor: string) {
         this.payload = {
-            cursor
+            cursor,
         };
     }
 }
@@ -58,12 +56,12 @@ export class FetchArtistSuccess implements Action {
     readonly type = ArtistActionTypes.FetchSingleSuccess;
 
     public payload: {
-        artist: ArtistModel
+        artist: ArtistModel;
     };
 
     constructor(artist: ArtistModel) {
         this.payload = {
-            artist
+            artist,
         };
     }
 }
@@ -71,15 +69,15 @@ export class FetchArtistSuccess implements Action {
 export class FetchArtistError implements Action {
     readonly type = ArtistActionTypes.FetchSingleError;
 
-    constructor(public error: any) {
-    }
+    constructor(public error: any) {}
 }
 
-export type ArtistActionsUnion = FetchArtists |
-    FetchArtistsSuccess |
-    FetchArtistsError |
-    OpenArtist |
-    CloseArtist |
-    FetchArtist |
-    FetchArtistSuccess |
-    FetchArtistError;
+export type ArtistActionsUnion =
+    | FetchArtists
+    | FetchArtistsSuccess
+    | FetchArtistsError
+    | OpenArtist
+    | CloseArtist
+    | FetchArtist
+    | FetchArtistSuccess
+    | FetchArtistError;

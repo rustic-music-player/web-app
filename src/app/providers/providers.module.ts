@@ -14,12 +14,14 @@ import { ProviderPasswordAuthenticationComponent } from './providers/provider-pa
         SharedModule,
         RouterModule.forChild(ProvidersModule.routes),
         MatFormFieldModule,
-        MatInputModule
-    ]
+        MatInputModule,
+    ],
 })
 export class ProvidersModule {
-    private static readonly routes: Routes = [{
-        path: 'providers',
-        component: ProvidersComponent
-    }];
+    private static readonly routes: Routes = [
+        {
+            path: 'providers',
+            component: ProvidersComponent,
+        },
+    ];
 }

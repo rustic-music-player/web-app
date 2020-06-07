@@ -11,12 +11,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
         CommonModule,
         RouterModule.forChild(ExtensionsModule.routes),
         SharedModule,
-        MatSlideToggleModule
-    ]
+        MatSlideToggleModule,
+    ],
 })
 export class ExtensionsModule {
-    private static routes: Routes = [{
-        path: 'extensions',
-        component: ExtensionsComponent
-    }];
+    private static routes: Routes = [
+        {
+            path: 'extensions',
+            component: ExtensionsComponent,
+        },
+    ];
 }

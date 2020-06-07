@@ -6,7 +6,7 @@ export enum ProviderActionTypes {
     FetchSuccess = 'provider/fetch/success',
     FetchError = 'provider/fetch/error',
     ToggleSelection = 'provider/select/toggle',
-    SingleSelection = 'provider/select/single'
+    SingleSelection = 'provider/select/single',
 }
 
 export class FetchProviders implements Action {
@@ -22,7 +22,7 @@ export class FetchProvidersSuccess implements Action {
 
     constructor(providers: ProviderModel[]) {
         this.payload = {
-            providers
+            providers,
         };
     }
 }
@@ -36,10 +36,9 @@ export class ToggleProvider implements Action {
 
     constructor(provider: string) {
         this.payload = {
-            provider
+            provider,
         };
     }
-
 }
 
 export class SingleProvider implements Action {
@@ -51,10 +50,13 @@ export class SingleProvider implements Action {
 
     constructor(provider: string) {
         this.payload = {
-            provider
+            provider,
         };
     }
-
 }
 
-export type ProviderActionsUnion = FetchProviders | FetchProvidersSuccess | ToggleProvider | SingleProvider;
+export type ProviderActionsUnion =
+    | FetchProviders
+    | FetchProvidersSuccess
+    | ToggleProvider
+    | SingleProvider;

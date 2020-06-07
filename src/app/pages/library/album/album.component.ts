@@ -9,7 +9,7 @@ import { first, switchMap } from 'rxjs/operators';
 @Component({
     selector: 'rms-album',
     templateUrl: './album.component.html',
-    styleUrls: ['./album.component.scss']
+    styleUrls: ['./album.component.scss'],
 })
 export class AlbumComponent {
     album$: Observable<AlbumModel>;
@@ -19,10 +19,12 @@ export class AlbumComponent {
     }
 
     queueAlbum(album: AlbumModel) {
-        this.store.pipe(
-            select(s => s.player.currentPlayer),
-            first(),
-            switchMap(player => this.queue.queueAlbum(player, album))
-        ).subscribe();
+        this.store
+            .pipe(
+                select((s) => s.player.currentPlayer),
+                first(),
+                switchMap((player) => this.queue.queueAlbum(player, album))
+            )
+            .subscribe();
     }
 }

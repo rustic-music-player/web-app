@@ -1,5 +1,8 @@
 import { PlayerModel } from '@rustic/http-client';
-import { PlayerActionsUnion, PlayerActionTypes } from '../actions/player.actions';
+import {
+    PlayerActionsUnion,
+    PlayerActionTypes,
+} from '../actions/player.actions';
 
 export interface State {
     players: PlayerModel[];
@@ -7,80 +10,86 @@ export interface State {
 }
 
 export const initial: State = {
-    players: []
+    players: [],
 };
 
-export function reducer(state: State = initial, action: PlayerActionsUnion): State {
+export function reducer(
+    state: State = initial,
+    action: PlayerActionsUnion
+): State {
     switch (action.type) {
         case PlayerActionTypes.FetchPlayers:
             return {
                 ...state,
                 currentPlayer: action.payload.players[0].cursor,
-                players: action.payload.players
+                players: action.payload.players,
             };
         case PlayerActionTypes.SelectPlayer:
             return {
                 ...state,
-                currentPlayer: action.payload.cursor
+                currentPlayer: action.payload.cursor,
             };
         case PlayerActionTypes.CurrentTrackUpdated:
             return {
                 ...state,
-                players: state.players.map(p => {
+                players: state.players.map((p) => {
                     if (p.cursor !== action.cursor) {
                         return p;
                     }
                     return {
                         ...p,
-                        current: action.payload
+                        current: action.payload,
                     };
-                })
+                }),
             };
         case PlayerActionTypes.StateUpdated:
             return {
                 ...state,
-                players: state.players.map(p => {
+                players: state.players.map((p) => {
                     if (p.cursor !== action.cursor) {
                         return p;
                     }
                     return {
                         ...p,
-                        playing: action.payload
+                        playing: action.payload,
                     };
-                })
+                }),
             };
         case PlayerActionTypes.ChangeVolume:
             return {
                 ...state,
-                players: state.players.map(p => {
+                players: state.players.map((p) => {
                     if (p.cursor !== state.currentPlayer) {
                         return p;
                     }
                     return {
                         ...p,
-                        volume: action.payload
+                        volume: action.payload,
                     };
-                })
+                }),
             };
         case PlayerActionTypes.VolumeUpdated:
             return {
                 ...state,
-                players: state.players.map(p => {
+                players: state.players.map((p) => {
                     if (p.cursor !== action.cursor) {
                         return p;
                     }
                     return {
                         ...p,
-                        volume: action.payload
+                        volume: action.payload,
                     };
-                })
+                }),
             };
         default:
             return state;
     }
 }
 
-export const selectPlayer = (state: State) => state.players.find(p => p.cursor === state.currentPlayer);
-export const selectPlayingState = (state: State) => selectPlayer(state)?.playing;
-export const selectCurrentTrack = (state: State) => selectPlayer(state)?.current;
+export const selectPlayer = (state: State) =>
+    state.players.find((p) => p.cursor === state.currentPlayer);
+export const selectPlayingState = (state: State) =>
+    selectPlayer(state)?.playing;
+export const selectCurrentTrack = (state: State) =>
+    selectPlayer(state)?.current;
 export const selectVolume = (state: State) => selectPlayer(state)?.volume;

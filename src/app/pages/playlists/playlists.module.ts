@@ -10,12 +10,12 @@ import { LibraryItemsModule } from '../../shared/library-items/library-items.mod
 const routes: Routes = [
     {
         path: 'playlists',
-        component: PlaylistsComponent
+        component: PlaylistsComponent,
     },
     {
         path: 'playlists/:playlist_cursor',
-        component: PlaylistComponent
-    }
+        component: PlaylistComponent,
+    },
 ];
 
 @NgModule({
@@ -23,15 +23,9 @@ const routes: Routes = [
         CommonModule,
         SharedModule,
         RouterModule.forChild(routes),
-        LibraryItemsModule
+        LibraryItemsModule,
     ],
-    declarations: [
-        PlaylistsComponent,
-        PlaylistComponent
-    ],
-    providers: [
-        PlaylistsService
-    ]
+    declarations: [PlaylistsComponent, PlaylistComponent],
+    providers: [PlaylistsService],
 })
-export class PlaylistsModule {
-}
+export class PlaylistsModule {}

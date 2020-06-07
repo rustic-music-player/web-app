@@ -30,26 +30,23 @@ import { ProvidersModule } from './providers/providers.module';
 import { PlayerPageModule } from './pages/player-page/player-page.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        SidenavComponent,
-        HeaderComponent
-    ],
+    declarations: [AppComponent, SidenavComponent, HeaderComponent],
     imports: [
         BrowserModule,
         RouterModule.forRoot([]),
         SharedModule,
         StoreModule.forRoot(reducers),
         StoreDevtoolsModule.instrument(),
-        StoreRouterConnectingModule.forRoot({ serializer: CustomRouterStateSerializer,
-            stateKey: 'router'
+        StoreRouterConnectingModule.forRoot({
+            serializer: CustomRouterStateSerializer,
+            stateKey: 'router',
         }),
         EffectsModule.forRoot([
             PlayerEffects,
             AlbumEffects,
             ArtistEffects,
             TrackEffects,
-            ProviderEffects
+            ProviderEffects,
         ]),
         PlayerModule,
         LibraryModule,
@@ -58,16 +55,15 @@ import { PlayerPageModule } from './pages/player-page/player-page.module';
         ExtensionsModule,
         ExploreModule,
         ProvidersModule,
-        PlayerPageModule
+        PlayerPageModule,
     ],
-    providers: [
-        QueueService,
-        SocketService
-    ],
-    bootstrap: [AppComponent]
+    providers: [QueueService, SocketService],
+    bootstrap: [AppComponent],
 })
 export class AppModule {
     constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
-        matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('../assets/mdi.svg'));
+        matIconRegistry.addSvgIconSet(
+            domSanitizer.bypassSecurityTrustResourceUrl('../assets/mdi.svg')
+        );
     }
 }

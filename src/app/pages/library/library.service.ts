@@ -5,8 +5,7 @@ import { ApiClient } from '../../contracts/api-client';
 
 @Injectable()
 export class LibraryService {
-    constructor(private client: ApiClient) {
-    }
+    constructor(private client: ApiClient) {}
 
     getAlbums(): Observable<AlbumModel[]> {
         return from(this.client.getAlbums([]));

@@ -22,7 +22,7 @@ export class FetchPlayers implements Action {
 
     constructor(players: PlayerModel[]) {
         this.payload = {
-            players
+            players,
         };
     }
 }
@@ -80,20 +80,20 @@ export class SelectPlayer implements Action {
 
     constructor(player: PlayerModel) {
         this.payload = {
-            cursor: player.cursor
+            cursor: player.cursor,
         };
     }
-
 }
 
-export type PlayerActionsUnion = PlayerPlay |
-    PlayerPause |
-    PlayerStop |
-    PlayerPrev |
-    PlayerNext |
-    PlayerCurrentTrackUpdated |
-    PlayerStateUpdated |
-    PlayerVolumeUpdated |
-    ChangePlayerVolume |
-    FetchPlayers |
-    SelectPlayer;
+export type PlayerActionsUnion =
+    | PlayerPlay
+    | PlayerPause
+    | PlayerStop
+    | PlayerPrev
+    | PlayerNext
+    | PlayerCurrentTrackUpdated
+    | PlayerStateUpdated
+    | PlayerVolumeUpdated
+    | ChangePlayerVolume
+    | FetchPlayers
+    | SelectPlayer;

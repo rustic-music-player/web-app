@@ -7,7 +7,7 @@ import { QueueComponent } from './queue/queue.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import {MatSliderModule} from "@angular/material/slider";
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
     imports: [
@@ -16,18 +16,10 @@ import {MatSliderModule} from "@angular/material/slider";
         PortalModule,
         OverlayModule,
         DragDropModule,
-        MatSliderModule
+        MatSliderModule,
     ],
-    declarations: [
-        PlayerComponent,
-        QueueComponent
-    ],
-    exports: [
-        PlayerComponent
-    ],
-    providers: [
-        PlayerService
-    ]
+    declarations: [PlayerComponent, QueueComponent],
+    exports: [PlayerComponent],
+    providers: [PlayerService],
 })
-export class PlayerModule {
-}
+export class PlayerModule {}

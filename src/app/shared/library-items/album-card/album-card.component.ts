@@ -4,10 +4,9 @@ import { AlbumModel } from '@rustic/http-client';
 @Component({
     selector: 'rms-album-card',
     templateUrl: './album-card.component.html',
-    styleUrls: ['./album-card.component.scss']
+    styleUrls: ['./album-card.component.scss'],
 })
 export class AlbumCardComponent {
-
     @Input()
     album: AlbumModel;
 

@@ -10,7 +10,7 @@ import {
     QueuedTrackModel,
     RusticApiClient,
     SearchResults,
-    TrackModel
+    TrackModel,
 } from '@rustic/http-client';
 
 export abstract class ApiClient implements RusticApiClient {
@@ -54,18 +54,36 @@ export abstract class ApiClient implements RusticApiClient {
 
     abstract playerControlPrev(player_id?: string): Promise<void>;
 
-    abstract playerSetVolume(player_id: string | undefined, volume: number): Promise<void>;
+    abstract playerSetVolume(
+        player_id: string | undefined,
+        volume: number
+    ): Promise<void>;
 
-    abstract queueAlbum(player_id: string | undefined, cursor: string): Promise<void>;
+    abstract queueAlbum(
+        player_id: string | undefined,
+        cursor: string
+    ): Promise<void>;
 
-    abstract queuePlaylist(player_id: string | undefined, cursor: string): Promise<void>;
+    abstract queuePlaylist(
+        player_id: string | undefined,
+        cursor: string
+    ): Promise<void>;
 
-    abstract queueTrack(player_id: string | undefined, cursor: string): Promise<void>;
+    abstract queueTrack(
+        player_id: string | undefined,
+        cursor: string
+    ): Promise<void>;
 
-    abstract reorderQueueItem(player_id: string | undefined, before: number, after: number): Promise<void>;
+    abstract reorderQueueItem(
+        player_id: string | undefined,
+        before: number,
+        after: number
+    ): Promise<void>;
 
-    abstract removeQueueItem(player_id: string | undefined, item: number): Promise<void>;
+    abstract removeQueueItem(
+        player_id: string | undefined,
+        item: number
+    ): Promise<void>;
 
     abstract search(query: string, providers: any): Promise<SearchResults>;
 }
-

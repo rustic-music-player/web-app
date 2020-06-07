@@ -19,31 +19,31 @@ const routes: Routes = [
         children: [
             {
                 path: 'albums',
-                component: AlbumsComponent
+                component: AlbumsComponent,
             },
             {
                 path: 'artists',
-                component: ArtistsComponent
+                component: ArtistsComponent,
             },
             {
                 path: 'tracks',
-                component: TracksComponent
-            }
-        ]
+                component: TracksComponent,
+            },
+        ],
     },
     {
         path: '',
         redirectTo: '/library/albums',
-        pathMatch: 'full'
+        pathMatch: 'full',
     },
     {
         path: 'library/albums/:album_cursor',
-        component: AlbumComponent
+        component: AlbumComponent,
     },
     {
         path: 'library/artists/:artist_cursor',
-        component: ArtistComponent
-    }
+        component: ArtistComponent,
+    },
 ];
 
 @NgModule({
@@ -52,7 +52,7 @@ const routes: Routes = [
         SharedModule,
         RouterModule.forChild(routes),
         LibraryItemsModule,
-        ScrollingModule
+        ScrollingModule,
     ],
     declarations: [
         LibraryComponent,
@@ -60,14 +60,9 @@ const routes: Routes = [
         AlbumsComponent,
         ArtistsComponent,
         TracksComponent,
-        ArtistComponent
+        ArtistComponent,
     ],
-    exports: [
-        LibraryComponent
-    ],
-    providers: [
-        LibraryService
-    ]
+    exports: [LibraryComponent],
+    providers: [LibraryService],
 })
-export class LibraryModule {
-}
+export class LibraryModule {}

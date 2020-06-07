@@ -1,9 +1,19 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MediaObserver } from '@angular/flex-layout';
-import { FlexibleConnectedPositionStrategy, Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
+import {
+    FlexibleConnectedPositionStrategy,
+    Overlay,
+    OverlayPositionBuilder,
+    OverlayRef,
+} from '@angular/cdk/overlay';
 import { PlayerModel, TrackModel } from '@rustic/http-client';
-import {RmsState, selectCurrentTrack, selectPlayingState, selectVolume} from '../store/reducers';
+import {
+    RmsState,
+    selectCurrentTrack,
+    selectPlayingState,
+    selectVolume,
+} from '../store/reducers';
 import { select, Store } from '@ngrx/store';
 import {
     ChangePlayerVolume,
@@ -11,7 +21,7 @@ import {
     PlayerPause,
     PlayerPlay,
     PlayerPrev,
-    SelectPlayer
+    SelectPlayer,
 } from '../store/actions/player.actions';
 import { QueueService } from '../queue.service';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
@@ -20,10 +30,9 @@ import { MatSliderChange } from '@angular/material/slider';
 @Component({
     selector: 'rms-player',
     templateUrl: './player.component.html',
-    styleUrls: ['./player.component.scss']
+    styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent implements OnInit {
-
     private overlayRef: OverlayRef;
     private playerOverlayRef: OverlayRef;
     private positionStrategy: FlexibleConnectedPositionStrategy;
@@ -52,35 +61,35 @@ export class PlayerComponent implements OnInit {
     players$: Observable<PlayerModel[]>;
     currentPlayer$: Observable<string>;
 
-    constructor(private media: MediaObserver,
-                private overlay: Overlay,
-                private positionBuilder: OverlayPositionBuilder,
-                private store: Store<RmsState>,
-                private queueService: QueueService) {
+    constructor(
+        private media: MediaObserver,
+        private overlay: Overlay,
+        private positionBuilder: OverlayPositionBuilder,
+        private store: Store<RmsState>,
+        private queueService: QueueService
+    ) {
         this.current$ = this.store.pipe(select(selectCurrentTrack));
-        this.store
-            .pipe(select(selectPlayingState))
-            .subscribe(playing => {
-                this.playing = playing
-            });
+        this.store.pipe(select(selectPlayingState)).subscribe((playing) => {
+            this.playing = playing;
+        });
         this.volume$ = this.store.pipe(select(selectVolume));
-        this.currentPlayer$ = this.store.pipe(select(s => s.player.currentPlayer));
+        this.currentPlayer$ = this.store.pipe(
+            select((s) => s.player.currentPlayer)
+        );
         this.queueIsEmpty$ = this.currentPlayer$.pipe(
-            switchMap(player => queueService.observe(player)),
-            map(queue => queue.length === 0),
+            switchMap((player) => queueService.observe(player)),
+            map((queue) => queue.length === 0),
             shareReplay(1)
         );
-        this.players$ = this.store.pipe(select(s => s.player.players));
+        this.players$ = this.store.pipe(select((s) => s.player.players));
     }
 
     ngOnInit() {
-        this.media
-            .media$
-            .subscribe(change => {
-                if (change.mqAlias === 'xs') {
-                    this.closeQueue();
-                }
-            });
+        this.media.media$.subscribe((change) => {
+            if (change.mqAlias === 'xs') {
+                this.closeQueue();
+            }
+        });
     }
 
     toggle($event: MouseEvent) {
@@ -88,7 +97,7 @@ export class PlayerComponent implements OnInit {
         $event.stopPropagation();
         if (this.playing) {
             this.store.dispatch(new PlayerPause());
-        }else {
+        } else {
             this.store.dispatch(new PlayerPlay());
         }
     }
@@ -106,7 +115,7 @@ export class PlayerComponent implements OnInit {
     }
 
     onUpdateVolume(event: MatSliderChange) {
-        this.store.dispatch(new ChangePlayerVolume(event.value))
+        this.store.dispatch(new ChangePlayerVolume(event.value));
     }
 
     toggleQueue() {
@@ -116,7 +125,7 @@ export class PlayerComponent implements OnInit {
             }
             if (this.showQueue) {
                 this.overlayRef.detach();
-            }else {
+            } else {
                 this.overlayRef.attach(this.queueOverlay);
             }
         }
@@ -124,9 +133,11 @@ export class PlayerComponent implements OnInit {
     }
 
     private closeQueue() {
-        if (this.overlayRef &&
+        if (
+            this.overlayRef &&
             this.overlayRef.hasAttached() &&
-            this.showQueue) {
+            this.showQueue
+        ) {
             this.overlayRef.detach();
             this.showQueue = false;
         }
@@ -143,13 +154,13 @@ export class PlayerComponent implements OnInit {
                     originY: 'top',
                     weight: 1,
                     overlayX: 'end',
-                    overlayY: 'bottom'
-                }
+                    overlayY: 'bottom',
+                },
             ]);
         this.overlayRef = this.overlay.create({
             height: 500,
             width: 400,
-            positionStrategy: this.positionStrategy
+            positionStrategy: this.positionStrategy,
         });
     }
 
@@ -160,7 +171,7 @@ export class PlayerComponent implements OnInit {
             }
             if (this.showPlayer) {
                 this.playerOverlayRef.detach();
-            }else {
+            } else {
                 this.playerOverlayRef.attach(this.playerOverlay);
             }
         }
@@ -168,9 +179,11 @@ export class PlayerComponent implements OnInit {
     }
 
     private closePlayer() {
-        if (this.playerOverlayRef &&
+        if (
+            this.playerOverlayRef &&
             this.playerOverlayRef.hasAttached() &&
-            this.showPlayer) {
+            this.showPlayer
+        ) {
             this.playerOverlayRef.detach();
             this.showPlayer = false;
         }
@@ -187,13 +200,13 @@ export class PlayerComponent implements OnInit {
                     originY: 'top',
                     weight: 1,
                     overlayX: 'end',
-                    overlayY: 'bottom'
-                }
+                    overlayY: 'bottom',
+                },
             ]);
         this.playerOverlayRef = this.overlay.create({
             height: 500,
             width: 400,
-            positionStrategy: this.playerPositionStrategy
+            positionStrategy: this.playerPositionStrategy,
         });
     }
 

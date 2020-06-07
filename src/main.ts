@@ -10,15 +10,15 @@ if (localStorage.darkTheme && JSON.parse(localStorage.darkTheme)) {
 }
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 import('@rustic/http-client')
-    .then(client => {
-
-        platformBrowserDynamic([{
-            provide: ApiClient,
-            useValue: client
-        }]).bootstrapModule(AppModule)
-    }
-    )
-  .catch(err => console.log(err));
+    .then((client) => {
+        platformBrowserDynamic([
+            {
+                provide: ApiClient,
+                useValue: client,
+            },
+        ]).bootstrapModule(AppModule);
+    })
+    .catch((err) => console.log(err));

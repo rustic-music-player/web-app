@@ -19,22 +19,19 @@ export class FetchAlbums implements Action {
 export class FetchAlbumsSuccess implements Action {
     readonly type = AlbumActionTypes.FetchSuccess;
 
-    constructor(public payload: AlbumModel[]) {
-    }
+    constructor(public payload: AlbumModel[]) {}
 }
 
 export class FetchAlbumsError implements Action {
     readonly type = AlbumActionTypes.FetchError;
 
-    constructor(public error: any) {
-    }
+    constructor(public error: any) {}
 }
 
 export class OpenAlbum implements Action {
     readonly type = AlbumActionTypes.Open;
 
-    constructor(public payload: string) {
-    }
+    constructor(public payload: string) {}
 }
 
 export class CloseAlbum implements Action {
@@ -45,12 +42,12 @@ export class FetchAlbum implements Action {
     readonly type = AlbumActionTypes.FetchSingle;
 
     public payload: {
-        cursor: string
+        cursor: string;
     };
 
     constructor(cursor: string) {
         this.payload = {
-            cursor
+            cursor,
         };
     }
 }
@@ -59,12 +56,12 @@ export class FetchAlbumSuccess implements Action {
     readonly type = AlbumActionTypes.FetchSingleSuccess;
 
     public payload: {
-        album: AlbumModel
+        album: AlbumModel;
     };
 
     constructor(album: AlbumModel) {
         this.payload = {
-            album
+            album,
         };
     }
 }
@@ -72,15 +69,15 @@ export class FetchAlbumSuccess implements Action {
 export class FetchAlbumError implements Action {
     readonly type = AlbumActionTypes.FetchSingleError;
 
-    constructor(public error: any) {
-    }
+    constructor(public error: any) {}
 }
 
-export type AlbumActionsUnion = FetchAlbums |
-    FetchAlbumsSuccess |
-    FetchAlbumsError |
-    OpenAlbum |
-    CloseAlbum |
-    FetchAlbum |
-    FetchAlbumSuccess |
-    FetchAlbumError;
+export type AlbumActionsUnion =
+    | FetchAlbums
+    | FetchAlbumsSuccess
+    | FetchAlbumsError
+    | OpenAlbum
+    | CloseAlbum
+    | FetchAlbum
+    | FetchAlbumSuccess
+    | FetchAlbumError;

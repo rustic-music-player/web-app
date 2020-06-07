@@ -13,12 +13,14 @@ import { MatTableModule } from '@angular/material/table';
         RouterModule.forChild(PlayerPageModule.routes),
         LibraryItemsModule,
         SharedModule,
-        MatTableModule
-    ]
+        MatTableModule,
+    ],
 })
 export class PlayerPageModule {
-    private static readonly routes: Routes = [{
-        path: 'player',
-        component: PlayerPageComponent
-    }];
+    private static readonly routes: Routes = [
+        {
+            path: 'player',
+            component: PlayerPageComponent,
+        },
+    ];
 }

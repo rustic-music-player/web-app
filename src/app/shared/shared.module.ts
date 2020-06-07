@@ -21,11 +21,7 @@ import { QueueTrackDirective } from './queue-track.directive';
 import { FilterProviderComponent } from './filter-provider/filter-provider.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        MatIconModule,
-        FlexLayoutModule
-    ],
+    imports: [CommonModule, MatIconModule, FlexLayoutModule],
     exports: [
         BrowserAnimationsModule,
         MatToolbarModule,
@@ -45,14 +41,13 @@ import { FilterProviderComponent } from './filter-provider/filter-provider.compo
         ProviderPipe,
         RouterModule,
         QueueTrackDirective,
-        FilterProviderComponent
+        FilterProviderComponent,
     ],
     declarations: [
         DurationPipe,
         ProviderPipe,
         QueueTrackDirective,
-        FilterProviderComponent
-    ]
+        FilterProviderComponent,
+    ],
 })
-export class SharedModule {
-}
+export class SharedModule {}

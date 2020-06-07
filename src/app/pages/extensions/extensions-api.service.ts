@@ -4,11 +4,10 @@ import { ExtensionModel } from '@rustic/http-client';
 import { ApiClient } from '../../contracts/api-client';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ExtensionsApiService {
-    constructor(private client: ApiClient) {
-    }
+    constructor(private client: ApiClient) {}
 
     getExtensions(): Observable<ExtensionModel[]> {
         return from(this.client.getExtensions());

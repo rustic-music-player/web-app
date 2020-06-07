@@ -9,7 +9,7 @@ import { AvailableProviderModel } from '@rustic/http-client';
 @Component({
     selector: 'rms-providers',
     templateUrl: './providers.component.html',
-    styleUrls: ['./providers.component.scss']
+    styleUrls: ['./providers.component.scss'],
 })
 export class ProvidersComponent {
     private refresh$ = new Subject();
@@ -21,11 +21,11 @@ export class ProvidersComponent {
         return merge(load$, refresh$);
     });
 
-    constructor(private client: ApiClient,
-                private httpClient: HttpClient) {
-    }
+    constructor(private client: ApiClient, private httpClient: HttpClient) {}
 
     onLogin(provider: string, credentials: ProviderPasswordLogin) {
-        this.httpClient.post<void>(`api/providers/${provider}/auth`, credentials).subscribe(() => this.refresh$.next());
+        this.httpClient
+            .post<void>(`api/providers/${provider}/auth`, credentials)
+            .subscribe(() => this.refresh$.next());
     }
 }

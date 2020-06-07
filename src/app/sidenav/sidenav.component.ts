@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'rms-sidenav',
     templateUrl: './sidenav.component.html',
-    styleUrls: [
-        './sidenav.component.scss'
-    ]
+    styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent {
     constructor(private router: Router) {}

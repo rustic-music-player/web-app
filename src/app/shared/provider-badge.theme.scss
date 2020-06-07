@@ -1,9 +1,9 @@
-@import "../providers";
+@import '../providers';
 
 // TODO: Move into own component
 @mixin provider-badge-theme($theme) {
     $radius: 20px;
-    
+
     .provider-badge {
         width: $radius;
         height: $radius;
@@ -16,7 +16,7 @@
         position: absolute;
         top: 40px;
         left: 40px;
-    
+
         .i {
             font-size: 14px;
         }

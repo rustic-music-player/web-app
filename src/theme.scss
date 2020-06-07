@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 
 $rms-primary: mat-palette($mat-blue-grey);
-$rms-accent:  mat-palette($mat-deep-orange, A200, A100, A400);
+$rms-accent: mat-palette($mat-deep-orange, A200, A100, A400);
 
 $rms-theme: mat-light-theme($rms-primary, $rms-accent);
 $rms-dark-theme: mat-dark-theme($rms-primary, $rms-accent);

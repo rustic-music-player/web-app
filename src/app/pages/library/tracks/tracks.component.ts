@@ -8,7 +8,7 @@ import { FetchTracks } from '../../../store/actions/track.actions';
 @Component({
     selector: 'rms-tracks',
     templateUrl: './tracks.component.html',
-    styleUrls: ['./tracks.component.scss']
+    styleUrls: ['./tracks.component.scss'],
 })
 export class TracksComponent implements OnInit {
     tracks$: Observable<TrackModel[]>;

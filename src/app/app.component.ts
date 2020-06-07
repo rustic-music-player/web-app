@@ -7,9 +7,7 @@ import { map } from 'rxjs/operators';
 @Component({
     selector: 'rms-root',
     templateUrl: './app.component.html',
-    styleUrls: [
-        './app.component.scss'
-    ]
+    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
     @ViewChild('sidenav')
@@ -18,16 +16,16 @@ export class AppComponent {
     sidebarMode$: Observable<string>;
 
     constructor(private media: MediaObserver) {
-        this.sidebarMode$ = this.media
-            .asObservable()
-            .pipe(map(() => {
+        this.sidebarMode$ = this.media.asObservable().pipe(
+            map(() => {
                 let isWide = this.media.isActive('gt-sm');
                 if (isWide) {
                     this.sidenav.open();
                 } else {
                     this.sidenav.close();
                 }
-                return isWide ? 'side' : 'over'
-            }));
+                return isWide ? 'side' : 'over';
+            })
+        );
     }
 }

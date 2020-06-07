@@ -8,8 +8,8 @@ import { LibraryItemsModule } from '../shared/library-items/library-items.module
 const routes: Routes = [
     {
         path: 'search',
-        component: SearchComponent
-    }
+        component: SearchComponent,
+    },
 ];
 
 @NgModule({
@@ -17,11 +17,8 @@ const routes: Routes = [
         CommonModule,
         SharedModule,
         RouterModule.forChild(routes),
-        LibraryItemsModule
+        LibraryItemsModule,
     ],
-    declarations: [
-        SearchComponent
-    ]
+    declarations: [SearchComponent],
 })
-export class SearchModule {
-}
+export class SearchModule {}

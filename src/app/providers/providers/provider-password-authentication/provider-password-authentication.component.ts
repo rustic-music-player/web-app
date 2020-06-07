@@ -10,7 +10,7 @@ export interface ProviderPasswordLogin {
 @Component({
     selector: 'rms-provider-password-authentication',
     templateUrl: './provider-password-authentication.component.html',
-    styleUrls: ['./provider-password-authentication.component.scss']
+    styleUrls: ['./provider-password-authentication.component.scss'],
 })
 export class ProviderPasswordAuthenticationComponent {
     form: FormGroup;
@@ -24,7 +24,7 @@ export class ProviderPasswordAuthenticationComponent {
     constructor(formBuilder: FormBuilder) {
         this.form = formBuilder.group({
             username: [null, Validators.required],
-            password: [null, Validators.required]
+            password: [null, Validators.required],
         });
     }
 

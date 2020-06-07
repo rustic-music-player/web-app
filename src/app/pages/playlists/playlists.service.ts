@@ -6,8 +6,7 @@ import { ProviderTypeModel } from '@rustic/http-client';
 
 @Injectable()
 export class PlaylistsService {
-    constructor(private client: ApiClient) {
-    }
+    constructor(private client: ApiClient) {}
 
     getPlaylists(providers: ProviderTypeModel[]): Observable<PlaylistModel[]> {
         return from(this.client.getPlaylists(providers));

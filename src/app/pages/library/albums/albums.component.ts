@@ -8,7 +8,7 @@ import { FetchAlbums } from '../../../store/actions/album.actions';
 @Component({
     selector: 'rms-library-albums',
     templateUrl: './albums.component.html',
-    styleUrls: ['./albums.component.scss']
+    styleUrls: ['./albums.component.scss'],
 })
 export class AlbumsComponent implements OnInit {
     albums$: Observable<AlbumModel[]>;

@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { from, merge, Observable } from 'rxjs';
-import { AlbumModel, PlaylistModel, QueuedTrackModel, TrackModel } from '@rustic/http-client';
+import {
+    AlbumModel,
+    PlaylistModel,
+    QueuedTrackModel,
+    TrackModel,
+} from '@rustic/http-client';
 import { filter, switchMap } from 'rxjs/operators';
 import { Messages, SocketService } from './socket.service';
 import { ApiClient } from './contracts/api-client';
 
 @Injectable()
 export class QueueService {
-
-    constructor(private client: ApiClient,
-                private socket: SocketService) {
-    }
+    constructor(private client: ApiClient, private socket: SocketService) {}
 
     queueTrack(player: string, track: TrackModel): Observable<void> {
         return from(this.client.queueTrack(player, track.cursor));
@@ -36,7 +38,11 @@ export class QueueService {
         const initalFetch = this.get(player);
         const updates = this.socket.ws$.pipe(
             filter(({ player_cursor }) => player_cursor === player),
-            filter(({ type }) => type === Messages.QueueUpdated || type === Messages.CurrentlyPlayingChanged),
+            filter(
+                ({ type }) =>
+                    type === Messages.QueueUpdated ||
+                    type === Messages.CurrentlyPlayingChanged
+            ),
             switchMap(() => this.get(player))
         );
         return merge(initalFetch, updates);

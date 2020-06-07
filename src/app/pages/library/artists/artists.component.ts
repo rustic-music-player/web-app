@@ -8,7 +8,7 @@ import { FetchArtists } from '../../../store/actions/artist.actions';
 @Component({
     selector: 'rms-artists',
     templateUrl: './artists.component.html',
-    styleUrls: ['./artists.component.scss']
+    styleUrls: ['./artists.component.scss'],
 })
 export class ArtistsComponent implements OnInit {
     artists$: Observable<ArtistModel[]>;

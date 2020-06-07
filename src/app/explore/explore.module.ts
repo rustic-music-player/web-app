@@ -12,18 +12,18 @@ import { ExploreProviderComponent } from './explore-provider/explore-provider.co
         CommonModule,
         RouterModule.forChild(ExploreModule.routes),
         SharedModule,
-        LibraryItemsModule
-    ]
+        LibraryItemsModule,
+    ],
 })
 export class ExploreModule {
     private static routes: Routes = [
         {
             path: 'explore',
-            component: ExploreComponent
+            component: ExploreComponent,
         },
         {
             path: 'explore/:provider',
-            component: ExploreProviderComponent
-        }
+            component: ExploreProviderComponent,
+        },
     ];
 }

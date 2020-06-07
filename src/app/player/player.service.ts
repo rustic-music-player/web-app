@@ -11,8 +11,7 @@ export interface PlayerState {
 
 @Injectable()
 export class PlayerService {
-    constructor(private client: ApiClient) {
-    }
+    constructor(private client: ApiClient) {}
 
     play(id: string): Observable<void> {
         return from(this.client.playerControlPlay(id));

@@ -8,24 +8,20 @@ import { TrackListItemComponent } from './track-list-item/track-list-item.compon
 import { PlaylistCardComponent } from './playlist-card/playlist-card.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        SharedModule
-    ],
+    imports: [CommonModule, SharedModule],
     declarations: [
         AlbumCardComponent,
         AlbumCoverComponent,
         ArtistCardComponent,
         TrackListItemComponent,
-        PlaylistCardComponent
+        PlaylistCardComponent,
     ],
     exports: [
         AlbumCardComponent,
         AlbumCoverComponent,
         ArtistCardComponent,
         TrackListItemComponent,
-        PlaylistCardComponent
-    ]
+        PlaylistCardComponent,
+    ],
 })
-export class LibraryItemsModule {
-}
+export class LibraryItemsModule {}
