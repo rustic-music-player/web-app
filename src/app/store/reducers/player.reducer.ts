@@ -1,40 +1,86 @@
-import { TrackModel } from '@rustic/http-client';
+import { PlayerModel } from '@rustic/http-client';
 import { PlayerActionsUnion, PlayerActionTypes } from '../actions/player.actions';
 
 export interface State {
-    playing: boolean;
-    currentTrack?: TrackModel;
-    volume: number;
+    players: PlayerModel[];
+    currentPlayer?: string;
 }
 
 export const initial: State = {
-    playing: false,
-    volume: 1
+    players: []
 };
 
 export function reducer(state: State = initial, action: PlayerActionsUnion): State {
     switch (action.type) {
+        case PlayerActionTypes.FetchPlayers:
+            return {
+                ...state,
+                currentPlayer: action.payload.players[0].cursor,
+                players: action.payload.players
+            };
+        case PlayerActionTypes.SelectPlayer:
+            return {
+                ...state,
+                currentPlayer: action.payload.cursor
+            };
         case PlayerActionTypes.CurrentTrackUpdated:
             return {
                 ...state,
-                currentTrack: action.payload
+                players: state.players.map(p => {
+                    if (p.cursor !== action.cursor) {
+                        return p;
+                    }
+                    return {
+                        ...p,
+                        current: action.payload
+                    };
+                })
             };
         case PlayerActionTypes.StateUpdated:
             return {
                 ...state,
-                playing: action.payload
+                players: state.players.map(p => {
+                    if (p.cursor !== action.cursor) {
+                        return p;
+                    }
+                    return {
+                        ...p,
+                        playing: action.payload
+                    };
+                })
             };
-        case PlayerActionTypes.VolumeUpdated:
         case PlayerActionTypes.ChangeVolume:
             return {
                 ...state,
-                volume: action.payload
+                players: state.players.map(p => {
+                    if (p.cursor !== state.currentPlayer) {
+                        return p;
+                    }
+                    return {
+                        ...p,
+                        volume: action.payload
+                    };
+                })
+            };
+        case PlayerActionTypes.VolumeUpdated:
+            return {
+                ...state,
+                players: state.players.map(p => {
+                    if (p.cursor !== action.cursor) {
+                        return p;
+                    }
+                    return {
+                        ...p,
+                        volume: action.payload
+                    };
+                })
             };
         default:
             return state;
     }
 }
 
-export const selectPlayingState = (state: State) => state.playing;
-export const selectCurrentTrack = (state: State) => state.currentTrack;
-export const selectVolume = (state: State) => state.volume;
+export const selectPlayer = (state: State) => state.players.find(p => p.cursor === state.currentPlayer);
+export const selectPlayingState = (state: State) => selectPlayer(state)?.playing;
+export const selectCurrentTrack = (state: State) => selectPlayer(state)?.current;
+export const selectVolume = (state: State) => selectPlayer(state)?.volume;

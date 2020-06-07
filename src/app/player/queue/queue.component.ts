@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { QueueService } from '../../queue.service';
 import { merge, Observable, Subject } from 'rxjs';
-import { first, shareReplay } from 'rxjs/operators';
+import { first, shareReplay, switchMap } from 'rxjs/operators';
 import { QueuedTrackModel, TrackModel } from '@rustic/http-client';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { RmsState } from '../../store/reducers';
+import { select, Store } from '@ngrx/store';
 
 @Component({
     selector: 'rms-queue',
@@ -15,20 +17,25 @@ export class QueueComponent implements OnInit {
 
     queue$: Observable<QueuedTrackModel[]>;
 
-    constructor(private api: QueueService) {
+    constructor(private api: QueueService,
+                private store: Store<RmsState>) {
     }
 
     ngOnInit() {
-        const queue$ = this.api.observe().pipe(shareReplay(1));
+        const queue$ = this.store.pipe(
+            select(s => s.player.currentPlayer),
+            switchMap(player => this.api.observe(player)),
+            shareReplay(1)
+        );
         this.queue$ = merge(queue$, this.reorderedItems);
     }
 
     clear() {
-        this.api.clear().subscribe();
+        this.withPlayer(player => this.api.clear(player)).subscribe();
     }
 
     removeItem(index: number) {
-        this.api.removeItem(index).subscribe();
+        this.withPlayer(player => this.api.removeItem(player, index)).subscribe();
     }
 
     onReorder(event: CdkDragDrop<TrackModel, any>) {
@@ -39,6 +46,14 @@ export class QueueComponent implements OnInit {
                 next.splice(event.currentIndex, 0, item);
                 this.reorderedItems.next(next);
             });
-        this.api.reorder(event.previousIndex, event.currentIndex).subscribe();
+        this.withPlayer(player => this.api.reorder(player, event.previousIndex, event.currentIndex)).subscribe();
+    }
+
+    private withPlayer(call: (player: string) => Observable<void>): Observable<void> {
+        return this.store.pipe(
+            select(s => s.player.currentPlayer),
+            first(),
+            switchMap(player => call(player))
+        );
     }
 }

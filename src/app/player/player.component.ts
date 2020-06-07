@@ -2,12 +2,19 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MediaObserver } from '@angular/flex-layout';
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
-import { TrackModel } from '@rustic/http-client';
+import { PlayerModel, TrackModel } from '@rustic/http-client';
 import {RmsState, selectCurrentTrack, selectPlayingState, selectVolume} from '../store/reducers';
 import { select, Store } from '@ngrx/store';
-import { ChangePlayerVolume, PlayerNext, PlayerPause, PlayerPlay, PlayerPrev } from '../store/actions/player.actions';
+import {
+    ChangePlayerVolume,
+    PlayerNext,
+    PlayerPause,
+    PlayerPlay,
+    PlayerPrev,
+    SelectPlayer
+} from '../store/actions/player.actions';
 import { QueueService } from '../queue.service';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
@@ -18,20 +25,32 @@ import { MatSliderChange } from '@angular/material/slider';
 export class PlayerComponent implements OnInit {
 
     private overlayRef: OverlayRef;
+    private playerOverlayRef: OverlayRef;
     private positionStrategy: FlexibleConnectedPositionStrategy;
+    private playerPositionStrategy: FlexibleConnectedPositionStrategy;
 
     @ViewChild('queueOverlay')
     queueOverlay;
 
+    @ViewChild('playerOverlay', { static: false })
+    playerOverlay;
+
     @ViewChild('queueToggle', { read: ElementRef })
     queueToggle: ElementRef;
 
+    @ViewChild('playerToggle', { read: ElementRef, static: false })
+    playerToggle: ElementRef;
+
     showQueue = false;
+    showPlayer = false;
 
     playing = false;
     current$: Observable<TrackModel | null>;
     volume$: Observable<number>;
     queueIsEmpty$: Observable<boolean>;
+
+    players$: Observable<PlayerModel[]>;
+    currentPlayer$: Observable<string>;
 
     constructor(private media: MediaObserver,
                 private overlay: Overlay,
@@ -45,8 +64,13 @@ export class PlayerComponent implements OnInit {
                 this.playing = playing
             });
         this.volume$ = this.store.pipe(select(selectVolume));
-        this.queueIsEmpty$ = queueService.observe()
-            .pipe(map(queue => queue.length === 0), shareReplay(1));
+        this.currentPlayer$ = this.store.pipe(select(s => s.player.currentPlayer));
+        this.queueIsEmpty$ = this.currentPlayer$.pipe(
+            switchMap(player => queueService.observe(player)),
+            map(queue => queue.length === 0),
+            shareReplay(1)
+        );
+        this.players$ = this.store.pipe(select(s => s.player.players));
     }
 
     ngOnInit() {
@@ -127,5 +151,53 @@ export class PlayerComponent implements OnInit {
             width: 400,
             positionStrategy: this.positionStrategy
         });
+    }
+
+    togglePlayer() {
+        if (this.media.isActive('gt-sm')) {
+            if (!this.playerOverlayRef) {
+                this.setupPlayerOverlayRef();
+            }
+            if (this.showPlayer) {
+                this.playerOverlayRef.detach();
+            }else {
+                this.playerOverlayRef.attach(this.playerOverlay);
+            }
+        }
+        this.showPlayer = !this.showPlayer;
+    }
+
+    private closePlayer() {
+        if (this.playerOverlayRef &&
+            this.playerOverlayRef.hasAttached() &&
+            this.showPlayer) {
+            this.playerOverlayRef.detach();
+            this.showPlayer = false;
+        }
+    }
+
+    private setupPlayerOverlayRef() {
+        this.playerPositionStrategy = this.positionBuilder
+            .flexibleConnectedTo(this.playerToggle)
+            .withPositions([
+                {
+                    offsetX: 0,
+                    offsetY: -32,
+                    originX: 'end',
+                    originY: 'top',
+                    weight: 1,
+                    overlayX: 'end',
+                    overlayY: 'bottom'
+                }
+            ]);
+        this.playerOverlayRef = this.overlay.create({
+            height: 500,
+            width: 400,
+            positionStrategy: this.playerPositionStrategy
+        });
+    }
+
+    selectPlayer(player: PlayerModel) {
+        this.store.dispatch(new SelectPlayer(player));
     }
 }

@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PlaylistsService } from '../playlists.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PlaylistModel, TrackModel } from '@rustic/http-client';
+import { PlaylistModel } from '@rustic/http-client';
 import { QueueService } from '../../../queue.service';
-import { switchMap } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
+import { RmsState } from '../../../store/reducers';
+import { select, Store } from '@ngrx/store';
 
 @Component({
     selector: 'rms-playlist',
@@ -16,7 +18,8 @@ export class PlaylistComponent implements OnInit {
 
     constructor(private playlistsService: PlaylistsService,
                 private activatedRoute: ActivatedRoute,
-                private queue: QueueService) {
+                private queue: QueueService,
+                private store: Store<RmsState>) {
     }
 
     ngOnInit() {
@@ -24,14 +27,10 @@ export class PlaylistComponent implements OnInit {
     }
 
     queuePlaylist(playlist: PlaylistModel) {
-        this.queue
-            .queuePlaylist(playlist)
-            .subscribe();
-    }
-
-    queueTrack(track: TrackModel) {
-        this.queue
-            .queueTrack(track)
-            .subscribe();
+        this.store.pipe(
+            select(s => s.player.currentPlayer),
+            first(),
+            switchMap(player => this.queue.queuePlaylist(player, playlist))
+        ).subscribe();
     }
 }

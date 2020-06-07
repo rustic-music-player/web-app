@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
-import { TrackModel } from '@rustic/http-client';
+import { TrackModel, PlayerModel } from '@rustic/http-client';
 
 export enum PlayerActionTypes {
+    FetchPlayers = '[Players] Fetch',
     Play = '[Player] Play',
     Pause = '[Player] Pause',
     Stop = '[Player] Stop',
@@ -10,7 +11,20 @@ export enum PlayerActionTypes {
     CurrentTrackUpdated = '[Player] Current Track Updated',
     StateUpdated = '[Player] State Updated',
     VolumeUpdated = '[Player] Volume Updated',
-    ChangeVolume = '[Player] Change Volume'
+    ChangeVolume = '[Player] Change Volume',
+    SelectPlayer = '[Player] Select Player',
+}
+
+export class FetchPlayers implements Action {
+    readonly type = PlayerActionTypes.FetchPlayers;
+
+    readonly payload: { players: PlayerModel[] };
+
+    constructor(players: PlayerModel[]) {
+        this.payload = {
+            players
+        };
+    }
 }
 
 export class PlayerPlay implements Action {
@@ -36,25 +50,40 @@ export class PlayerNext implements Action {
 export class PlayerCurrentTrackUpdated implements Action {
     readonly type = PlayerActionTypes.CurrentTrackUpdated;
 
-    constructor(public payload: TrackModel | null) {}
+    constructor(public cursor: string, public payload: TrackModel | null) {}
 }
 
 export class PlayerStateUpdated implements Action {
     readonly type = PlayerActionTypes.StateUpdated;
 
-    constructor(public payload: boolean) {}
+    constructor(public cursor: string, public payload: boolean) {}
 }
 
 export class PlayerVolumeUpdated implements Action {
     readonly type = PlayerActionTypes.VolumeUpdated;
 
-    constructor(public payload: number) {}
+    constructor(public cursor: string, public payload: number) {}
 }
 
 export class ChangePlayerVolume implements Action {
     readonly type = PlayerActionTypes.ChangeVolume;
 
     constructor(public payload: number) {}
+}
+
+export class SelectPlayer implements Action {
+    readonly type = PlayerActionTypes.SelectPlayer;
+
+    public payload: {
+        cursor: string;
+    };
+
+    constructor(player: PlayerModel) {
+        this.payload = {
+            cursor: player.cursor
+        };
+    }
+
 }
 
 export type PlayerActionsUnion = PlayerPlay |
@@ -65,4 +94,6 @@ export type PlayerActionsUnion = PlayerPlay |
     PlayerCurrentTrackUpdated |
     PlayerStateUpdated |
     PlayerVolumeUpdated |
-    ChangePlayerVolume;
+    ChangePlayerVolume |
+    FetchPlayers |
+    SelectPlayer;

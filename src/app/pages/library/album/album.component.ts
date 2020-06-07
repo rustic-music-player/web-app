@@ -4,6 +4,7 @@ import { QueueService } from '../../../queue.service';
 import { AlbumModel } from '@rustic/http-client';
 import { RmsState, selectCurrentAlbum } from '../../../store/reducers';
 import { select, Store } from '@ngrx/store';
+import { first, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'rms-album',
@@ -18,8 +19,10 @@ export class AlbumComponent {
     }
 
     queueAlbum(album: AlbumModel) {
-        this.queue
-            .queueAlbum(album)
-            .subscribe();
+        this.store.pipe(
+            select(s => s.player.currentPlayer),
+            first(),
+            switchMap(player => this.queue.queueAlbum(player, album))
+        ).subscribe();
     }
 }

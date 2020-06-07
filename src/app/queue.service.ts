@@ -12,37 +12,41 @@ export class QueueService {
                 private socket: SocketService) {
     }
 
-    queueTrack(track: TrackModel): Observable<void> {
-        return from(this.client.queueTrack(null, track.cursor));
+    queueTrack(player: string, track: TrackModel): Observable<void> {
+        return from(this.client.queueTrack(player, track.cursor));
     }
 
-    queuePlaylist(playlist: PlaylistModel): Observable<void> {
-        return from(this.client.queuePlaylist(null, playlist.cursor));
+    queuePlaylist(player: string, playlist: PlaylistModel): Observable<void> {
+        return from(this.client.queuePlaylist(player, playlist.cursor));
     }
 
-    queueAlbum(album: AlbumModel): Observable<void> {
-        return from(this.client.queueAlbum(null, album.cursor));
+    queueAlbum(player: string, album: AlbumModel): Observable<void> {
+        return from(this.client.queueAlbum(player, album.cursor));
     }
 
-    get(): Observable<QueuedTrackModel[]> {
-        return from(this.client.getQueue(null));
+    get(player: string): Observable<QueuedTrackModel[]> {
+        return from(this.client.getQueue(player));
     }
 
-    clear(): Observable<void> {
-        return from(this.client.clearQueue(null));
+    clear(player: string): Observable<void> {
+        return from(this.client.clearQueue(player));
     }
 
-    observe(): Observable<QueuedTrackModel[]> {
-        const initalFetch = this.get();
-        const updates = this.socket.ws$.pipe(filter(({ type }) => type === Messages.QueueUpdated || type === Messages.CurrentlyPlayingChanged), switchMap(() => this.get()));
+    observe(player: string): Observable<QueuedTrackModel[]> {
+        const initalFetch = this.get(player);
+        const updates = this.socket.ws$.pipe(
+            filter(({ player_cursor }) => player_cursor === player),
+            filter(({ type }) => type === Messages.QueueUpdated || type === Messages.CurrentlyPlayingChanged),
+            switchMap(() => this.get(player))
+        );
         return merge(initalFetch, updates);
     }
 
-    removeItem(index: number): Observable<void> {
-        return from(this.client.removeQueueItem(null, index));
+    removeItem(player: string, index: number): Observable<void> {
+        return from(this.client.removeQueueItem(player, index));
     }
 
-    reorder(before: number, after: number): Observable<void> {
-        return from(this.client.reorderQueueItem(null, before, after));
+    reorder(player: string, before: number, after: number): Observable<void> {
+        return from(this.client.reorderQueueItem(player, before, after));
     }
 }

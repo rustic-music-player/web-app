@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { TrackModel } from '@rustic/http-client';
+import { PlayerModel, TrackModel } from '@rustic/http-client';
 import { ApiClient } from '../contracts/api-client';
 
 export interface PlayerState {
@@ -14,27 +14,31 @@ export class PlayerService {
     constructor(private client: ApiClient) {
     }
 
-    play(): Observable<void> {
-        return from(this.client.playerControlPlay(null));
+    play(id: string): Observable<void> {
+        return from(this.client.playerControlPlay(id));
     }
 
-    pause(): Observable<void> {
-        return from(this.client.playerControlPause(null));
+    pause(id: string): Observable<void> {
+        return from(this.client.playerControlPause(id));
     }
 
-    next(): Observable<void> {
-        return from(this.client.playerControlNext(null));
+    next(id: string): Observable<void> {
+        return from(this.client.playerControlNext(id));
     }
 
-    prev(): Observable<void> {
-        return from(this.client.playerControlPrev(null));
+    prev(id: string): Observable<void> {
+        return from(this.client.playerControlPrev(id));
     }
 
     getState(): Observable<PlayerState> {
         return from(this.client.getPlayer(null));
     }
 
-    setVolume(volume: number): Observable<void> {
-        return from(this.client.playerSetVolume(null, volume));
+    setVolume(id: string, volume: number): Observable<void> {
+        return from(this.client.playerSetVolume(id, volume));
+    }
+
+    getPlayers(): Observable<PlayerModel[]> {
+        return from(this.client.getPlayers());
     }
 }

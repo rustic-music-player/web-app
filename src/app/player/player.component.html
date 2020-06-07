@@ -28,6 +28,11 @@
                     #queueToggle>
                 <i class="mdi mdi-playlist-play"></i>
             </button>
+            <button mat-icon-button
+                    (click)="togglePlayer()"
+                    #playerToggle>
+                <i class="mdi mdi-disc-player"></i>
+            </button>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
@@ -39,5 +44,19 @@
 <ng-template cdk-portal #queueOverlay="cdkPortal">
     <mat-card fxFlex style="width: 100%; overflow: auto;">
         <rms-queue></rms-queue>
+    </mat-card>
+</ng-template>
+<ng-template cdk-portal #playerOverlay="cdkPortal">
+    <mat-card fxFlex style="width: 100%; overflow: auto;">
+        <mat-action-list>
+            <button mat-list-item *ngFor="let player of players$ | async"
+                    [class.player__player-item--active]="(currentPlayer$ | async) == player.cursor"
+                    (click)="selectPlayer(player)">
+                <i matListIcon class="mdi mdi-disc-player"></i>
+                <span mat-line>
+                    {{ player.name }}
+                </span>
+            </button>
+        </mat-action-list>
     </mat-card>
 </ng-template>

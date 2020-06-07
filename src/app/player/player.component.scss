@@ -33,3 +33,7 @@ i.mdi {
     height: calc(100vh - 56px);
     background: white;
 }
+
+.player__player-item--active {
+    background: rgba(black, 0.2);
+}
