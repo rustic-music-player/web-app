@@ -5,6 +5,7 @@ export const Messages = {
     PlayerStateChanged: 'PLAYER_STATE_CHANGED',
     CurrentlyPlayingChanged: 'CURRENTLY_PLAYING_CHANGED',
     QueueUpdated: 'QUEUE_UPDATED',
+    VolumeChanged: 'VOLUME_CHANGED'
 };
 
 @Injectable()

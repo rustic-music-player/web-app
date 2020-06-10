@@ -66,6 +66,14 @@ export class PlayerEffects {
         )
     );
 
+    @Effect() volume$ = this.socket.ws$.pipe(
+        filter(({ type }) => type === Messages.VolumeChanged),
+        map(
+            ({ payload, player_cursor }) =>
+                new PlayerVolumeUpdated(player_cursor, payload)
+        )
+    );
+
     @Effect()
     fetchPlayers = this.playerApi
         .getPlayers()
