@@ -49,8 +49,21 @@ mat-card-title {
     }
 }
 
-.album__card-image {
-    padding-right: 16px;
+.album__card-image,
+.album__card-placeholder {
+    margin-right: 16px;
+}
+
+.album__card-placeholder {
+    width: 64px;
+    height: 64px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: rgba(black, 0.1);
+    border-radius: 2px;
 }
 
 .album__title {
