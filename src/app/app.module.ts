@@ -28,11 +28,13 @@ import { ProviderEffects } from './store/effects/provider.effects';
 import { ExploreModule } from './pages/explore/explore.module';
 import { ProvidersModule } from './pages/providers/providers.module';
 import { PlayerPageModule } from './pages/player-page/player-page.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [AppComponent, SidenavComponent, HeaderComponent],
     imports: [
         BrowserModule,
+        MatSnackBarModule,
         RouterModule.forRoot([]),
         SharedModule,
         StoreModule.forRoot(reducers),

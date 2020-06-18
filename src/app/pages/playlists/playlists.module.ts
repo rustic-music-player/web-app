@@ -6,6 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { LibraryItemsModule } from '../../shared/library-items/library-items.module';
+import { AddPlaylistDialogComponent } from './add-playlist-dialog/add-playlist-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
     {
@@ -24,8 +28,14 @@ const routes: Routes = [
         SharedModule,
         RouterModule.forChild(routes),
         LibraryItemsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogModule,
     ],
-    declarations: [PlaylistsComponent, PlaylistComponent],
-    providers: [PlaylistsService],
+    declarations: [
+        PlaylistsComponent,
+        PlaylistComponent,
+        AddPlaylistDialogComponent,
+    ],
 })
 export class PlaylistsModule {}

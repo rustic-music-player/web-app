@@ -4,6 +4,10 @@ export interface ProviderStyle {
 }
 
 export const PROVIDERS: { [provider: string]: ProviderStyle } = {
+    internal: {
+        label: 'Rustic',
+        icon: 'archive',
+    },
     soundcloud: {
         label: 'Soundcloud',
         icon: 'soundcloud',

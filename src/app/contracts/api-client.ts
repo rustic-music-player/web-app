@@ -91,4 +91,23 @@ export abstract class ApiClient implements RusticApiClient {
     ): Promise<void>;
 
     abstract search(query: string, providers: any): Promise<SearchResults>;
+
+    abstract addAlbumToLibrary(cursor: string): Promise<void>;
+
+    abstract addArtistToLibrary(cursor: string): Promise<void>;
+
+    abstract addPlaylist(name: String): Promise<PlaylistModel>;
+
+    abstract addPlaylistToLibrary(cursor: string): Promise<void>;
+
+    abstract addTrackToLibrary(cursor: string): Promise<void>;
+
+    abstract addTrackToPlaylist(playlist: String, track: String): Promise<void>;
+
+    abstract removePlaylist(cursor: String): Promise<void>;
+
+    abstract removeTrackFromPlaylist(
+        playlist: String,
+        track: String
+    ): Promise<void>;
 }

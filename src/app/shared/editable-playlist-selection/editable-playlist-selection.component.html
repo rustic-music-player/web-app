@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Select Playlist</h1>
+<div mat-dialog-content>
+    <mat-action-list>
+        <button mat-list-item *ngFor="let playlist of playlists$ | async" [mat-dialog-close]="playlist">
+            {{ playlist.title }}
+        </button>
+    </mat-action-list>
+</div>

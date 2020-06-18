@@ -19,9 +19,17 @@ import { ProviderPipe } from './provider.pipe';
 import { RouterModule } from '@angular/router';
 import { QueueTrackDirective } from './queue-track.directive';
 import { FilterProviderComponent } from './filter-provider/filter-provider.component';
+import { EditablePlaylistSelectionComponent } from './editable-playlist-selection/editable-playlist-selection.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-    imports: [CommonModule, MatIconModule, FlexLayoutModule],
+    imports: [
+        CommonModule,
+        MatIconModule,
+        FlexLayoutModule,
+        MatDialogModule,
+        MatListModule,
+    ],
     exports: [
         BrowserAnimationsModule,
         MatToolbarModule,
@@ -48,6 +56,7 @@ import { FilterProviderComponent } from './filter-provider/filter-provider.compo
         ProviderPipe,
         QueueTrackDirective,
         FilterProviderComponent,
+        EditablePlaylistSelectionComponent,
     ],
 })
 export class SharedModule {}

@@ -10,6 +10,9 @@
         <span class="track-list-item__duration">{{ track.duration | duration }}</span>
     </h3>
     <a [routerLink]="['/library/artists', track.artist?.cursor]" mat-line>{{track.artist?.name}}</a>
+    <button mat-icon-button (click)="$event.stopPropagation();$event.preventDefault()" [matMenuTriggerFor]="trackMenu">
+        <mat-icon svgIcon="dots-vertical"></mat-icon>
+    </button>
 </button>
 <button mat-list-item class="track-list-item" [rmsQueueTrack]="track" *ngIf="!showCoverart">
     <h3 mat-line fxLayout="row">
@@ -17,4 +20,11 @@
         <span class="track-list-item__duration">{{ track.duration | duration }}</span>
     </h3>
     <a [routerLink]="['/library/artists', track.artist?.cursor]" mat-line>{{track.artist?.name}}</a>
+    <button mat-icon-button (click)="$event.stopPropagation();$event.preventDefault()" [matMenuTriggerFor]="trackMenu">
+        <mat-icon svgIcon="dots-vertical"></mat-icon>
+    </button>
 </button>
+
+<mat-menu #trackMenu="matMenu">
+    <button mat-menu-item (click)="addToPlaylist()">Add to Playlist</button>
+</mat-menu>
