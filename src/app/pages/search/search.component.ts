@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit {
     ngOnInit() {
         const query = this.activeRoute.snapshot.queryParamMap.get('query');
         if (query) {
-            this.search.query(query);
+            this.search.search(query);
         }
     }
 }

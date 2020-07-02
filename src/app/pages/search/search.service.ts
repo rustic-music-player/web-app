@@ -9,7 +9,7 @@ import {
 } from '@rustic/http-client';
 import { RmsState, selectProviders } from '../../store/reducers';
 import { Store } from '@ngrx/store';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import { ApiClient } from '../../contracts/api-client';
 
 export interface SearchResults {
@@ -54,13 +54,21 @@ export class SearchService {
         return from(this.client.openShareUrl(url));
     }
 
-    query(query: string) {
+    query(query: string): Promise<any> {
+        return this.client.searchLibrary(query);
+    }
+
+    search(query: string) {
         this._query$.next(query);
         this._results$.next(EMPTY_RESULTS);
     }
 
     private setup() {
-        const query$ = this.query$.pipe(filter((query) => query !== ''));
+        const query$ = this.query$.pipe(
+            filter((query) => query !== ''),
+            debounceTime(500),
+            distinctUntilChanged()
+        );
         const providers$ = this.store
             .select(selectProviders)
             .pipe(

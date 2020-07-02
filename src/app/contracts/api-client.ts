@@ -1,4 +1,5 @@
 import {
+    AggregatedSearchResults,
     AlbumModel,
     ArtistModel,
     AvailableProviderModel,
@@ -110,4 +111,11 @@ export abstract class ApiClient implements RusticApiClient {
         playlist: String,
         track: String
     ): Promise<void>;
+
+    abstract aggregatedSearch(
+        query: string,
+        providers: any
+    ): Promise<AggregatedSearchResults>;
+
+    abstract searchLibrary(query: string): Promise<SearchResults>;
 }

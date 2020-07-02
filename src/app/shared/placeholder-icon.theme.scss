@@ -3,13 +3,16 @@
 @mixin placeholder-icon-theme($theme) {
     $dark: map-get($theme, is-dark);
     $foreground: if($dark, $light-secondary-text, $light-primary-text);
-    $background: if($dark, map-get($mat-grey, 700), map-get($mat-grey, 300));
+    $background: rgba(black, 0.2);
 
     .placeholder-icon {
         // HACK: needed because of mat-icon
         padding: 8px !important;
         background: $background;
         color: $foreground;
+    }
+
+    .placeholder-icon--badge {
         mask: url(/assets/cover-mask.svg);
     }
 }

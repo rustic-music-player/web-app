@@ -2,11 +2,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SearchService } from '../../pages/search/search.service';
-import { debounceTime, map, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { debounceTime, filter, map, switchMap, tap } from 'rxjs/operators';
+import { EMPTY, from, Observable } from 'rxjs';
 import { QueueService } from '../../queue.service';
 import { LibraryService } from '../../pages/library/library.service';
-import { TrackModel } from '@rustic/http-client';
+import { SearchResults } from '@rustic/http-client';
 
 @Component({
     selector: 'rms-header',
@@ -23,7 +23,9 @@ export class HeaderComponent {
     @Output('toggle-sidenav')
     toggleSidenav = new EventEmitter<void>();
 
-    suggestions$: Observable<TrackModel[]>;
+    suggestions$: Observable<SearchResults>;
+
+    hideSuggestions = true;
 
     constructor(
         private searchService: SearchService,
@@ -32,13 +34,17 @@ export class HeaderComponent {
         private router: Router
     ) {
         this.suggestions$ = this.searchControl.valueChanges.pipe(
-            debounceTime(500),
+            filter((v) => v !== ''),
+            debounceTime(200),
+            tap(() => (this.hideSuggestions = false)),
             switchMap((query: string) => {
                 if (query.startsWith('http')) {
                     return this.openUrl(query);
-                } else {
-                    return this.search(query);
                 }
+                if (this.router.isActive('/search', false)) {
+                    return from(this.search());
+                }
+                return this.searchService.query(query);
             })
         );
         this.searchService.query$.subscribe((query) =>
@@ -62,12 +68,12 @@ export class HeaderComponent {
         }
     }
 
-    private async search(query: string): Promise<any> {
-        this.searchService.query(query);
+    async search(): Promise<any> {
+        this.searchService.search(this.searchControl.value);
         await this.router.navigateByUrl(
-            `/search?query=${encodeURIComponent(query)}`
+            `/search?query=${encodeURIComponent(this.searchControl.value)}`
         );
-        return Promise.resolve([]);
+        this.hideSuggestions = true;
     }
 
     private openUrl(url: string): Observable<any> {
@@ -87,7 +93,7 @@ export class HeaderComponent {
                             )}`
                         );
                     case 'track':
-                        return this.showTrack(result.cursor);
+                        return this.loadTrack(result.cursor);
                     case 'playlist':
                         return this.router.navigateByUrl(
                             `/playlists/${encodeURIComponent(result.cursor)}`
@@ -103,9 +109,22 @@ export class HeaderComponent {
         );
     }
 
-    private showTrack(cursor: string) {
-        return this.libraryService
-            .getTrack(cursor)
-            .pipe(map((track) => [track]));
+    private loadTrack(cursor: string) {
+        return this.libraryService.getTrack(cursor).pipe(
+            map((track) => ({
+                tracks: [track],
+                playlists: [],
+                albums: [],
+                artists: [],
+            }))
+        );
+    }
+
+    showSuggestions() {
+        this.hideSuggestions = false;
+    }
+
+    onSelectSuggestion() {
+        this.hideSuggestions = true;
     }
 }

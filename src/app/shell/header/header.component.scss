@@ -43,24 +43,30 @@
     margin-left: 16px; // HACK: the search bar is not properly centered
 }
 
-.header__search-suggestion-track {
+.header__search-suggestion {
     padding: 8px;
     display: grid;
     grid-gap: 8px;
     grid-template-columns: 48px 1fr 48px;
+    //grid-template-rows: 1fr 1fr;
+    height: 48px;
+    align-items: center;
     grid-template-areas: 'coverart title provider' 'coverart subtitle provider';
     cursor: pointer;
 
     &:hover {
         background: rgba(black, 0.2);
+        text-decoration: none;
     }
 }
 
-.header__search-suggestion-coverart {
+.header__search-suggestion-coverart,
+.header__search-suggestion-coverart-placeholder {
     grid-area: coverart;
     height: 48px;
     width: 48px;
     object-fit: cover;
+    box-sizing: border-box;
 }
 
 .header__search-suggestion-provider {
@@ -69,7 +75,15 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
-    background-color: #e0e0e0;
+    font-size: 24px;
+    height: 100%;
+    background-color: rgba(black, 0.1);
     border-radius: 100%;
+}
+
+.header__search-suggestion-title {
+    grid-area: title;
+}
+.header__search-suggestion-subtitle {
+    grid-area: subtitle;
 }

@@ -8,6 +8,8 @@
             <i class="mdi mdi-search"></i>
             <input type="search"
                    placeholder="Search or enter url to open"
+                   (click)="showSuggestions()"
+                   (keydown.enter)="search()"
                    [formControl]="searchControl"/>
         </div>
         <span fxFlex fxHide.lt-md></span>
@@ -28,15 +30,50 @@
         </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>
-<div class="header__search-suggestion-container" *ngIf="suggestions$ | async as suggestions">
-    <div class="header__search-suggestions">
-        <div class="header__search-suggestion-track" *ngFor="let track of suggestions" [rmsQueueTrack]="track">
-            <img class="header__search-suggestion-coverart" [src]="track.coverart" *ngIf="track.coverart" loading="lazy">
-            <mat-icon class="header__search-suggestion-coverart-placeholder placeholder-icon" svgIcon="music-circle" *ngIf="!track.coverart"></mat-icon>
-            <span class="header__search-suggestion-provider provider-badge--{{track.provider}} mdi mdi-{{(track.provider | provider).icon}}">
-            </span>
-            <span class="header__search-suggestion-title">{{ track.title }}</span>
-            <span class="header__search-suggestion-subtitle">{{ track.artist?.name }}</span>
+<ng-container *ngIf="suggestions$ | async as suggestions">
+    <div class="header__search-suggestion-container" *ngIf="!hideSuggestions">
+        <div class="header__search-suggestions">
+            <div class="header__search-suggestion" *ngFor="let track of suggestions.tracks"
+                 [rmsQueueTrack]="track" (click)="onSelectSuggestion()">
+                <img class="header__search-suggestion-coverart" [src]="track.coverart" *ngIf="track.coverart"
+                     loading="lazy">
+                <mat-icon class="header__search-suggestion-coverart-placeholder placeholder-icon" svgIcon="music-circle"
+                          *ngIf="!track.coverart"></mat-icon>
+                <span
+                    class="header__search-suggestion-provider provider-badge--{{track.provider}} mdi mdi-{{(track.provider | provider).icon}}">
+                </span>
+                <span class="header__search-suggestion-title">{{ track.title }}</span>
+                <span class="header__search-suggestion-subtitle">{{ track.artist?.name }}</span>
+            </div>
+            <a [routerLink]="'/library/albums/' + album.cursor" class="header__search-suggestion" *ngFor="let album of suggestions.albums" (click)="onSelectSuggestion()">
+                <img class="header__search-suggestion-coverart" [src]="album.coverart" *ngIf="album.coverart"
+                     loading="lazy">
+                <mat-icon class="header__search-suggestion-coverart-placeholder placeholder-icon" svgIcon="music-circle"
+                          *ngIf="!album.coverart"></mat-icon>
+                <span
+                    class="header__search-suggestion-provider provider-badge--{{album.provider}} mdi mdi-{{(album.provider | provider).icon}}">
+                </span>
+                <span class="header__search-suggestion-title">{{ album.title }}</span>
+                <span class="header__search-suggestion-subtitle">{{ album.artist?.name }}</span>
+            </a>
+            <a [routerLink]="'/library/artists/' + artist.cursor" class="header__search-suggestion" *ngFor="let artist of suggestions.artists" (click)="onSelectSuggestion()">
+                <img class="header__search-suggestion-coverart" [src]="artist.image" *ngIf="artist.image"
+                     loading="lazy">
+                <mat-icon class="header__search-suggestion-coverart-placeholder placeholder-icon" svgIcon="account-music"
+                          *ngIf="!artist.image"></mat-icon>
+                <span
+                    class="header__search-suggestion-provider provider-badge--{{artist.provider}} mdi mdi-{{(artist.provider | provider).icon}}">
+                </span>
+                <span class="header__search-suggestion-title">{{ artist.name }}</span>
+            </a>
+            <a [routerLink]="'/playlists/' + playlist.cursor" class="header__search-suggestion" *ngFor="let playlist of suggestions.playlists" (click)="onSelectSuggestion()">
+                <mat-icon class="header__search-suggestion-coverart-placeholder placeholder-icon" svgIcon="playlist-music"></mat-icon>
+                <span
+                    class="header__search-suggestion-provider provider-badge--{{playlist.provider}} mdi mdi-{{(playlist.provider | provider).icon}}">
+                </span>
+                <span class="header__search-suggestion-title">{{ playlist.title }}</span>
+                <span class="header__search-suggestion-subtitle">{{ playlist.tracks.length }} Tracks</span>
+            </a>
         </div>
     </div>
-</div>
+</ng-container>
