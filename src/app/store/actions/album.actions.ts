@@ -10,6 +10,8 @@ export enum AlbumActionTypes {
     FetchSingle = '[Library] Fetch Album',
     FetchSingleSuccess = '[Library] Fetch Album Success',
     FetchSingleError = '[Library] Fetch Album Error',
+    AddToLibrary = '[Library] Add Album',
+    RemoveFromLibrary = '[Library] Remove Album'
 }
 
 export class FetchAlbums implements Action {
@@ -72,6 +74,26 @@ export class FetchAlbumError implements Action {
     constructor(public error: any) {}
 }
 
+export class AddAlbum implements Action {
+    readonly type = AlbumActionTypes.AddToLibrary;
+
+    readonly payload: { cursor: string };
+
+    constructor(cursor: string) {
+        this.payload = { cursor };
+    }
+}
+
+export class RemoveAlbum implements Action {
+    readonly type = AlbumActionTypes.RemoveFromLibrary;
+
+    readonly payload: { cursor: string };
+
+    constructor(cursor: string) {
+        this.payload = { cursor };
+    }
+}
+
 export type AlbumActionsUnion =
     | FetchAlbums
     | FetchAlbumsSuccess
@@ -80,4 +102,6 @@ export type AlbumActionsUnion =
     | CloseAlbum
     | FetchAlbum
     | FetchAlbumSuccess
-    | FetchAlbumError;
+    | FetchAlbumError
+    | AddAlbum
+    | RemoveAlbum;

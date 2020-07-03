@@ -1,6 +1,8 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { AlbumModel } from '@rustic/http-client';
 import { AlbumActionsUnion, AlbumActionTypes } from '../actions/album.actions';
+import { createUrlResolverWithoutPackagePrefix } from '@angular/compiler';
+import { act } from '@ngrx/effects';
 
 export interface State extends EntityState<AlbumModel> {
     selectedAlbumCursor: string | null;
@@ -33,6 +35,20 @@ export function reducer(
             };
         case AlbumActionTypes.FetchSingleSuccess:
             return adapter.upsertOne(action.payload.album, state);
+        case AlbumActionTypes.AddToLibrary:
+            return adapter.updateOne({
+                id: action.payload.cursor,
+                changes: {
+                    inLibrary: true
+                }
+            }, state);
+        case AlbumActionTypes.RemoveFromLibrary:
+            return adapter.updateOne({
+                id: action.payload.cursor,
+                changes: {
+                    inLibrary: false
+                }
+            }, state);
         default:
             return state;
     }

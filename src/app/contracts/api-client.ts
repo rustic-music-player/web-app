@@ -118,4 +118,12 @@ export abstract class ApiClient implements RusticApiClient {
     ): Promise<AggregatedSearchResults>;
 
     abstract searchLibrary(query: string): Promise<SearchResults>;
+
+    abstract removeAlbumFromLibrary(cursor: string): Promise<void>;
+
+    abstract removeArtistFromLibrary(cursor: string): Promise<void>;
+
+    abstract removePlaylistFromLibrary(cursor: string): Promise<void>;
+
+    abstract removeTrackFromLibrary(cursor: string): Promise<void>;
 }

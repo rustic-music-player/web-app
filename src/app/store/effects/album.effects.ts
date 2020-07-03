@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import {
+    AddAlbum,
     AlbumActionTypes,
     CloseAlbum,
     FetchAlbum,
@@ -9,7 +10,7 @@ import {
     FetchAlbumsError,
     FetchAlbumsSuccess,
     FetchAlbumSuccess,
-    OpenAlbum,
+    OpenAlbum, RemoveAlbum,
 } from '../actions/album.actions';
 import { LibraryService } from '../../pages/library/library.service';
 import { of } from 'rxjs';
@@ -67,8 +68,21 @@ export class AlbumEffects {
         )
     );
 
+    @Effect({ dispatch: false }) addAlbum$ = this.actions$.pipe(
+        ofType(AlbumActionTypes.AddToLibrary),
+        map(({ payload }: AddAlbum) => payload.cursor),
+        switchMap((cursor) => this.libraryApi.addAlbumToLibrary(cursor))
+    );
+
+    @Effect({ dispatch: false }) removeAlbum$ = this.actions$.pipe(
+        ofType(AlbumActionTypes.RemoveFromLibrary),
+        map(({ payload }: RemoveAlbum) => payload.cursor),
+        switchMap((cursor) => this.libraryApi.removeAlbumFromLibrary(cursor))
+    );
+
     constructor(
         private actions$: Actions,
         private libraryApi: LibraryService
-    ) {}
+    ) {
+    }
 }

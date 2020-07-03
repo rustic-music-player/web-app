@@ -30,4 +30,12 @@ export class LibraryService {
     getTrack(cursor: string): Observable<TrackModel> {
         return from(this.client.getTrack(cursor));
     }
+
+    addAlbumToLibrary(cursor: string): Observable<void> {
+        return from(this.client.addAlbumToLibrary(cursor));
+    }
+
+    removeAlbumFromLibrary(cursor: string): Observable<void> {
+        return from(this.client.removeAlbumFromLibrary(cursor));
+    }
 }

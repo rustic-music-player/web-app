@@ -5,6 +5,7 @@ import { AlbumModel } from '@rustic/http-client';
 import { RmsState, selectCurrentAlbum } from '../../../store/reducers';
 import { select, Store } from '@ngrx/store';
 import { first, switchMap } from 'rxjs/operators';
+import { AddAlbum, RemoveAlbum } from '../../../store/actions/album.actions';
 
 @Component({
     selector: 'rms-album',
@@ -26,5 +27,13 @@ export class AlbumComponent {
                 switchMap((player) => this.queue.queueAlbum(player, album))
             )
             .subscribe();
+    }
+
+    addToLibrary(cursor: string) {
+        this.store.dispatch(new AddAlbum(cursor));
+    }
+
+    removeFromLibrary(cursor: string) {
+        this.store.dispatch(new RemoveAlbum(cursor));
     }
 }
