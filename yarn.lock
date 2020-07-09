@@ -1068,10 +1068,10 @@
     rxjs "6.5.4"
     webpack-sources "1.4.3"
 
-"@rustic/http-client@^0.1.14":
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/@rustic/http-client/-/http-client-0.1.14.tgz#04b53080a317e465e1d6edbdb44fb883a62fbbca"
-  integrity sha512-D2YJbmdhg5dByeIfW7g4xNY6WMXgC/MqcxcT3rGCkhxVjVHeJSh043GbOqNa9lR3lO0/qyny/lEWPxOn1tdO7w==
+"@rustic/http-client@^0.1.16":
+  version "0.1.16"
+  resolved "https://registry.yarnpkg.com/@rustic/http-client/-/http-client-0.1.16.tgz#5cd9bdd0cec89edd94ded58d44972314febacdc6"
+  integrity sha512-ZzyCtsIrjBNISSkUrywaglZ8zQTeQka4uDzCBSzfLJHLXB158CsBMWOYmp9RKfByjVBmGDCqg5ZfnluovgTTZg==
 
 "@schematics/angular@9.1.6":
   version "9.1.6"
