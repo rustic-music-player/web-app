@@ -7,4 +7,5 @@
     <a *ngIf="album.artist" [routerLink]="['/library/artists', album.artist.cursor]" class="album-card__artist">{{album.artist.name}}</a>
     <mat-icon [svgIcon]="(album.provider | provider).icon"
               [class]="album.provider"></mat-icon>
+    <span class="explicit-icon" *ngIf="album.explicit">E<span class="explicit-icon__word">xplicit</span></span>
 </a>

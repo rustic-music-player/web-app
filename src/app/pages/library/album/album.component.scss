@@ -1,3 +1,5 @@
+@import "~@angular/material/theming";
+
 .album {
     position: relative;
     display: block;
@@ -69,4 +71,15 @@ mat-card-title {
 .album__title {
     margin-bottom: 4px;
     line-height: 20px;
+}
+
+.explicit-icon {
+    font-size: 14px;
+    display: inline-block;
+    background: mat-color($mat-deep-orange, 500);
+    padding: 0 3px;
+    margin-bottom: -2px;
+    border-radius: 2px;
+    overflow: hidden;
+    font-weight: bold;
 }

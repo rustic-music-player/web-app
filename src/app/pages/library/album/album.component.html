@@ -7,7 +7,7 @@
                 <i class="mdi mdi-album"></i>
             </div>
             <div fxLayout="column">
-                <h2 class="album__title">{{album.title}}</h2>
+                <h2 class="album__title">{{album.title}} <span *ngIf="album.explicit" class="explicit-icon">E</span></h2>
                 <a *ngIf="album.artist" [routerLink]="['/library/artists/', album.artist.cursor]" class="mat-body-1">{{album.artist.name}}</a>
                 <span class="mat-caption">{{album.tracks.length}} Tracks</span>
                 <div style="padding: 8px 0">
