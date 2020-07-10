@@ -15,6 +15,7 @@
     </button>
 </button>
 <button mat-list-item class="track-list-item" [rmsQueueTrack]="track" *ngIf="!showCoverart">
+    <span matListIcon style="text-align: center" *ngIf="track.position">{{ track.position.track }}</span>
     <h3 mat-line fxLayout="row">
         <span fxFlex>{{track.title}}</span>
         <span class="track-list-item__duration">{{ track.duration | duration }}</span>
