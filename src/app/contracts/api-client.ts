@@ -27,6 +27,10 @@ export abstract class ApiClient implements RusticApiClient {
 
     abstract getAvailableProviders(): Promise<AvailableProviderModel[]>;
 
+    abstract enableExtension(id: string): Promise<void>;
+
+    abstract disableExtension(id: string): Promise<void>;
+
     abstract getExtensions(): Promise<ExtensionModel[]>;
 
     abstract getPlayer(player_id?: string): Promise<PlayerModel>;
