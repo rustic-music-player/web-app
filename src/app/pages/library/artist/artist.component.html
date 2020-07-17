@@ -4,6 +4,7 @@
         <span class="provider-badge--{{artist.provider}} mdi mdi-{{(artist.provider | provider).icon}}">
             {{ (artist.provider | provider).label }}
         </span>
+        <p class="artist__description" *ngIf="artist.description">{{ artist.description }}</p>
     </div>
     <img class="artist__image" [src]="artist.image"/>
     <div class="artist__top-tracks" *ngIf="topTracks$ | async as topTracks">
