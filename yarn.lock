@@ -1272,10 +1272,10 @@
   dependencies:
     mkdirp "^1.0.4"
 
-"@rustic/http-client@^0.1.18":
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/@rustic/http-client/-/http-client-0.1.18.tgz#72be6e15a1f3764669fb2ad9b00f35ed0b07846e"
-  integrity sha512-agVm2wcIz3kgTyblZzDIEXB6Z1NSyCda4Os9fwZ1439mhalBwrZ8Z9zgcWFtFnhGWXrygaGbePoigVb9dOj5Cw==
+"@rustic/http-client@^0.1.19":
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/@rustic/http-client/-/http-client-0.1.19.tgz#682abec21bd5e778c74ec2af93828a4e08c13ec6"
+  integrity sha512-TN0r8rNsFmuA8kivhXCqquRWKJYQdLPWyPNzD54TII1c133d5i8PAbRftroG/QQaVOXBstWGv0MWYUU8D38KWQ==
 
 "@schematics/angular@10.0.3":
   version "10.0.3"
