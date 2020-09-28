@@ -5,7 +5,7 @@ import {
     ProviderModel,
     TrackModel,
 } from '@rustic/http-client';
-import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
+import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { ProviderService } from '../../../provider.service';
 import { ActivatedRoute } from '@angular/router';
 import { RmsState, selectProviders } from '../../../store/reducers';
@@ -23,6 +23,7 @@ export class ExploreProviderComponent implements OnInit {
     provider$ = defer(() => this.getProvider());
     folders$: Observable<string[]> = defer(() => this.selectFolders());
     tracks$: Observable<TrackModel[]> = defer(() => this.selectTracks());
+    pending$ = new BehaviorSubject(false);
 
     get path(): string[] {
         return this.path$.value;
@@ -76,10 +77,12 @@ export class ExploreProviderComponent implements OnInit {
                 if (path.length === 0) {
                     return of(provider.explore);
                 }
+                this.pending$.next(true);
                 return this.providerService.navigate(
                     provider.provider,
                     path.join('/')
-                );
+                )
+                    .pipe(tap(() => this.pending$.next(false)));
             })
         );
     }

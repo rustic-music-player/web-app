@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { LibraryItemsModule } from '../../shared/library-items/library-items.module';
 import { ExploreProviderComponent } from './explore-provider/explore-provider.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
     declarations: [ExploreComponent, ExploreProviderComponent],
@@ -13,6 +14,7 @@ import { ExploreProviderComponent } from './explore-provider/explore-provider.co
         RouterModule.forChild(ExploreModule.routes),
         SharedModule,
         LibraryItemsModule,
+        MatProgressBarModule,
     ],
 })
 export class ExploreModule {

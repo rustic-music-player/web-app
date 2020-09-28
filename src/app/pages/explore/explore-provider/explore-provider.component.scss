@@ -1,6 +1,13 @@
 @import 'node_modules/@mdi/font/scss/variables';
 @import 'node_modules/@mdi/font/scss/functions';
 
+.explore__progress-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
 .explore__path {
     display: flex;
     flex-direction: row;
@@ -17,4 +24,9 @@
 
 .explore__path-separator {
     font-size: 24px;
+}
+
+.explore__folder-list--pending {
+    opacity: 0.5;
+    pointer-events: none;
 }

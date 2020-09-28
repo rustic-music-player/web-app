@@ -1,5 +1,11 @@
 <div class="explore">
+    <mat-progress-bar class="explore__progress-bar" *ngIf="pending$ | async" mode="query"></mat-progress-bar>
     <div class="explore__path">
+        <a routerLink="/explore" class="explore__path-provider-item">
+            <mat-icon svgIcon="folder-multiple"></mat-icon>
+        </a>
+        <i class="mdi mdi-chevron-right explore__path-separator"></i>
+
         <ng-container *ngIf="provider$ | async as provider">
             <a [routerLink]="['/explore', provider.provider]" [queryParams]="{ path: '' }" class="explore__path-provider-item">
                <mat-icon [svgIcon]="(provider.provider | provider).icon"></mat-icon>
@@ -14,7 +20,7 @@
             <i class="mdi mdi-chevron-right explore__path-separator" *ngIf="!last"></i>
         </ng-container>
     </div>
-    <div class="explore__folder-list">
+    <div class="explore__folder-list" [class.explore__folder-list--pending]="pending$ | async">
         <a class="explore__folder"
            *ngFor="let folder of folders$ | async"
            [routerLink]=""
