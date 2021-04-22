@@ -20,10 +20,6 @@ export const PROVIDERS: { [provider: string]: ProviderStyle } = {
         label: 'Pocketcasts',
         icon: 'podcast',
     },
-    gmusic: {
-        label: 'Google Play Music',
-        icon: 'google-play',
-    },
     plex: {
         label: 'Plex',
         icon: 'plex',
