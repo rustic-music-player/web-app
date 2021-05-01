@@ -20,10 +20,12 @@ pipeline {
                 success {
                     zip zipFile: 'rustic-web-client.zip', archive: true, dir: 'dist'
                 }
-                always {
-                    cleanWs()
-                }
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
