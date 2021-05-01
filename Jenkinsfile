@@ -19,6 +19,7 @@ pipeline {
             post {
                 always {
                     zip zipFile: 'rustic-web-client.zip', archive: true, dir: 'dist'
+                    cleanWs()
                 }
             }
         }
