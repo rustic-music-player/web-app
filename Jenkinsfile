@@ -11,14 +11,16 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
                 sh 'yarn'
                 sh 'yarn build'
             }
             post {
-                always {
+                success {
                     zip zipFile: 'rustic-web-client.zip', archive: true, dir: 'dist'
+                }
+                always {
                     cleanWs()
                 }
             }
