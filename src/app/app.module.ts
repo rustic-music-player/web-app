@@ -35,7 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     imports: [
         BrowserModule,
         MatSnackBarModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
         SharedModule,
         StoreModule.forRoot(reducers),
         StoreDevtoolsModule.instrument(),

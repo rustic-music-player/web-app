@@ -23,7 +23,7 @@ export function reducer(
 ): State {
     switch (action.type) {
         case ArtistActionTypes.FetchSuccess:
-            return adapter.addAll(action.payload, state);
+            return adapter.setAll(action.payload, state);
         case ArtistActionTypes.Open:
             return {
                 ...state,

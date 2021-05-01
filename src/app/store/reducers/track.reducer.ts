@@ -16,7 +16,7 @@ export function reducer(
 ): State {
     switch (action.type) {
         case TrackActionTypes.FetchSuccess:
-            return adapter.addAll(action.payload, state);
+            return adapter.setAll(action.payload, state);
         default:
             return state;
     }
