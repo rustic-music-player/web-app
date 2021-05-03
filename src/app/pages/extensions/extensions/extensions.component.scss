@@ -1,3 +1,9 @@
 .extensions {
     padding: 16px;
 }
+
+.link-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}

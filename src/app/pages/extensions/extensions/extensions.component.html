@@ -1,9 +1,21 @@
 <div class="extensions">
     <h2>Extensions</h2>
-    <mat-selection-list multiple (selectionChange)="onChange($event)">
-        <mat-list-option *ngFor="let extension of extensions$ | async" [selected]="extension.enabled" [value]="extension">
-            <h3 matLine>{{ extension.name }}</h3>
-            <p matLine>v{{ extension.version }}</p>
-        </mat-list-option>
-    </mat-selection-list>
+    <mat-expansion-panel *ngFor="let extension of extensions$ | async; trackBy:trackMethod">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{ extension.name }}</mat-panel-title>
+            <mat-panel-description>
+                v{{ extension.version }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="extension.enabled">
+            <div *ngFor="let info of extension.controls.infos" class="link-info">
+                <img [rmsQrCode]="info.value" [size]="256"/>
+                <a href="{{ info.value }}" target="_blank">{{ info.value }}</a>
+            </div>
+        </div>
+        <mat-action-row>
+            <button mat-button color="accent" (click)="disable(extension)" *ngIf="extension.enabled">Disable</button>
+            <button mat-button color="accent" (click)="enable(extension)" *ngIf="!extension.enabled">Enable</button>
+        </mat-action-row>
+    </mat-expansion-panel>
 </div>
