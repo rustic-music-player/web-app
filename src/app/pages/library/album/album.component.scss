@@ -83,3 +83,16 @@ mat-card-title {
     overflow: hidden;
     font-weight: bold;
 }
+
+.album-actions {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 8px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.album-actions__advanced {
+    display: contents;
+}

@@ -29,6 +29,24 @@ export class AlbumComponent {
             .subscribe();
     }
 
+    playAlbumNow(album: AlbumModel) {
+        this.store
+            .pipe(
+                select((s) => s.player.currentPlayer),
+                first(),
+                switchMap((player) =>
+                    this.queue
+                        .clear(player)
+                        .pipe(
+                            switchMap(() =>
+                                this.queue.queueAlbum(player, album)
+                            )
+                        )
+                )
+            )
+            .subscribe();
+    }
+
     addToLibrary(cursor: string) {
         this.store.dispatch(new AddAlbum(cursor));
     }

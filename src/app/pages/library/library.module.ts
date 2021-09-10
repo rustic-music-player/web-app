@@ -11,6 +11,8 @@ import { ArtistsComponent } from './artists/artists.component';
 import { TracksComponent } from './tracks/tracks.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ArtistComponent } from './artist/artist.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const routes: Routes = [
     {

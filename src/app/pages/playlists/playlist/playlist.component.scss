@@ -21,16 +21,6 @@ mat-card-title {
     max-width: calc(100% - 56px);
 }
 
-.play {
-    position: absolute;
-    top: -28px;
-    right: 16px;
-
-    i {
-        font-size: 24px;
-    }
-}
-
 @media screen and (max-width: 599px) {
     mat-card {
         margin: 100vw 0 48px;
@@ -40,4 +30,17 @@ mat-card-title {
     img.background {
         height: 100vw;
     }
+}
+
+.playlist-actions {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 8px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.playlist-actions__advanced {
+    display: contents;
 }
